@@ -666,6 +666,11 @@ main {
     text-align: center;
     padding: 40px;
     background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5));
+    /* Propiedades para imagen de fondo */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
 }
 
 /* ==================================================
@@ -738,7 +743,46 @@ footer {
 }
 
 /* ==================================================
-   DISEÑO RESPONSIVO
+   CLASES ESPECÍFICAS PARA IMÁGENES DE BANNER
+   ================================================== */
+
+/* Banner SGI - Imagen personalizada */
+.banner-sgi {
+    background-image: 
+        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+        url('ruta/a/tu/imagen-sgi.jpg');
+}
+
+/* Banner Recursos Audiovisuales - Imagen personalizada */
+.banner-recursos {
+    background-image: 
+        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+        url('ruta/a/tu/imagen-recursos.jpg');
+}
+
+/* Banner Embajador Ali - Imagen personalizada */
+.banner-ali {
+    background-image: 
+        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+        url('ruta/a/tu/imagen-ali.jpg');
+}
+
+/* Banner Inteligencias Artificiales - Imagen personalizada */
+.banner-ia {
+    background-image: 
+        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+        url('ruta/a/tu/imagen-ia.jpg');
+}
+
+/* Banner Proyectos - Imagen personalizada */
+.banner-proyectos {
+    background-image: 
+        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+        url('ruta/a/tu/imagen-proyectos.jpg');
+}
+
+/* ==================================================
+   FIN DE CLASES ESPECÍFICAS PARA BANNERS
    ================================================== */
 
 /* Escritorio - pantallas grandes */

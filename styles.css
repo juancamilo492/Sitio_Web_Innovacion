@@ -503,6 +503,12 @@ main {
     overflow: hidden;
     animation: fadeInUp 0.8s ease-out;
     animation-fill-mode: both;
+    /* Flexbox para centrado perfecto */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 280px; /* Altura mínima consistente */
 }
 
 .resource-card:nth-child(1) { animation-delay: 0.1s; }
@@ -536,6 +542,9 @@ main {
     font-size: 1.5em;
     margin-bottom: 20px;
     font-weight: bold;
+    /* Asegurar que el título esté centrado */
+    width: 100%;
+    text-align: center;
 }
 
 .resource-card-icon {
@@ -543,13 +552,14 @@ main {
     height: 120px;
     background-color: rgba(255,255,255,0.2);
     border-radius: 20px;
-    margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 14px;
     color: white;
     transition: all 0.3s ease;
+    /* Centrado perfecto del icono */
+    flex-shrink: 0; /* Evita que se comprima */
 }
 
 .resource-card:hover .resource-card-icon {
@@ -773,6 +783,22 @@ footer {
     
     .ali-character {
         display: none;
+    }
+
+    /* Ajustar tarjetas de recursos en móvil */
+    .resource-card {
+        min-height: 250px; /* Altura mínima menor en móvil */
+        padding: 25px;
+    }
+    
+    .resource-card h3 {
+        font-size: 1.3em;
+        margin-bottom: 15px;
+    }
+    
+    .resource-card-icon {
+        width: 100px;
+        height: 100px;
     }
 }
 

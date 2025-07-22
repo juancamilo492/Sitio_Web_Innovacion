@@ -1,0 +1,96 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alico - Innovación</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-100 font-sans">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-10">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-blue-600">alico</a>
+            <ul class="flex space-x-6">
+                <li><a href="generalidades-sgi.html" class="nav-link">🔍 Generalidades SGI</a></li>
+                <li><a href="embajador-ali.html" class="nav-link">😊 Embajador Ali</a></li>
+                <li><a href="inteligencias-artificiales.html" class="nav-link">🤖 Inteligencias Artificiales</a></li>
+                <li><a href="recursos-audiovisuales.html" class="nav-link">📹 Recursos Audiovisuales</a></li>
+                <li><a href="proyectos.html" class="nav-link">⚙️ Proyectos</a></li>
+                <li><a href="disena-tu-empaque.html" class="nav-link">📦 Diseña tu Empaque ↗</a></li>
+                <li><a href="banco-de-iniciativas.html" class="nav-link">💡 Banco de Iniciativas ↗</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="container mx-auto px-4 py-12 text-center">
+        <h1 class="text-4xl font-bold mb-4">¡Hola! Soy Ali, el explorador de <span class="text-blue-600">NUEVAS IDEAS</span> en Alico</h1>
+        <p class="text-lg mb-6">Estoy diseñado para cuestionar lo establecido, buscar respuestas más allá de lo evidente y atreverme a innovar.</p>
+        <a href="embajador-ali.html" class="btn">¡Conóceme!</a>
+        <p class="mt-4 text-gray-600">Espacio para Ali</p>
+    </section>
+
+    <!-- Innovation Model -->
+    <section class="container mx-auto px-4 py-12">
+        <h2 class="text-3xl font-bold text-center mb-8">NUESTRO MODELO DE INNOVACIÓN</h2>
+        <p class="text-lg text-center mb-6">Para Alico, la innovación es la capacidad de crear, entregar y capturar valor de nuevas formas, de manera consciente y sostenible que genere impactos y beneficios positivos en términos ambientales, sociales y económicos.</p>
+        <a href="generalidades-sgi.html" class="btn mx-auto block w-fit">Conoce más</a>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+            <div class="card">
+                <h3 class="text-xl font-semibold">co-crea</h3>
+                <p>Implementar una metodología de co-creación que involucra clientes, tanto internos como externos, para así fortalecer las redes de valor de la compañía.</p>
+            </div>
+            <div class="card">
+                <h3 class="text-xl font-semibold">VERSÁTIL</h3>
+                <p>Implementar una metodología de co-creación que involucra clientes, tanto internos como externos, para así fortalecer las redes de valor de la compañía.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white text-center py-4">
+        <p>&copy; 2025 Alico. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>

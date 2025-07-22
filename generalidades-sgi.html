@@ -1,0 +1,155 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generalidades SGI - Alico</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-100 font-sans">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-10">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-blue-600">alico</a>
+            <ul class="flex space-x-6">
+                <li><a href="generalidades-sgi.html" class="nav-link active">🔍 Generalidades SGI</a></li>
+                <li><a href="embajador-ali.html" class="nav-link">😊 Embajador Ali</a></li>
+                <li><a href="inteligencias-artificiales.html" class="nav-link">🤖 Inteligencias Artificiales</a></li>
+                <li><a href="recursos-audiovisuales.html" class="nav-link">📹 Recursos Audiovisuales</a></li>
+                <li><a href="proyectos.html" class="nav-link">⚙️ Proyectos</a></li>
+                <li><a href="disena-tu-empaque.html" class="nav-link">📦 Diseña tu Empaque ↗</a></li>
+                <li><a href="banco-de-iniciativas.html" class="nav-link">💡 Banco de Iniciativas ↗</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- SGI Section -->
+    <section class="container mx-auto px-4 py-12">
+        <h1 class="text-3xl font-bold text-center mb-8">SISTEMA DE GESTIÓN DE LA INNOVACIÓN (SGI)</h1>
+        <h2 class="text-2xl font-semibold mb-4">ACERCA DEL SGI</h2>
+        <p class="text-lg mb-6">En Alico, creemos que la innovación es el motor del cambio y la clave para ofrecer soluciones de empaque cada vez más eficientes, sostenibles y alineadas con las necesidades del mercado. Nuestro Sistema de Gestión de Innovación (SGI) nos permite estructurar, medir y optimizar nuestros procesos de innovación para transformar ideas en soluciones reales.</p>
+        <p class="text-gray-600 mb-6">Espacio para Ali</p>
+        <h2 class="text-2xl font-semibold mb-4">FORTALEZAS DE NUESTRO SGI</h2>
+        <p class="text-lg mb-6">↻ ¡Dale la vuelta a las tarjetas!</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="card card-flip">
+                <div class="card-inner">
+                    <div class="card-front">💡</div>
+                    <div class="card-back">
+                        <h3 class="text-xl font-semibold">Ideación</h3>
+                        <p>Fomentamos la creatividad y la generación de ideas innovadoras en todos los niveles de la organización.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card card-flip">
+                <div class="card-inner">
+                    <div class="card-front">🧬</div>
+                    <div class="card-back">
+                        <h3 class="text-xl font-semibold">Investigación</h3>
+                        <p>Desarrollamos investigación aplicada para crear soluciones de empaque más eficientes y sostenibles.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card card-flip">
+                <div class="card-inner">
+                    <div class="card-front">👶</div>
+                    <div class="card-back">
+                        <h3 class="text-xl font-semibold">Desarrollo</h3>
+                        <p>Transformamos las ideas en prototipos y productos viables para el mercado.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card card-flip">
+                <div class="card-inner">
+                    <div class="card-front">🏢</div>
+                    <div class="card-back">
+                        <h3 class="text-xl font-semibold">Implementación</h3>
+                        <p>Llevamos las innovaciones al mercado de manera eficiente y escalable.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card card-flip">
+                <div class="card-inner">
+                    <div class="card-front">🔧</div>
+                    <div class="card-back">
+                        <h3 class="text-xl font-semibold">Mejora Continua</h3>
+                        <p>Evaluamos y optimizamos constantemente nuestros procesos de innovación.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card card-flip">
+                <div class="card-inner">
+                    <div class="card-front">📦</div>
+                    <div class="card-back">
+                        <h3 class="text-xl font-semibold">Sostenibilidad</h3>
+                        <p>Integramos criterios de sostenibilidad en cada etapa del proceso de innovación.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card card-flip">
+                <div class="card-inner">
+                    <div class="card-front">🌍</div>
+                    <div class="card-back">
+                        <h3 class="text-xl font-semibold">Impacto Global</h3>
+                        <p>Creamos soluciones que generan valor para nuestros clientes y la sociedad.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card card-flip">
+                <div class="card-inner">
+                    <div class="card-front">🔲</div>
+                    <div class="card-back">
+                        <h3 class="text-xl font-semibold">Colaboración</h3>
+                        <p>Trabajamos en red con partners, universidades y centros de investigación.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white text-center py-4">
+        <p>&copy; 2025 Alico. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>

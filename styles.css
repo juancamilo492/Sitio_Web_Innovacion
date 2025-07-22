@@ -156,13 +156,16 @@ body {
     top: 100px;
     left: 0;
     right: 0;
+    bottom: 0; /* Permite que ocupe toda la altura disponible */
     background-color: white;
     padding: 20px;
     transform: translateY(-200%);
     transition: transform 0.3s ease;
     z-index: 999;
-    border-radius: 0 0 25px 25px;
+    border-radius: 25px 25px 0 0; /* Solo bordes superiores redondeados */
     box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    overflow-y: auto; /* Permite scroll vertical */
+    -webkit-overflow-scrolling: touch; /* Mejora el scroll en iOS */
 }
 
 .mobile-nav-menu.active {
@@ -175,6 +178,7 @@ body {
     gap: 15px;
     max-width: 600px;
     margin: 0 auto;
+    padding-bottom: 20px; /* Espacio adicional al final para mejor scroll */
 }
 
 .mobile-nav-item {
@@ -776,6 +780,10 @@ footer {
 @media (max-width: 480px) {
     body {
         padding-top: 80px;
+    }
+
+    .mobile-nav-menu {
+        top: 80px; /* Ajustar según el header más pequeño */
     }
 
     .mobile-nav-grid {

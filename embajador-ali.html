@@ -263,7 +263,12 @@
                 
                 <!-- Información del modelo -->
                 <div class="ali-3d-info">
-                    <div id="aliInfo">🖱️ Arrastra para rotar • 🖲️ Rueda para zoom</div>
+                    <div id="aliInfo">
+                        <span style="display: block;">📱 <strong>Móvil:</strong></span>
+                        <span style="font-size: 12px;">• 1 dedo: rotar • 2 dedos: zoom/pan</span>
+                        <span style="display: block; margin-top: 5px;">🖱️ <strong>PC:</strong></span>
+                        <span style="font-size: 12px;">• Click+drag: rotar • Rueda: zoom • Shift+drag: pan</span>
+                    </div>
                 </div>
                 
                 <!-- Indicador de carga -->
@@ -527,24 +532,25 @@
             scene.add(accentLight);
         }
 
-        // Configurar controles de mouse/touch
+        // Configurar controles de mouse/touch mejorados
         function setupControls(container) {
             // Mouse events
             container.addEventListener('mousedown', onMouseDown);
             container.addEventListener('mousemove', onMouseMove);
             container.addEventListener('mouseup', onMouseUp);
-            container.addEventListener('wheel', onMouseWheel);
+            container.addEventListener('mouseleave', onMouseUp);
+            container.addEventListener('wheel', onMouseWheel, { passive: false });
             
-            // Touch events para móvil
-            container.addEventListener('touchstart', onTouchStart);
-            container.addEventListener('touchmove', onTouchMove);
-            container.addEventListener('touchend', onTouchEnd);
+            // Touch events mejorados para móvil
+            container.addEventListener('touchstart', onTouchStart, { passive: false });
+            container.addEventListener('touchmove', onTouchMove, { passive: false });
+            container.addEventListener('touchend', onTouchEnd, { passive: false });
             
             // Prevent context menu
             container.addEventListener('contextmenu', (e) => e.preventDefault());
         }
 
-        // Event handlers para mouse
+        // Event handlers para mouse mejorados
         function onMouseDown(event) {
             mouseDown = true;
             mouseX = event.clientX;
@@ -557,11 +563,18 @@
             const deltaX = event.clientX - mouseX;
             const deltaY = event.clientY - mouseY;
             
-            targetRotationY += deltaX * 0.01;
-            targetRotationX += deltaY * 0.01;
-            
-            // Limitar rotación vertical
-            targetRotationX = Math.max(-Math.PI/2, Math.min(Math.PI/2, targetRotationX));
+            if (event.shiftKey) {
+                // Pan con Shift + drag
+                targetPanX += deltaX * 0.005;
+                targetPanY -= deltaY * 0.005;
+            } else {
+                // Rotación normal
+                targetRotationY += deltaX * 0.01;
+                targetRotationX += deltaY * 0.01;
+                
+                // Limitar rotación vertical
+                targetRotationX = Math.max(-Math.PI/2, Math.min(Math.PI/2, targetRotationX));
+            }
             
             mouseX = event.clientX;
             mouseY = event.clientY;
@@ -573,45 +586,114 @@
 
         function onMouseWheel(event) {
             event.preventDefault();
-            const delta = event.deltaY * 0.001;
-            camera.position.z += delta;
-            camera.position.z = Math.max(2, Math.min(10, camera.position.z));
+            const delta = event.deltaY * 0.01;
+            targetZoom += delta;
+            targetZoom = Math.max(2, Math.min(15, targetZoom));
         }
 
-        // Event handlers para touch (móvil)
+        // Event handlers para touch mejorados (móvil)
         function onTouchStart(event) {
-            if (event.touches.length === 1) {
+            event.preventDefault();
+            touches = Array.from(event.touches);
+            
+            if (touches.length === 1) {
+                // Un dedo - rotación
                 mouseDown = true;
-                mouseX = event.touches[0].clientX;
-                mouseY = event.touches[0].clientY;
+                mouseX = touches[0].clientX;
+                mouseY = touches[0].clientY;
+            } else if (touches.length === 2) {
+                // Dos dedos - zoom y pan
+                mouseDown = false;
+                const touch1 = touches[0];
+                const touch2 = touches[1];
+                
+                // Calcular distancia inicial para zoom
+                lastTouchDistance = Math.sqrt(
+                    Math.pow(touch2.clientX - touch1.clientX, 2) +
+                    Math.pow(touch2.clientY - touch1.clientY, 2)
+                );
+                
+                // Punto medio para pan
+                mouseX = (touch1.clientX + touch2.clientX) / 2;
+                mouseY = (touch1.clientY + touch2.clientY) / 2;
             }
         }
 
         function onTouchMove(event) {
             event.preventDefault();
-            if (!mouseDown || event.touches.length !== 1) return;
             
-            const deltaX = event.touches[0].clientX - mouseX;
-            const deltaY = event.touches[0].clientY - mouseY;
-            
-            targetRotationY += deltaX * 0.01;
-            targetRotationX += deltaY * 0.01;
-            
-            targetRotationX = Math.max(-Math.PI/2, Math.min(Math.PI/2, targetRotationX));
-            
-            mouseX = event.touches[0].clientX;
-            mouseY = event.touches[0].clientY;
+            if (event.touches.length === 1 && mouseDown) {
+                // Un dedo - rotación
+                const touch = event.touches[0];
+                const deltaX = touch.clientX - mouseX;
+                const deltaY = touch.clientY - mouseY;
+                
+                targetRotationY += deltaX * 0.01;
+                targetRotationX += deltaY * 0.01;
+                
+                // Limitar rotación vertical
+                targetRotationX = Math.max(-Math.PI/2, Math.min(Math.PI/2, targetRotationX));
+                
+                mouseX = touch.clientX;
+                mouseY = touch.clientY;
+                
+            } else if (event.touches.length === 2) {
+                // Dos dedos - zoom y pan
+                const touch1 = event.touches[0];
+                const touch2 = event.touches[1];
+                
+                // Calcular nueva distancia para zoom
+                const currentDistance = Math.sqrt(
+                    Math.pow(touch2.clientX - touch1.clientX, 2) +
+                    Math.pow(touch2.clientY - touch1.clientY, 2)
+                );
+                
+                if (lastTouchDistance > 0) {
+                    const pinchScale = currentDistance / lastTouchDistance;
+                    const zoomDelta = (1 - pinchScale) * 2;
+                    targetZoom += zoomDelta;
+                    targetZoom = Math.max(2, Math.min(15, targetZoom));
+                }
+                
+                lastTouchDistance = currentDistance;
+                
+                // Pan con el punto medio
+                const newCenterX = (touch1.clientX + touch2.clientX) / 2;
+                const newCenterY = (touch1.clientY + touch2.clientY) / 2;
+                
+                const panDeltaX = newCenterX - mouseX;
+                const panDeltaY = newCenterY - mouseY;
+                
+                targetPanX += panDeltaX * 0.005;
+                targetPanY -= panDeltaY * 0.005;
+                
+                mouseX = newCenterX;
+                mouseY = newCenterY;
+            }
         }
 
-        function onTouchEnd() {
+        function onTouchEnd(event) {
+            event.preventDefault();
             mouseDown = false;
+            touches = Array.from(event.touches);
+            
+            if (touches.length === 0) {
+                lastTouchDistance = 0;
+            } else if (touches.length === 1) {
+                // Volver a modo rotación con un dedo
+                mouseDown = true;
+                mouseX = touches[0].clientX;
+                mouseY = touches[0].clientY;
+            }
         }
 
-        // Funciones de control
+        // Funciones de control mejoradas
         function resetCamera() {
             targetRotationX = 0;
             targetRotationY = 0;
-            camera.position.set(0, 1, 5);
+            targetPanX = 0;
+            targetPanY = 0;
+            targetZoom = 5;
             isAutoRotating = false;
             updateAutoRotateButton();
         }
@@ -651,7 +733,7 @@
             }
         }
 
-        // Loop de animación
+        // Loop de animación mejorado
         function animate() {
             requestAnimationFrame(animate);
             
@@ -659,20 +741,33 @@
             currentRotationX += (targetRotationX - currentRotationX) * 0.05;
             currentRotationY += (targetRotationY - currentRotationY) * 0.05;
             
+            // Suavizar pan (movimiento lateral)
+            currentPanX += (targetPanX - currentPanX) * 0.05;
+            currentPanY += (targetPanY - currentPanY) * 0.05;
+            
+            // Suavizar zoom
+            currentZoom += (targetZoom - currentZoom) * 0.05;
+            
             // Auto-rotación
             if (isAutoRotating) {
                 targetRotationY += 0.01;
             }
             
-            // Aplicar rotación al modelo
+            // Aplicar transformaciones al modelo
             if (aliModel) {
                 aliModel.rotation.x = currentRotationX;
                 aliModel.rotation.y = currentRotationY;
+                aliModel.position.x = currentPanX;
+                aliModel.position.y = currentPanY;
                 
                 // Animación sutil de respiración
                 const time = Date.now() * 0.001;
-                aliModel.scale.y = 1 + Math.sin(time * 2) * 0.02;
+                aliModel.scale.y = (aliModel.scale.x || 1) * (1 + Math.sin(time * 2) * 0.02);
             }
+            
+            // Aplicar zoom a la cámara
+            camera.position.z = currentZoom;
+            camera.lookAt(currentPanX, currentPanY, 0);
             
             // Renderizar
             renderer.render(scene, camera);

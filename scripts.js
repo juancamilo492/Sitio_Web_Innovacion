@@ -405,3 +405,294 @@ if (window.location.hostname === 'localhost' || window.location.hostname === '12
     console.log('🚀 Alico Debug Mode Activated');
     console.log('📦 Available functions:', Object.keys(window.debugAlico));
 }
+
+// ==================================================
+// FUNCIONES DE ACCESIBILIDAD
+// ==================================================
+
+// Variables globales para estados
+let fontSizeLevel = 0; // -1: pequeño, 0: normal, 1: grande, 2: extra grande
+let accessibilityStates = {
+    highContrast: false,
+    reducedAnimations: false,
+    bigCursor: false,
+    highlightLinks: false
+};
+
+/**
+ * Alternar menú de accesibilidad
+ */
+function toggleAccessibilityMenu() {
+    const menu = document.getElementById('accessibilityMenu');
+    const isActive = menu.classList.contains('active');
+    
+    if (isActive) {
+        closeAccessibilityMenu();
+    } else {
+        menu.classList.add('active');
+        // Focus en el primer botón para accesibilidad
+        setTimeout(() => {
+            const firstButton = menu.querySelector('button');
+            if (firstButton) firstButton.focus();
+        }, 100);
+    }
+}
+
+/**
+ * Cerrar menú de accesibilidad
+ */
+function closeAccessibilityMenu() {
+    const menu = document.getElementById('accessibilityMenu');
+    menu.classList.remove('active');
+}
+
+/**
+ * Cambiar tamaño de fuente
+ */
+function changeFontSize(action) {
+    const body = document.body;
+    
+    // Remover clases existentes
+    body.classList.remove('large-text', 'extra-large-text');
+    
+    switch(action) {
+        case 'decrease':
+            fontSizeLevel = Math.max(-1, fontSizeLevel - 1);
+            break;
+        case 'increase':
+            fontSizeLevel = Math.min(2, fontSizeLevel + 1);
+            break;
+        case 'reset':
+            fontSizeLevel = 0;
+            break;
+    }
+    
+    // Aplicar nueva clase
+    if (fontSizeLevel === 1) {
+        body.classList.add('large-text');
+    } else if (fontSizeLevel >= 2) {
+        body.classList.add('extra-large-text');
+    }
+    
+    // Guardar preferencia
+    localStorage.setItem('alico-font-size', fontSizeLevel);
+    
+    // Anunciar cambio para lectores de pantalla
+    announceToScreenReader(`Tamaño de texto ${action === 'increase' ? 'aumentado' : action === 'decrease' ? 'reducido' : 'restablecido'}`);
+}
+
+/**
+ * Alternar alto contraste
+ */
+function toggleHighContrast() {
+    const body = document.body;
+    const btn = document.getElementById('contrastBtn');
+    
+    accessibilityStates.highContrast = !accessibilityStates.highContrast;
+    
+    if (accessibilityStates.highContrast) {
+        body.classList.add('high-contrast');
+        btn.classList.add('active');
+    } else {
+        body.classList.remove('high-contrast');
+        btn.classList.remove('active');
+    }
+    
+    localStorage.setItem('alico-high-contrast', accessibilityStates.highContrast);
+    announceToScreenReader(`Alto contraste ${accessibilityStates.highContrast ? 'activado' : 'desactivado'}`);
+}
+
+/**
+ * Alternar animaciones
+ */
+function toggleAnimations() {
+    const body = document.body;
+    const btn = document.getElementById('animationsBtn');
+    
+    accessibilityStates.reducedAnimations = !accessibilityStates.reducedAnimations;
+    
+    if (accessibilityStates.reducedAnimations) {
+        body.classList.add('no-animations');
+        btn.classList.add('active');
+    } else {
+        body.classList.remove('no-animations');
+        btn.classList.remove('active');
+    }
+    
+    localStorage.setItem('alico-reduced-animations', accessibilityStates.reducedAnimations);
+    announceToScreenReader(`Animaciones ${accessibilityStates.reducedAnimations ? 'reducidas' : 'habilitadas'}`);
+}
+
+/**
+ * Alternar cursor grande
+ */
+function toggleBigCursor() {
+    const body = document.body;
+    const btn = document.getElementById('cursorBtn');
+    
+    accessibilityStates.bigCursor = !accessibilityStates.bigCursor;
+    
+    if (accessibilityStates.bigCursor) {
+        body.classList.add('big-cursor');
+        btn.classList.add('active');
+    } else {
+        body.classList.remove('big-cursor');
+        btn.classList.remove('active');
+    }
+    
+    localStorage.setItem('alico-big-cursor', accessibilityStates.bigCursor);
+    announceToScreenReader(`Cursor grande ${accessibilityStates.bigCursor ? 'activado' : 'desactivado'}`);
+}
+
+/**
+ * Alternar enlaces destacados
+ */
+function toggleHighlightLinks() {
+    const body = document.body;
+    const btn = document.getElementById('linksBtn');
+    
+    accessibilityStates.highlightLinks = !accessibilityStates.highlightLinks;
+    
+    if (accessibilityStates.highlightLinks) {
+        body.classList.add('highlight-links');
+        btn.classList.add('active');
+    } else {
+        body.classList.remove('highlight-links');
+        btn.classList.remove('active');
+    }
+    
+    localStorage.setItem('alico-highlight-links', accessibilityStates.highlightLinks);
+    announceToScreenReader(`Enlaces ${accessibilityStates.highlightLinks ? 'destacados' : 'normales'}`);
+}
+
+/**
+ * Restablecer todas las configuraciones
+ */
+function resetAccessibility() {
+    const body = document.body;
+    
+    // Resetear clases
+    body.classList.remove('high-contrast', 'large-text', 'extra-large-text', 'no-animations', 'big-cursor', 'highlight-links');
+    
+    // Resetear estados
+    fontSizeLevel = 0;
+    accessibilityStates = {
+        highContrast: false,
+        reducedAnimations: false,
+        bigCursor: false,
+        highlightLinks: false
+    };
+    
+    // Resetear botones
+    document.querySelectorAll('.accessibility-controls button').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    
+    // Limpiar localStorage
+    localStorage.removeItem('alico-font-size');
+    localStorage.removeItem('alico-high-contrast');
+    localStorage.removeItem('alico-reduced-animations');
+    localStorage.removeItem('alico-big-cursor');
+    localStorage.removeItem('alico-highlight-links');
+    
+    announceToScreenReader('Configuración de accesibilidad restablecida');
+}
+
+/**
+ * Anunciar a lectores de pantalla
+ */
+function announceToScreenReader(message) {
+    const announcement = document.createElement('div');
+    announcement.setAttribute('aria-live', 'polite');
+    announcement.setAttribute('aria-atomic', 'true');
+    announcement.style.position = 'absolute';
+    announcement.style.left = '-10000px';
+    announcement.style.width = '1px';
+    announcement.style.height = '1px';
+    announcement.style.overflow = 'hidden';
+    announcement.textContent = message;
+    
+    document.body.appendChild(announcement);
+    
+    setTimeout(() => {
+        document.body.removeChild(announcement);
+    }, 1000);
+}
+
+/**
+ * Cargar preferencias guardadas
+ */
+function loadAccessibilityPreferences() {
+    // Cargar tamaño de fuente
+    const savedFontSize = localStorage.getItem('alico-font-size');
+    if (savedFontSize) {
+        fontSizeLevel = parseInt(savedFontSize);
+        if (fontSizeLevel === 1) {
+            document.body.classList.add('large-text');
+        } else if (fontSizeLevel >= 2) {
+            document.body.classList.add('extra-large-text');
+        }
+    }
+    
+    // Cargar alto contraste
+    if (localStorage.getItem('alico-high-contrast') === 'true') {
+        accessibilityStates.highContrast = true;
+        document.body.classList.add('high-contrast');
+        document.getElementById('contrastBtn').classList.add('active');
+    }
+    
+    // Cargar animaciones reducidas
+    if (localStorage.getItem('alico-reduced-animations') === 'true') {
+        accessibilityStates.reducedAnimations = true;
+        document.body.classList.add('no-animations');
+        document.getElementById('animationsBtn').classList.add('active');
+    }
+    
+    // Cargar cursor grande
+    if (localStorage.getItem('alico-big-cursor') === 'true') {
+        accessibilityStates.bigCursor = true;
+        document.body.classList.add('big-cursor');
+        document.getElementById('cursorBtn').classList.add('active');
+    }
+    
+    // Cargar enlaces destacados
+    if (localStorage.getItem('alico-highlight-links') === 'true') {
+        accessibilityStates.highlightLinks = true;
+        document.body.classList.add('highlight-links');
+        document.getElementById('linksBtn').classList.add('active');
+    }
+}
+
+/**
+ * Cerrar menú con tecla Escape
+ */
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        const menu = document.getElementById('accessibilityMenu');
+        if (menu && menu.classList.contains('active')) {
+            closeAccessibilityMenu();
+        }
+    }
+});
+
+/**
+ * Cerrar menú al hacer clic fuera
+ */
+document.addEventListener('click', function(event) {
+    const menu = document.getElementById('accessibilityMenu');
+    const button = document.getElementById('accessibilityBtn');
+    
+    if (menu && button && 
+        !menu.contains(event.target) && 
+        !button.contains(event.target) &&
+        menu.classList.contains('active')) {
+        closeAccessibilityMenu();
+    }
+});
+
+// Cargar preferencias al cargar la página
+document.addEventListener('DOMContentLoaded', function() {
+    // Pequeño delay para asegurar que todos los elementos estén cargados
+    setTimeout(loadAccessibilityPreferences, 100);
+});
+</script>

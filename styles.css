@@ -1,5 +1,5 @@
 /* ==================================================
-   VARIABLES DE COLORES CORPORATIVOS OFICIALESS
+   VARIABLES DE COLORES CORPORATIVOS OFICIALES
    Basadas en el Manual de Marca de Alico - ACTUALIZADAS
    ================================================== */
 :root {
@@ -635,15 +635,19 @@ footer::before {
 /* Escritorio - pantallas grandes */
 @media (min-width: 1024px) {
     .menu-toggle {
-        display: none;
+        display: none !important;
     }
 
     .desktop-nav {
-        display: flex;
+        display: flex !important;
     }
 
     .mobile-nav-menu {
         display: none !important;
+    }
+
+    .header-banner-btn {
+        display: flex !important;
     }
 
     .sgi-grid {
@@ -658,11 +662,15 @@ footer::before {
 /* Tableta */
 @media (max-width: 1023px) and (min-width: 769px) {
     .desktop-nav {
-        display: none;
+        display: none !important;
     }
 
     .header-banner-btn {
-        display: none;
+        display: none !important;
+    }
+
+    .menu-toggle {
+        display: block !important;
     }
 
     .sgi-grid {
@@ -687,11 +695,15 @@ footer::before {
     }
 
     .desktop-nav {
-        display: none;
+        display: none !important;
     }
 
     .header-banner-btn {
-        display: none;
+        display: none !important;
+    }
+
+    .menu-toggle {
+        display: block !important;
     }
 
     .intro-card {

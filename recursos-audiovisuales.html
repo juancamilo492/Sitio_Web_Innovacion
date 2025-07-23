@@ -8,6 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
     <!-- Estilos principales -->
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -15,159 +17,167 @@
     <!-- Header fijo con navegación -->
     <header class="header">
         <!-- Botón de menú móvil -->
-        <button class="menu-toggle" onclick="toggleMenu()">
+        <button class="menu-toggle" onclick="toggleMenu()" aria-label="Abrir menú de navegación">
             <span></span>
             <span></span>
             <span></span>
         </button>
         
         <!-- Logo de Alico -->
-        <a href="index.html" class="logo">
+        <a href="index.html" class="logo" aria-label="Ir a página principal de Alico">
             <span class="logo-text">a</span>
         </a>
 
         <!-- Navegación de escritorio -->
-        <nav class="desktop-nav">
+        <nav class="desktop-nav" aria-label="Navegación principal">
             <div class="nav-links">
                 <a href="generalidades-sgi.html" class="nav-link">
-                    <span class="nav-link-icon">🔍</span>
+                    <span class="material-symbols-rounded nav-link-icon">analytics</span>
                     <span>Generalidades SGI</span>
                 </a>
                 <a href="embajador-ali.html" class="nav-link">
-                    <span class="nav-link-icon">😊</span>
+                    <span class="material-symbols-rounded nav-link-icon">support_agent</span>
                     <span>Embajador Ali</span>
                 </a>
                 <a href="inteligencias-artificiales.html" class="nav-link">
-                    <span class="nav-link-icon">🤖</span>
+                    <span class="material-symbols-rounded nav-link-icon">psychology</span>
                     <span>Inteligencias artificiales</span>
                 </a>
                 <a href="recursos-audiovisuales.html" class="nav-link">
-                    <span class="nav-link-icon">📹</span>
+                    <span class="material-symbols-rounded nav-link-icon">video_library</span>
                     <span>Recursos audiovisuales</span>
                 </a>
                 <a href="proyectos.html" class="nav-link">
-                    <span class="nav-link-icon">⚙️</span>
+                    <span class="material-symbols-rounded nav-link-icon">engineering</span>
                     <span>Proyectos</span>
                 </a>
-                <a href="https://experiencia-alico.firebaseapp.com/" class="nav-link" target="_blank">
-                    <span class="nav-link-icon">📦</span>
+                <a href="https://experiencia-alico.firebaseapp.com/" class="nav-link" target="_blank" rel="noopener noreferrer">
+                    <span class="material-symbols-rounded nav-link-icon">inventory_2</span>
                     <span>Diseña tu empaque</span>
-                    <span>↗</span>
+                    <span class="material-symbols-rounded" style="font-size: 16px;">open_in_new</span>
                 </a>
             </div>
         </nav>
 
         <!-- Botón de banco de iniciativas en el header -->
         <a href="https://docs.google.com/forms/d/e/1FAIpQLScfJWsXOj-BAAgG9tmxYFf4QEuOimOmJJPsF4bnxmquUParZA/viewform?usp=sharing&ouid=102976851646670750896" 
-           class="header-banner-btn" target="_blank">
-            <span>💡</span>
+           class="header-banner-btn" target="_blank" rel="noopener noreferrer">
+            <span class="material-symbols-rounded">lightbulb</span>
             <span>Banco de iniciativas</span>
-            <span>↗</span>
+            <span class="material-symbols-rounded" style="font-size: 16px;">open_in_new</span>
         </a>
     </header>
 
     <!-- Menú de navegación móvil -->
-    <nav class="mobile-nav-menu" id="mobileNavMenu">
+    <nav class="mobile-nav-menu" id="mobileNavMenu" aria-label="Menú de navegación móvil">
         <div class="mobile-nav-grid">
             <a href="generalidades-sgi.html" class="mobile-nav-item">
-                <div class="mobile-nav-icon">🔍</div>
+                <div class="material-symbols-rounded mobile-nav-icon">analytics</div>
                 <div class="mobile-nav-title">Generalidades SGI</div>
             </a>
             <a href="embajador-ali.html" class="mobile-nav-item">
-                <div class="mobile-nav-icon">😊</div>
+                <div class="material-symbols-rounded mobile-nav-icon">support_agent</div>
                 <div class="mobile-nav-title">Embajador Ali</div>
             </a>
             <a href="inteligencias-artificiales.html" class="mobile-nav-item">
-                <div class="mobile-nav-icon">🤖</div>
+                <div class="material-symbols-rounded mobile-nav-icon">psychology</div>
                 <div class="mobile-nav-title">Inteligencias artificiales</div>
             </a>
             <a href="recursos-audiovisuales.html" class="mobile-nav-item">
-                <div class="mobile-nav-icon">📹</div>
+                <div class="material-symbols-rounded mobile-nav-icon">video_library</div>
                 <div class="mobile-nav-title">Recursos audiovisuales</div>
             </a>
             <a href="proyectos.html" class="mobile-nav-item">
-                <div class="mobile-nav-icon">⚙️</div>
+                <div class="material-symbols-rounded mobile-nav-icon">engineering</div>
                 <div class="mobile-nav-title">Proyectos</div>
             </a>
-            <a href="https://experiencia-alico.firebaseapp.com/" class="mobile-nav-item" target="_blank">
-                <div class="mobile-nav-icon">📦</div>
+            <a href="https://experiencia-alico.firebaseapp.com/" class="mobile-nav-item" target="_blank" rel="noopener noreferrer">
+                <div class="material-symbols-rounded mobile-nav-icon">inventory_2</div>
                 <div class="mobile-nav-title">Diseña tu empaque</div>
             </a>
             <a href="https://docs.google.com/forms/d/e/1FAIpQLScfJWsXOj-BAAgG9tmxYFf4QEuOimOmJJPsF4bnxmquUParZA/viewform?usp=sharing&ouid=102976851646670750896" 
-               class="mobile-nav-item" target="_blank">
-                <div class="mobile-nav-icon">💡</div>
+               class="mobile-nav-item" target="_blank" rel="noopener noreferrer">
+                <div class="material-symbols-rounded mobile-nav-icon">lightbulb</div>
                 <div class="mobile-nav-title">Banco de iniciativas</div>
             </a>
         </div>
     </nav>
 
     <!-- Botón de volver arriba -->
-    <button class="back-to-top" id="backToTop" onclick="scrollToTop()">
-        ↑
+    <button class="back-to-top" id="backToTop" onclick="scrollToTop()" aria-label="Volver arriba">
+        <span class="material-symbols-rounded">keyboard_arrow_up</span>
     </button>
 
     <!-- Contenido principal de recursos audiovisuales -->
     <main>
         <!-- Banner principal de la página -->
-        <div class="banner-section">
+        <section class="banner-section">
             <div class="banner-content banner-recursos">
                 RECURSOS AUDIOVISUALES
             </div>
-        </div>
+        </section>
 
         <!-- Sección de videos destacados -->
-        <div class="video-section">
+        <section class="video-section">
             <!-- Video 1: Lanzamiento Termoflex +B -->
-            <a href="https://youtube.com" class="video-card" target="_blank">
+            <a href="https://youtube.com" class="video-card" target="_blank" rel="noopener noreferrer">
                 <div class="video-placeholder">
-                    <div class="play-button">▶</div>
+                    <div class="play-button">
+                        <span class="material-symbols-rounded" style="font-size: 40px;">play_arrow</span>
+                    </div>
                 </div>
                 <div class="video-title">LANZAMIENTO TERMOFLEX +B</div>
             </a>
 
             <!-- Video 2: Proyecto Casas -->
-            <a href="https://youtube.com" class="video-card" target="_blank">
+            <a href="https://youtube.com" class="video-card" target="_blank" rel="noopener noreferrer">
                 <div class="video-placeholder">
-                    <div class="play-button">▶</div>
+                    <div class="play-button">
+                        <span class="material-symbols-rounded" style="font-size: 40px;">play_arrow</span>
+                    </div>
                 </div>
                 <div class="video-title">PROYECTO CASAS</div>
             </a>
-        </div>
+        </section>
 
-        <!-- Tarjetas de recursos adicionales -->
-        <div class="resource-cards">
+        <!-- Tarjetas de recursos adicionales CON IMÁGENES -->
+        <section class="resource-cards">
             <!-- Tarjeta 1: Plantillas -->
-            <div class="resource-card">
+            <article class="resource-card">
                 <h3>Plantillas</h3>
-                <div class="resource-card-icon">
-                    Espacio para Ali
+                <div class="resource-card-image" style="background-image: url('ruta/a/imagen-plantillas.jpg');">
+                    <!-- Placeholder para imagen de plantillas -->
+                    Imagen de Plantillas
                 </div>
-            </div>
+            </article>
 
             <!-- Tarjeta 2: Recursos adicionales -->
-            <div class="resource-card">
+            <article class="resource-card">
                 <h3>Recursos adicionales</h3>
-                <div class="resource-card-icon">
-                    Espacio para Ali
+                <div class="resource-card-image" style="background-image: url('ruta/a/imagen-recursos.jpg');">
+                    <!-- Placeholder para imagen de recursos adicionales -->
+                    Imagen de Recursos
                 </div>
-            </div>
+            </article>
 
             <!-- Tarjeta 3: Experiencia del cliente -->
-            <div class="resource-card">
+            <article class="resource-card">
                 <h3>Experiencia del cliente</h3>
-                <div class="resource-card-icon">
-                    Espacio para Ali
+                <div class="resource-card-image" style="background-image: url('ruta/a/imagen-experiencia.jpg');">
+                    <!-- Placeholder para imagen de experiencia del cliente -->
+                    Imagen de Experiencia
                 </div>
-            </div>
+            </article>
 
             <!-- Tarjeta 4: Eventos -->
-            <div class="resource-card">
+            <article class="resource-card">
                 <h3>Eventos</h3>
-                <div class="resource-card-icon">
-                    Espacio para Ali
+                <div class="resource-card-image" style="background-image: url('ruta/a/imagen-eventos.jpg');">
+                    <!-- Placeholder para imagen de eventos -->
+                    Imagen de Eventos
                 </div>
-            </div>
-        </div>
+            </article>
+        </section>
     </main>
 
     <!-- Footer -->
@@ -175,4 +185,7 @@
         <div class="footer-logo">alico</div>
     </footer>
 
-    <!--
+    <!-- Archivo JavaScript compartido -->
+    <script src="scripts.js"></script>
+</body>
+</html>

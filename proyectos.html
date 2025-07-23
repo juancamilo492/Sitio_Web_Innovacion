@@ -12,46 +12,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
     <!-- Estilos principales -->
     <link rel="stylesheet" href="styles.css">
-    <!-- CSS FORZADO PARA CORREGIR ICONOS -->
-    <style>
-        /* Forzar Material Icons en esta página */
-        .material-symbols-rounded {
-            font-family: 'Material Symbols Rounded' !important;
-            font-weight: normal !important;
-            font-style: normal !important;
-            font-size: 24px !important;
-            line-height: 1 !important;
-            letter-spacing: normal !important;
-            text-transform: none !important;
-            display: inline-block !important;
-            white-space: nowrap !important;
-            word-wrap: normal !important;
-            direction: ltr !important;
-            -webkit-font-feature-settings: 'liga' !important;
-            -webkit-font-smoothing: antialiased !important;
-        }
-        
-        .nav-link-icon {
-            font-size: 20px !important;
-        }
-        
-        .mobile-nav-icon {
-            font-size: 30px !important;
-        }
-        
-        /* Asegurar que desktop nav sea visible */
-        @media (min-width: 1024px) {
-            .menu-toggle {
-                display: none !important;
-            }
-            .desktop-nav {
-                display: flex !important;
-            }
-            .header-banner-btn {
-                display: flex !important;
-            }
-        }
-    </style>
 </head>
 <body>
     <!-- Header fijo con navegación -->
@@ -134,13 +94,11 @@
             <a href="https://experiencia-alico.firebaseapp.com/" class="mobile-nav-item" target="_blank" rel="noopener noreferrer">
                 <div class="material-symbols-rounded mobile-nav-icon">inventory_2</div>
                 <div class="mobile-nav-title">Diseña tu empaque</div>
-                <div class="mobile-nav-external">↗</div>
             </a>
             <a href="https://docs.google.com/forms/d/e/1FAIpQLScfJWsXOj-BAAgG9tmxYFf4QEuOimOmJJPsF4bnxmquUParZA/viewform?usp=sharing&ouid=102976851646670750896" 
                class="mobile-nav-item" target="_blank" rel="noopener noreferrer">
                 <div class="material-symbols-rounded mobile-nav-icon">lightbulb</div>
                 <div class="mobile-nav-title">Banco de iniciativas</div>
-                <div class="mobile-nav-external">↗</div>
             </a>
         </div>
     </nav>
@@ -161,16 +119,110 @@
 
         <!-- Tarjeta principal -->
         <section class="model-card">
-            <h2>Proyectos</h2>
-            <p>Contenido próximamente...</p>
-            <p>Esta página mostrará los proyectos de innovación actuales y pasados de Alico, con detalles sobre el progreso, resultados y impacto de cada iniciativa.</p>
+            <h2>Proyectos de Innovación</h2>
+            <p>En Alico, cada proyecto es una oportunidad para transformar ideas en soluciones reales que generen valor para nuestros clientes y contribuyan a un futuro más sostenible. Nuestros proyectos de innovación abarcan desde el desarrollo de nuevos materiales hasta la implementación de tecnologías disruptivas en el sector del empaque.</p>
+            <p>Aquí podrás conocer los proyectos que estamos desarrollando, los resultados obtenidos y el impacto que generamos en la industria y el medio ambiente.</p>
         </section>
 
-        <!-- Placeholder para futuro contenido de proyectos -->
-        <section style="text-align: center; margin: 40px 0;">
-            <div style="width: 300px; height: 200px; background-color: #ddd; border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto; font-size: 16px; color: #666;">
-                Galería de Proyectos<br>Próximamente
+        <!-- Grid de proyectos destacados -->
+        <section class="projects-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-xl); margin-top: var(--spacing-xxl); margin-bottom: var(--spacing-xxl);">
+            <!-- Proyecto 1: Empaques Sostenibles -->
+            <article class="project-card" style="background: linear-gradient(135deg, var(--verde-natura) 0%, var(--verde-natura-80) 100%); border-radius: var(--border-radius-xl); padding: var(--spacing-xl); color: var(--blanco); box-shadow: var(--shadow-lg); transition: all 0.3s ease; position: relative; overflow: hidden; cursor: pointer;">
+                <div style="content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%); pointer-events: none;"></div>
+                <div style="position: relative; z-index: 1;">
+                    <div class="material-symbols-rounded" style="font-size: 48px; margin-bottom: var(--spacing-md); color: var(--blanco);">eco</div>
+                    <h3 style="font-size: 1.5em; margin-bottom: var(--spacing-md); font-family: 'Zilla Slab', serif; font-weight: 600;">Empaques Biodegradables</h3>
+                    <p style="line-height: 1.6; margin-bottom: var(--spacing-md);">Desarrollo de materiales de empaque 100% biodegradables que se descomponen naturalmente sin dejar residuos tóxicos.</p>
+                    <div style="background-color: rgba(255,255,255,0.2); padding: var(--spacing-sm) var(--spacing-md); border-radius: var(--border-radius-md); font-size: 0.9em; margin-top: var(--spacing-md);">
+                        <strong>Estado:</strong> En desarrollo • <strong>Impacto:</strong> -40% huella de carbono
+                    </div>
+                </div>
+            </article>
+
+            <!-- Proyecto 2: Tecnología Inteligente -->
+            <article class="project-card" style="background: linear-gradient(135deg, var(--azul-novo) 0%, var(--azul-novo-80) 100%); border-radius: var(--border-radius-xl); padding: var(--spacing-xl); color: var(--blanco); box-shadow: var(--shadow-lg); transition: all 0.3s ease; position: relative; overflow: hidden; cursor: pointer;">
+                <div style="content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%); pointer-events: none;"></div>
+                <div style="position: relative; z-index: 1;">
+                    <div class="material-symbols-rounded" style="font-size: 48px; margin-bottom: var(--spacing-md); color: var(--blanco);">smart_toy</div>
+                    <h3 style="font-size: 1.5em; margin-bottom: var(--spacing-md); font-family: 'Zilla Slab', serif; font-weight: 600;">Empaques Inteligentes</h3>
+                    <p style="line-height: 1.6; margin-bottom: var(--spacing-md);">Integración de sensores IoT y códigos QR interactivos para crear empaques que comunican información en tiempo real.</p>
+                    <div style="background-color: rgba(255,255,255,0.2); padding: var(--spacing-sm) var(--spacing-md); border-radius: var(--border-radius-md); font-size: 0.9em; margin-top: var(--spacing-md);">
+                        <strong>Estado:</strong> Piloto • <strong>Beneficio:</strong> +60% trazabilidad
+                    </div>
+                </div>
+            </article>
+
+            <!-- Proyecto 3: Economía Circular -->
+            <article class="project-card" style="background: linear-gradient(135deg, var(--amarillo-oro) 0%, var(--amarillo-oro-80) 100%); border-radius: var(--border-radius-xl); padding: var(--spacing-xl); color: var(--blanco); box-shadow: var(--shadow-lg); transition: all 0.3s ease; position: relative; overflow: hidden; cursor: pointer;">
+                <div style="content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%); pointer-events: none;"></div>
+                <div style="position: relative; z-index: 1;">
+                    <div class="material-symbols-rounded" style="font-size: 48px; margin-bottom: var(--spacing-md); color: var(--blanco);">recycling</div>
+                    <h3 style="font-size: 1.5em; margin-bottom: var(--spacing-md); font-family: 'Zilla Slab', serif; font-weight: 600;">Economía Circular</h3>
+                    <p style="line-height: 1.6; margin-bottom: var(--spacing-md);">Implementación de procesos de reciclaje y reutilización para crear un ciclo cerrado de producción sostenible.</p>
+                    <div style="background-color: rgba(255,255,255,0.2); padding: var(--spacing-sm) var(--spacing-md); border-radius: var(--border-radius-md); font-size: 0.9em; margin-top: var(--spacing-md);">
+                        <strong>Estado:</strong> Activo • <strong>Logro:</strong> 85% material reciclado
+                    </div>
+                </div>
+            </article>
+
+            <!-- Proyecto 4: Innovación Colaborativa -->
+            <article class="project-card" style="background: linear-gradient(135deg, var(--azul-claro) 0%, var(--azul-claro-80) 100%); border-radius: var(--border-radius-xl); padding: var(--spacing-xl); color: var(--blanco); box-shadow: var(--shadow-lg); transition: all 0.3s ease; position: relative; overflow: hidden; cursor: pointer;">
+                <div style="content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%); pointer-events: none;"></div>
+                <div style="position: relative; z-index: 1;">
+                    <div class="material-symbols-rounded" style="font-size: 48px; margin-bottom: var(--spacing-md); color: var(--blanco);">groups</div>
+                    <h3 style="font-size: 1.5em; margin-bottom: var(--spacing-md); font-family: 'Zilla Slab', serif; font-weight: 600;">Co-creación con Clientes</h3>
+                    <p style="line-height: 1.6; margin-bottom: var(--spacing-md);">Proyectos desarrollados en colaboración directa con clientes para crear soluciones personalizadas y innovadoras.</p>
+                    <div style="background-color: rgba(255,255,255,0.2); padding: var(--spacing-sm) var(--spacing-md); border-radius: var(--border-radius-md); font-size: 0.9em; margin-top: var(--spacing-md);">
+                        <strong>Estado:</strong> Permanente • <strong>Participantes:</strong> +50 empresas
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <!-- Sección de metodología de proyectos -->
+        <section class="methodology-section" style="background: linear-gradient(135deg, var(--azul-claro) 0%, var(--azul-claro-80) 100%); border-radius: var(--border-radius-xl); padding: var(--spacing-xxl); margin-bottom: var(--spacing-xl); color: var(--blanco); text-align: center; position: relative; overflow: hidden; box-shadow: var(--shadow-lg);">
+            <div style="content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%); pointer-events: none;"></div>
+            <div style="position: relative; z-index: 1;">
+                <h2 style="font-size: clamp(1.5rem, 4vw, 2rem); margin-bottom: var(--spacing-lg); font-family: 'Zilla Slab', serif; font-weight: 600;">Nuestra Metodología de Proyectos</h2>
+                <p style="font-size: clamp(1rem, 2.5vw, 1.1rem); line-height: 1.6; margin-bottom: var(--spacing-xl); max-width: 800px; margin-left: auto; margin-right: auto;">Seguimos una metodología ágil e iterativa que nos permite adaptarnos rápidamente a los cambios del mercado y las necesidades de nuestros clientes, asegurando resultados innovadores y sostenibles.</p>
+                
+                <!-- Fases del proyecto -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--spacing-lg); margin-top: var(--spacing-xl);">
+                    <div style="text-align: center;">
+                        <div class="material-symbols-rounded" style="font-size: 40px; margin-bottom: var(--spacing-sm); color: var(--blanco);">lightbulb</div>
+                        <h4 style="font-size: 1.1em; margin-bottom: var(--spacing-sm); font-family: 'Zilla Slab', serif; font-weight: 600;">Ideación</h4>
+                        <p style="font-size: 0.9em; line-height: 1.5;">Generación y evaluación de ideas innovadoras</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div class="material-symbols-rounded" style="font-size: 40px; margin-bottom: var(--spacing-sm); color: var(--blanco);">science</div>
+                        <h4 style="font-size: 1.1em; margin-bottom: var(--spacing-sm); font-family: 'Zilla Slab', serif; font-weight: 600;">Investigación</h4>
+                        <p style="font-size: 0.9em; line-height: 1.5;">Análisis técnico y de viabilidad</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div class="material-symbols-rounded" style="font-size: 40px; margin-bottom: var(--spacing-sm); color: var(--blanco);">build</div>
+                        <h4 style="font-size: 1.1em; margin-bottom: var(--spacing-sm); font-family: 'Zilla Slab', serif; font-weight: 600;">Desarrollo</h4>
+                        <p style="font-size: 0.9em; line-height: 1.5;">Prototipado y pruebas iterativas</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div class="material-symbols-rounded" style="font-size: 40px; margin-bottom: var(--spacing-sm); color: var(--blanco);">rocket_launch</div>
+                        <h4 style="font-size: 1.1em; margin-bottom: var(--spacing-sm); font-family: 'Zilla Slab', serif; font-weight: 600;">Implementación</h4>
+                        <p style="font-size: 0.9em; line-height: 1.5;">Lanzamiento y escalamiento</p>
+                    </div>
+                </div>
             </div>
+        </section>
+
+        <!-- Llamada a la acción -->
+        <section style="text-align: center; margin: var(--spacing-xxl) 0;">
+            <h3 style="font-size: 1.8em; margin-bottom: var(--spacing-lg); font-family: 'Zilla Slab', serif; font-weight: 600; color: var(--blanco);">¿Tienes una idea innovadora?</h3>
+            <p style="font-size: 1.1em; line-height: 1.6; margin-bottom: var(--spacing-xl); color: var(--blanco); opacity: 0.9; max-width: 600px; margin-left: auto; margin-right: auto;">Únete a nuestra red de innovación y ayúdanos a crear el futuro del empaque sostenible. Comparte tu propuesta en nuestro banco de iniciativas.</p>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScfJWsXOj-BAAgG9tmxYFf4QEuOimOmJJPsF4bnxmquUParZA/viewform?usp=sharing&ouid=102976851646670750896" 
+               class="btn-primary" target="_blank" rel="noopener noreferrer" 
+               style="background: linear-gradient(135deg, var(--amarillo-oro) 0%, var(--amarillo-oro-80) 100%); color: var(--blanco); padding: var(--spacing-md) var(--spacing-xl); border: none; border-radius: var(--border-radius-xl); font-size: 1.1em; font-weight: 600; cursor: pointer; transition: all 0.3s ease; text-decoration: none; display: inline-flex; align-items: center; gap: var(--spacing-sm); box-shadow: var(--shadow-md);">
+                <span class="material-symbols-rounded">add_circle</span>
+                <span>Proponer Proyecto</span>
+                <span class="material-symbols-rounded" style="font-size: 16px;">open_in_new</span>
+            </a>
         </section>
     </main>
 
@@ -181,5 +233,70 @@
 
     <!-- Archivo JavaScript compartido -->
     <script src="scripts.js"></script>
+    
+    <!-- JavaScript específico para proyectos -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animaciones de hover para las tarjetas de proyecto
+            const projectCards = document.querySelectorAll('.project-card');
+            
+            projectCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px) scale(1.02)';
+                    this.style.boxShadow = 'var(--shadow-xl)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                    this.style.boxShadow = 'var(--shadow-lg)';
+                });
+                
+                // Efecto de click
+                card.addEventListener('click', function() {
+                    this.style.transform = 'translateY(-4px) scale(1.01)';
+                    setTimeout(() => {
+                        this.style.transform = 'translateY(-8px) scale(1.02)';
+                    }, 150);
+                });
+            });
+
+            // Animación de aparición progresiva para las tarjetas
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            // Aplicar animación a las tarjetas
+            projectCards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = `opacity 0.6s ease ${index * 0.2}s, transform 0.6s ease ${index * 0.2}s`;
+                observer.observe(card);
+            });
+
+            // Hover effect para el botón de CTA
+            const ctaButton = document.querySelector('a[href*="forms.d/e"]');
+            if (ctaButton) {
+                ctaButton.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.05) translateY(-2px)';
+                    this.style.boxShadow = 'var(--shadow-xl)';
+                });
+                
+                ctaButton.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1) translateY(0)';
+                    this.style.boxShadow = 'var(--shadow-md)';
+                });
+            }
+        });
+    </script>
 </body>
 </html>

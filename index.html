@@ -11,11 +11,119 @@
     <!-- Material Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
     <!-- Estilos principales -->
-    <style>
-        /* Aquí iría el CSS actualizado */
-        /* Por brevedad, asumo que el archivo styles.css actualizado está vinculado */
-    </style>
     <link rel="stylesheet" href="styles.css">
+    
+    <!-- CSS adicional para corregir layout móvil -->
+    <style>
+        /* CORRECCIÓN ESPECÍFICA PARA TARJETA DE ALI */
+        .intro-card {
+            /* Cambiar de absolute positioning a flexbox */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            min-height: auto;
+        }
+        
+        .intro-content {
+            order: 1;
+            width: 100%;
+            z-index: 2;
+        }
+        
+        .ali-character {
+            order: 2;
+            position: relative !important; /* Override absolute positioning */
+            right: auto !important;
+            bottom: auto !important;
+            margin: var(--spacing-lg) auto 0 auto;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        /* DESKTOP: Layout lado a lado */
+        @media (min-width: 1024px) {
+            .intro-card {
+                flex-direction: row;
+                text-align: left;
+                align-items: center;
+                min-height: 350px;
+            }
+            
+            .intro-content {
+                flex: 1;
+                padding-right: var(--spacing-xl);
+                order: 1;
+            }
+            
+            .ali-character {
+                order: 2;
+                margin: 0;
+                flex-shrink: 0;
+            }
+        }
+        
+        /* TABLET: Stack vertical con más espacio */
+        @media (max-width: 1023px) and (min-width: 769px) {
+            .intro-card {
+                padding: var(--spacing-xl);
+            }
+            
+            .ali-character {
+                width: 180px;
+                height: 220px;
+                margin-top: var(--spacing-xl);
+            }
+        }
+        
+        /* MÓVIL: Stack vertical compacto */
+        @media (max-width: 768px) {
+            .intro-card {
+                padding: var(--spacing-lg);
+                text-align: center;
+            }
+            
+            .intro-content h1 {
+                font-size: clamp(1.5rem, 6vw, 2rem);
+                margin-bottom: var(--spacing-sm);
+            }
+            
+            .intro-content h2 {
+                font-size: clamp(1.2rem, 5vw, 1.5rem);
+                margin-bottom: var(--spacing-sm);
+            }
+            
+            .intro-content p {
+                font-size: clamp(0.9rem, 3vw, 1.1rem);
+                margin-bottom: var(--spacing-md);
+            }
+            
+            .ali-character {
+                width: 150px;
+                height: 180px;
+                margin-top: var(--spacing-md);
+                font-size: 12px;
+            }
+            
+            .btn-primary {
+                margin-top: var(--spacing-md);
+                padding: var(--spacing-md) var(--spacing-lg);
+                font-size: 1rem;
+            }
+        }
+        
+        /* MÓVIL PEQUEÑO: Aún más compacto */
+        @media (max-width: 480px) {
+            .intro-card {
+                padding: var(--spacing-md);
+            }
+            
+            .ali-character {
+                width: 120px;
+                height: 150px;
+                font-size: 11px;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Header fijo con navegación -->
@@ -116,13 +224,18 @@
 
     <!-- Contenido principal de la página home -->
     <main>
-        <!-- Tarjeta de introducción con Ali -->
+        <!-- Tarjeta de introducción con Ali - ESTRUCTURA CORREGIDA -->
         <section class="intro-card">
-            <h1>¡Hola! Soy Ali, el explorador de</h1>
-            <h2>NUEVAS IDEAS</h2>
-            <p style="font-size: 1.5em; margin-bottom: 10px;">en <em>Alico</em></p>
-            <p>Estoy diseñado para cuestionar lo establecido, buscar respuestas más allá de lo evidente y atreverme a innovar.</p>
-            <a href="embajador-ali.html" class="btn-primary">¡Conóceme!</a>
+            <!-- Contenedor del contenido de texto -->
+            <div class="intro-content">
+                <h1>¡Hola! Soy Ali, el explorador de</h1>
+                <h2>NUEVAS IDEAS</h2>
+                <p style="font-size: 1.5em; margin-bottom: 10px;">en <em>Alico</em></p>
+                <p>Estoy diseñado para cuestionar lo establecido, buscar respuestas más allá de lo evidente y atreverme a innovar.</p>
+                <a href="embajador-ali.html" class="btn-primary">¡Conóceme!</a>
+            </div>
+            
+            <!-- Personaje Ali - ahora en el orden correcto -->
             <div class="ali-character" aria-hidden="true">Espacio para Ali</div>
         </section>
 

@@ -227,7 +227,7 @@ p,
 }
 
 /* ==================================================
-   ESTILOS DEL HEADER
+   ESTILOS DEL HEADER - CORREGIDO PARA DESKTOP
    ================================================== */
 .header {
     background-color: var(--amarillo-oro);
@@ -240,11 +240,6 @@ p,
     left: 0;
     right: 0;
     z-index: 1000;
-    box-shadow: var(--shadow-lg);
-}
-
-.video-card:hover {
-    transform: translateY(-10px) scale(1.02);
     box-shadow: var(--shadow-xl);
 }
 
@@ -629,57 +624,25 @@ footer::before {
 }
 
 /* ==================================================
-   RESPONSIVE DESIGN MEJORADO - CORREGIDO
+   RESPONSIVE DESIGN CORREGIDO
    ================================================== */
 
-/* Reglas base para todos los tamaños */
-.menu-toggle {
-    display: block;
-}
-
-.desktop-nav {
-    display: none;
-}
-
-.header-banner-btn {
-    display: flex;
-}
-
-/* Escritorio - pantallas grandes */
+/* Desktop - pantallas grandes (≥1024px) */
 @media (min-width: 1024px) {
+    /* Header desktop - todo visible */
     .menu-toggle {
         display: none !important;
     }
 
     .desktop-nav {
         display: flex !important;
-        flex: 1;
-        margin: 0 var(--spacing-xxl);
-    }
-
-    .mobile-nav-menu {
-        display: none !important;
     }
 
     .header-banner-btn {
         display: flex !important;
     }
 
-    /* Asegurar que los nav-links sean visibles */
-    .nav-links {
-        display: flex !important;
-        gap: var(--spacing-xl);
-        align-items: center;
-        justify-content: center;
-        flex-wrap: wrap;
-    }
-
-    .nav-link {
-        display: flex !important;
-        align-items: center;
-        gap: var(--spacing-sm);
-    }
-
+    /* Grid ajustes */
     .sgi-grid {
         grid-template-columns: repeat(4, 1fr);
     }
@@ -687,9 +650,13 @@ footer::before {
     .methodology-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+
+    .resource-cards {
+        grid-template-columns: repeat(4, 1fr);
+    }
 }
 
-/* Tableta */
+/* Tablet (769px-1023px) */
 @media (max-width: 1023px) and (min-width: 769px) {
     .menu-toggle {
         display: block !important;
@@ -712,7 +679,7 @@ footer::before {
     }
 }
 
-/* Móvil */
+/* Móvil (≤768px) */
 @media (max-width: 768px) {
     :root {
         --spacing-xxl: 32px;
@@ -764,7 +731,7 @@ footer::before {
     }
 }
 
-/* Móvil pequeño */
+/* Móvil pequeño (≤480px) */
 @media (max-width: 480px) {
     body {
         padding-top: 80px;
@@ -855,17 +822,17 @@ footer::before {
 .mb-sm { margin-bottom: var(--spacing-sm); }
 .mb-md { margin-bottom: var(--spacing-md); }
 .mb-lg { margin-bottom: var(--spacing-lg); }
-.mb-xl { margin-bottom: var(--spacing-xl); }shadow-md);
+.mb-xl { margin-bottom: var(--spacing-xl); }md);
     backdrop-filter: blur(10px);
 }
 
-/* Botón de menú móvil */
+/* Botón de menú móvil - OCULTO POR DEFECTO */
 .menu-toggle {
     background: none;
     border: none;
     cursor: pointer;
     padding: var(--spacing-sm);
-    display: block;
+    display: none; /* OCULTO por defecto en desktop */
     border-radius: var(--border-radius-sm);
     transition: all 0.3s ease;
 }
@@ -882,19 +849,6 @@ footer::before {
     margin: 5px 0;
     transition: 0.3s;
     border-radius: 2px;
-}
-
-/* Animación del menú hamburguesa */
-.menu-toggle.active span:nth-child(1) {
-    transform: rotate(-45deg) translate(-9px, 6px);
-}
-
-.menu-toggle.active span:nth-child(2) {
-    opacity: 0;
-}
-
-.menu-toggle.active span:nth-child(3) {
-    transform: rotate(45deg) translate(-8px, -8px);
 }
 
 /* Logo */
@@ -939,9 +893,9 @@ footer::before {
     transform: skew(-9deg); /* Inclinación según manual de marca */
 }
 
-/* Navegación de escritorio */
+/* Navegación de escritorio - VISIBLE POR DEFECTO */
 .desktop-nav {
-    display: none;
+    display: flex; /* VISIBLE por defecto */
     flex: 1;
     margin: 0 var(--spacing-xxl);
 }
@@ -990,7 +944,7 @@ footer::before {
     box-shadow: var(--shadow-sm);
 }
 
-/* Botón de banner en el header */
+/* Botón de banner en el header - VISIBLE POR DEFECTO */
 .header-banner-btn {
     background-color: var(--azul-novo);
     color: var(--blanco);
@@ -998,7 +952,7 @@ footer::before {
     border-radius: var(--border-radius-lg);
     text-decoration: none;
     font-weight: 600;
-    display: flex;
+    display: flex; /* VISIBLE por defecto */
     align-items: center;
     gap: var(--spacing-sm);
     transition: all 0.3s ease;
@@ -1460,4 +1414,9 @@ main {
     animation: fadeInUp 0.6s ease-out;
     text-decoration: none;
     color: inherit;
-    box-shadow: var(--
+    box-shadow: var(--shadow-lg);
+}
+
+.video-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: var(--shadow-

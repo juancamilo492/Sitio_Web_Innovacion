@@ -11,10 +11,6 @@
     <!-- Material Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
     <!-- Estilos principales -->
-    <style>
-        /* Aquí iría el CSS actualizado */
-        /* Por brevedad, asumo que el archivo styles.css actualizado está vinculado */
-    </style>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -113,6 +109,87 @@
     <button class="back-to-top" id="backToTop" onclick="scrollToTop()" aria-label="Volver arriba">
         <span class="material-symbols-rounded">keyboard_arrow_up</span>
     </button>
+
+    <!-- BOTÓN DE ACCESIBILIDAD -->
+    <button class="accessibility-btn" id="accessibilityBtn" onclick="toggleAccessibilityMenu()" aria-label="Opciones de accesibilidad" title="Opciones de accesibilidad">
+        <span class="material-symbols-rounded">accessibility</span>
+    </button>
+
+    <!-- MENÚ DE ACCESIBILIDAD -->
+    <div class="accessibility-menu" id="accessibilityMenu">
+        <div class="accessibility-header">
+            <h3>Accesibilidad</h3>
+            <button class="accessibility-close" onclick="closeAccessibilityMenu()" aria-label="Cerrar menú">
+                <span class="material-symbols-rounded">close</span>
+            </button>
+        </div>
+        
+        <div class="accessibility-options">
+            <!-- Aumentar tamaño de texto -->
+            <div class="accessibility-option">
+                <label for="textSize">Tamaño de texto</label>
+                <div class="accessibility-controls">
+                    <button onclick="changeFontSize('decrease')" aria-label="Reducir texto">A-</button>
+                    <button onclick="changeFontSize('reset')" aria-label="Texto normal">A</button>
+                    <button onclick="changeFontSize('increase')" aria-label="Aumentar texto">A+</button>
+                </div>
+            </div>
+            
+            <!-- Alto contraste -->
+            <div class="accessibility-option">
+                <label>Contraste</label>
+                <div class="accessibility-controls">
+                    <button onclick="toggleHighContrast()" id="contrastBtn" aria-label="Alternar alto contraste">
+                        <span class="material-symbols-rounded">contrast</span>
+                        Alto contraste
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Reducir animaciones -->
+            <div class="accessibility-option">
+                <label>Animaciones</label>
+                <div class="accessibility-controls">
+                    <button onclick="toggleAnimations()" id="animationsBtn" aria-label="Alternar animaciones">
+                        <span class="material-symbols-rounded">animation</span>
+                        Reducir animaciones
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Cursor grande -->
+            <div class="accessibility-option">
+                <label>Cursor</label>
+                <div class="accessibility-controls">
+                    <button onclick="toggleBigCursor()" id="cursorBtn" aria-label="Alternar cursor grande">
+                        <span class="material-symbols-rounded">mouse</span>
+                        Cursor grande
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Enlaces destacados -->
+            <div class="accessibility-option">
+                <label>Enlaces</label>
+                <div class="accessibility-controls">
+                    <button onclick="toggleHighlightLinks()" id="linksBtn" aria-label="Destacar enlaces">
+                        <span class="material-symbols-rounded">link</span>
+                        Destacar enlaces
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Resetear todo -->
+            <div class="accessibility-option">
+                <div class="accessibility-controls full-width">
+                    <button onclick="resetAccessibility()" class="reset-btn" aria-label="Restablecer configuración">
+                        <span class="material-symbols-rounded">refresh</span>
+                        Restablecer todo
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Contenido principal de la página home -->
     <main>

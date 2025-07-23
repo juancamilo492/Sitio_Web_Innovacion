@@ -4,126 +4,262 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alico - Innovación</title>
-    <!-- Google Fonts -->
+    
+    <!-- OPTIMIZACIÓN: Preconnect + Preload para íconos -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <!-- Material Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+    
+    <!-- Fuentes con preload optimizado -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"></noscript>
+    
+    <!-- Material Icons optimizado -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"></noscript>
+    
     <!-- Estilos principales -->
     <link rel="stylesheet" href="styles.css">
     
-    <!-- CSS adicional para corregir layout móvil -->
+    <!-- CSS ADICIONAL PARA CORRECCIÓN DE LAYOUT ALI -->
     <style>
         /* CORRECCIÓN ESPECÍFICA PARA TARJETA DE ALI */
         .intro-card {
-            /* Cambiar de absolute positioning a flexbox */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            min-height: auto;
+            background: linear-gradient(135deg, var(--azul-claro) 0%, var(--azul-claro-80) 100%);
+            border-radius: var(--border-radius-xl);
+            padding: var(--spacing-xl);
+            margin-bottom: var(--spacing-xl);
+            color: var(--blanco);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.6s ease-out;
+            box-shadow: var(--shadow-lg);
         }
         
-        .intro-content {
-            order: 1;
-            width: 100%;
-            z-index: 2;
+        /* MÓVIL: CSS Grid para orden correcto */
+        @media (max-width: 1023px) {
+            .intro-card {
+                display: grid;
+                grid-template-rows: auto auto auto;
+                gap: var(--spacing-lg);
+                text-align: center;
+                align-items: center;
+                justify-items: center;
+            }
+            
+            .intro-text {
+                grid-row: 1;
+                width: 100%;
+            }
+            
+            .ali-character {
+                grid-row: 2;
+            }
+            
+            .intro-button {
+                grid-row: 3;
+            }
         }
         
-        .ali-character {
-            order: 2;
-            position: relative !important; /* Override absolute positioning */
-            right: auto !important;
-            bottom: auto !important;
-            margin: var(--spacing-lg) auto 0 auto;
-            animation: float 3s ease-in-out infinite;
-        }
-        
-        /* DESKTOP: Layout lado a lado */
+        /* DESKTOP: Flexbox horizontal */
         @media (min-width: 1024px) {
             .intro-card {
+                display: flex;
                 flex-direction: row;
-                text-align: left;
                 align-items: center;
+                text-align: left;
+                gap: var(--spacing-xl);
                 min-height: 350px;
             }
             
-            .intro-content {
+            .intro-left {
                 flex: 1;
-                padding-right: var(--spacing-xl);
-                order: 1;
+                display: flex;
+                flex-direction: column;
+                gap: var(--spacing-lg);
             }
             
             .ali-character {
-                order: 2;
-                margin: 0;
                 flex-shrink: 0;
-            }
-        }
-        
-        /* TABLET: Stack vertical con más espacio */
-        @media (max-width: 1023px) and (min-width: 769px) {
-            .intro-card {
-                padding: var(--spacing-xl);
+                width: 200px;
+                height: 250px;
+                font-size: 14px;
             }
             
-            .ali-character {
-                width: 180px;
-                height: 220px;
-                margin-top: var(--spacing-xl);
-            }
-        }
-        
-        /* MÓVIL: Stack vertical compacto */
-        @media (max-width: 768px) {
-            .intro-card {
-                padding: var(--spacing-lg);
-                text-align: center;
+            /* DESKTOP: "NUEVAS IDEAS en Alico" en línea */
+            .intro-text h2 {
+                display: inline;
+                margin-right: var(--spacing-sm);
             }
             
-            .intro-content h1 {
-                font-size: clamp(1.5rem, 6vw, 2rem);
-                margin-bottom: var(--spacing-sm);
+            .intro-text .company-line {
+                display: inline;
+                font-size: clamp(1.5rem, 4vw, 2rem);
             }
             
-            .intro-content h2 {
-                font-size: clamp(1.2rem, 5vw, 1.5rem);
-                margin-bottom: var(--spacing-sm);
-            }
-            
-            .intro-content p {
-                font-size: clamp(0.9rem, 3vw, 1.1rem);
+            .intro-text .line-break {
+                display: block;
                 margin-bottom: var(--spacing-md);
             }
-            
+        }
+        
+        /* Estilos comunes */
+        .intro-text h1 {
+            font-family: 'Zilla Slab', serif;
+            font-weight: 700;
+            font-size: clamp(1.5rem, 5vw, 2rem);
+            margin: 0 0 var(--spacing-sm) 0;
+            line-height: 1.2;
+        }
+        
+        .intro-text h2 {
+            font-family: 'Zilla Slab', serif;
+            font-weight: 600;
+            font-size: clamp(1.5rem, 5vw, 2rem);
+            margin: 0;
+            line-height: 1.1;
+        }
+        
+        .intro-text .company-line {
+            font-size: clamp(1.2rem, 4vw, 1.6rem);
+            font-style: italic;
+            margin: 0;
+        }
+        
+        .intro-text .description {
+            font-size: clamp(1rem, 3vw, 1.1rem);
+            line-height: 1.6;
+            margin: var(--spacing-md) 0 0 0;
+        }
+        
+        .ali-character {
+            width: 150px;
+            height: 180px;
+            background: linear-gradient(135deg, var(--gris-claro) 0%, var(--gris-medio) 100%);
+            border-radius: var(--border-radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: var(--gris-oscuro);
+            animation: float 3s ease-in-out infinite;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .intro-button {
+            background: linear-gradient(135deg, var(--azul-novo) 0%, var(--azul-novo-80) 100%);
+            color: var(--blanco);
+            padding: var(--spacing-md) var(--spacing-xl);
+            border: none;
+            border-radius: var(--border-radius-xl);
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .intro-button:hover {
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: var(--shadow-xl);
+            background: linear-gradient(135deg, var(--azul-novo-80) 0%, var(--azul-novo-60) 100%);
+        }
+        
+        /* TABLET */
+        @media (max-width: 1023px) and (min-width: 769px) {
             .ali-character {
-                width: 150px;
-                height: 180px;
-                margin-top: var(--spacing-md);
-                font-size: 12px;
+                width: 170px;
+                height: 200px;
+            }
+        }
+        
+        /* MÓVIL PEQUEÑO */
+        @media (max-width: 480px) {
+            .intro-card {
+                padding: var(--spacing-lg);
+                gap: var(--spacing-md);
             }
             
-            .btn-primary {
-                margin-top: var(--spacing-md);
-                padding: var(--spacing-md) var(--spacing-lg);
+            .ali-character {
+                width: 130px;
+                height: 160px;
+                font-size: 11px;
+            }
+            
+            .intro-button {
+                padding: var(--spacing-sm) var(--spacing-lg);
                 font-size: 1rem;
             }
         }
         
-        /* MÓVIL PEQUEÑO: Aún más compacto */
-        @media (max-width: 480px) {
-            .intro-card {
-                padding: var(--spacing-md);
-            }
-            
-            .ali-character {
-                width: 120px;
-                height: 150px;
-                font-size: 11px;
-            }
+        /* Fallback íconos mientras cargan */
+        body:not(.material-icons-loaded) .material-symbols-rounded::before {
+            content: '';
+            display: block;
+            width: 1em;
+            height: 1em;
+            background-color: currentColor;
+            border-radius: 2px;
+            opacity: 0.6;
+            animation: iconPulse 1.5s ease-in-out infinite;
+        }
+        
+        body:not(.material-icons-loaded) .material-symbols-rounded {
+            color: transparent;
+        }
+        
+        @keyframes iconPulse {
+            0%, 100% { opacity: 0.4; transform: scale(0.8); }
+            50% { opacity: 0.8; transform: scale(1); }
+        }
+        
+        .material-icons-loaded .material-symbols-rounded::before {
+            display: none;
+        }
+        
+        .material-icons-loaded .material-symbols-rounded {
+            color: inherit;
         }
     </style>
+    
+    <!-- Script detección íconos -->
+    <script>
+        (function() {
+            function checkIcons() {
+                const test = document.createElement('span');
+                test.style.font = '24px "Material Symbols Rounded"';
+                test.style.position = 'absolute';
+                test.style.left = '-9999px';
+                test.innerHTML = 'home';
+                
+                document.body.appendChild(test);
+                const width = test.getBoundingClientRect().width;
+                document.body.removeChild(test);
+                
+                if (width > 0 && width !== 24) {
+                    document.documentElement.classList.add('material-icons-loaded');
+                    return true;
+                }
+                return false;
+            }
+            
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', function() {
+                    if (!checkIcons()) {
+                        let attempts = 0;
+                        const interval = setInterval(function() {
+                            if (checkIcons() || ++attempts > 30) {
+                                clearInterval(interval);
+                            }
+                        }, 100);
+                    }
+                });
+            } else {
+                checkIcons();
+            }
+        })();
+    </script>
 </head>
 <body>
     <!-- Header fijo con navegación -->
@@ -226,16 +362,21 @@
     <main>
         <!-- Tarjeta de introducción con Ali - ESTRUCTURA CORREGIDA -->
         <section class="intro-card">
-            <!-- Contenedor del contenido de texto -->
-            <div class="intro-content">
-                <h1>¡Hola! Soy Ali, el explorador de</h1>
-                <h2>NUEVAS IDEAS</h2>
-                <p style="font-size: 1.5em; margin-bottom: 10px;">en <em>Alico</em></p>
-                <p>Estoy diseñado para cuestionar lo establecido, buscar respuestas más allá de lo evidente y atreverme a innovar.</p>
-                <a href="embajador-ali.html" class="btn-primary">¡Conóceme!</a>
+            <!-- ESTRUCTURA PARA DESKTOP -->
+            <div class="intro-left">
+                <!-- TEXTO -->
+                <div class="intro-text">
+                    <h1>¡Hola! Soy Ali, el explorador de</h1>
+                    <h2>NUEVAS IDEAS</h2><span class="company-line">en <em>Alico</em></span>
+                    <div class="line-break"></div>
+                    <p class="description">Estoy diseñado para cuestionar lo establecido, buscar respuestas más allá de lo evidente y atreverme a innovar.</p>
+                </div>
+                
+                <!-- BOTÓN -->
+                <a href="embajador-ali.html" class="intro-button">¡Conóceme!</a>
             </div>
             
-            <!-- Personaje Ali - ahora en el orden correcto -->
+            <!-- ALI -->
             <div class="ali-character" aria-hidden="true">Espacio para Ali</div>
         </section>
 
@@ -266,5 +407,33 @@
 
     <!-- Archivo JavaScript compartido -->
     <script src="scripts.js"></script>
+    
+    <!-- Script adicional para reorganizar desktop -->
+    <script>
+        function reorganizeForDesktop() {
+            if (window.innerWidth >= 1024) {
+                // En desktop, el CSS ya maneja el layout correctamente
+                // Este script es para casos edge donde se necesite manipulación DOM
+                console.log('Desktop layout activo');
+            } else {
+                // En móvil, CSS Grid maneja el orden automáticamente
+                console.log('Mobile layout activo');
+            }
+        }
+        
+        window.addEventListener('load', reorganizeForDesktop);
+        window.addEventListener('resize', reorganizeForDesktop);
+        
+        // Precargar íconos críticos
+        if ('fonts' in document) {
+            document.fonts.ready.then(function() {
+                document.fonts.forEach(function(font) {
+                    if (font.family.includes('Material Symbols Rounded') && font.status === 'loaded') {
+                        document.documentElement.classList.add('material-icons-loaded');
+                    }
+                });
+            });
+        }
+    </script>
 </body>
 </html>

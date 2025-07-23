@@ -12,581 +12,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
     <!-- Estilos principales -->
     <link rel="stylesheet" href="styles.css">
-    
-    <style>
-        /* Variables de colores corporativos */
-        :root {
-            --amarillo-oro: #DB9500;
-            --azul-novo: #003DA6;
-            --azul-claro: #40B4E5;
-            --verde-natura: #71B338;
-            --marron-corporativo: #683026;
-            --blanco: #FFFFFF;
-            --negro: #000000;
-            --gris-claro: #F5F5F5;
-            --gris-medio: #CCCCCC;
-            --gris-oscuro: #666666;
-            
-            --spacing-xs: 4px;
-            --spacing-sm: 8px;
-            --spacing-md: 16px;
-            --spacing-lg: 24px;
-            --spacing-xl: 32px;
-            --spacing-xxl: 48px;
-            
-            --border-radius-sm: 8px;
-            --border-radius-md: 12px;
-            --border-radius-lg: 20px;
-            --border-radius-xl: 25px;
-            
-            --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
-            --shadow-md: 0 4px 8px rgba(0,0,0,0.15);
-            --shadow-lg: 0 8px 16px rgba(0,0,0,0.2);
-            --shadow-xl: 0 12px 24px rgba(0,0,0,0.25);
-        }
-
-        /* Reset básico */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: var(--azul-novo);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            padding-top: 100px;
-            line-height: 1.6;
-            color: var(--negro);
-        }
-
-        /* Material Icons */
-        .material-symbols-rounded {
-            font-family: 'Material Symbols Rounded';
-            font-weight: normal;
-            font-style: normal;
-            font-size: 24px;
-            line-height: 1;
-            letter-spacing: normal;
-            text-transform: none;
-            display: inline-block;
-            white-space: nowrap;
-            word-wrap: normal;
-            direction: ltr;
-            -webkit-font-feature-settings: 'liga';
-            -webkit-font-smoothing: antialiased;
-        }
-
-        .nav-link-icon {
-            font-size: 20px !important;
-        }
-
-        .mobile-nav-icon {
-            font-size: 30px !important;
-        }
-
-        /* Header */
-        .header {
-            background-color: var(--amarillo-oro);
-            padding: var(--spacing-lg) var(--spacing-xxl);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            box-shadow: var(--shadow-xl);
-        }
-
-        .menu-toggle {
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: var(--spacing-sm);
-            display: none;
-            border-radius: var(--border-radius-sm);
-            transition: all 0.3s ease;
-        }
-
-        .menu-toggle span {
-            display: block;
-            width: 30px;
-            height: 3px;
-            background-color: var(--blanco);
-            margin: 5px 0;
-            transition: 0.3s;
-            border-radius: 2px;
-        }
-
-        .logo {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--azul-claro) 0%, var(--azul-novo) 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            box-shadow: var(--shadow-md);
-        }
-
-        .logo::before {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background-color: var(--amarillo-oro);
-            border-radius: 50%;
-            top: -5px;
-            right: -5px;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .logo-text {
-            color: var(--blanco);
-            font-size: 28px;
-            font-weight: bold;
-            font-family: 'Zilla Slab', serif;
-            transform: skew(-9deg);
-        }
-
-        .desktop-nav {
-            display: flex;
-            flex: 1;
-            margin: 0 var(--spacing-xxl);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: var(--spacing-xl);
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .nav-link {
-            color: var(--blanco);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
-            transition: all 0.3s ease;
-            padding: var(--spacing-sm) var(--spacing-md);
-            border-radius: var(--border-radius-md);
-        }
-
-        .header-banner-btn {
-            background-color: var(--azul-novo);
-            color: var(--blanco);
-            padding: var(--spacing-md) var(--spacing-lg);
-            border-radius: var(--border-radius-lg);
-            text-decoration: none;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
-            transition: all 0.3s ease;
-            font-size: 14px;
-            box-shadow: var(--shadow-sm);
-        }
-
-        /* Main content */
-        main {
-            flex: 1;
-            padding: var(--spacing-xxl) var(--spacing-lg);
-            max-width: 1200px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        /* Banner */
-        .banner-section {
-            background: linear-gradient(135deg, var(--azul-novo) 0%, var(--azul-novo) 100%);
-            border-radius: var(--border-radius-xl);
-            overflow: hidden;
-            margin-bottom: var(--spacing-xxl);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .banner-content {
-            height: 300px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--blanco);
-            text-align: center;
-            padding: var(--spacing-xxl);
-            font-family: 'Zilla Slab', serif;
-            font-weight: 700;
-            font-size: clamp(1.8rem, 4vw, 2.5rem);
-            letter-spacing: -0.02em;
-        }
-
-        /* Contenedor de Sketchfab personalizado */
-        .ali-3d-container {
-            background: linear-gradient(135deg, var(--azul-claro) 0%, var(--azul-claro) 100%);
-            border-radius: var(--border-radius-xl);
-            padding: var(--spacing-xl);
-            margin-bottom: var(--spacing-xl);
-            color: var(--blanco);
-            position: relative;
-            overflow: hidden;
-            box-shadow: var(--shadow-lg);
-        }
-
-        /* Efecto de brillo sutil */
-        .ali-3d-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%);
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .ali-3d-viewer {
-            width: 100%;
-            height: 500px;
-            border-radius: var(--border-radius-lg);
-            overflow: hidden;
-            position: relative;
-            background: linear-gradient(45deg, #1e3a8a 0%, #3b82f6 100%);
-            border: 3px solid rgba(255,255,255,0.2);
-            box-shadow: var(--shadow-md);
-            z-index: 2;
-        }
-
-        /* Iframe de Sketchfab responsive */
-        .sketchfab-embed-wrapper {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            border-radius: var(--border-radius-lg);
-            overflow: hidden;
-        }
-
-        .sketchfab-embed-wrapper iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            border-radius: var(--border-radius-lg);
-        }
-
-        /* Ocultar el texto de atribución de Sketchfab */
-        .sketchfab-embed-wrapper p {
-            display: none;
-        }
-
-        /* Información personalizada del modelo */
-        .ali-3d-info {
-            position: absolute;
-            bottom: 15px;
-            left: 15px;
-            background: rgba(0,0,0,0.8);
-            color: white;
-            padding: 12px 18px;
-            border-radius: 25px;
-            font-size: 14px;
-            backdrop-filter: blur(10px);
-            z-index: 10;
-            border: 1px solid rgba(255,255,255,0.2);
-            box-shadow: var(--shadow-sm);
-        }
-
-        /* Controles personalizados */
-        .ali-3d-controls {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            display: flex;
-            gap: 10px;
-            z-index: 10;
-        }
-
-        .ali-control-btn {
-            background: rgba(255,255,255,0.95);
-            border: none;
-            border-radius: 50%;
-            width: 45px;
-            height: 45px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            color: var(--azul-novo);
-            box-shadow: var(--shadow-md);
-            backdrop-filter: blur(10px);
-        }
-
-        .ali-control-btn:hover {
-            background: white;
-            transform: scale(1.1);
-            box-shadow: var(--shadow-lg);
-        }
-
-        /* Descripción de Ali */
-        .ali-description {
-            margin-top: var(--spacing-xl);
-            text-align: center;
-            z-index: 2;
-            position: relative;
-        }
-
-        .ali-description h3 {
-            font-size: 1.8em;
-            margin-bottom: var(--spacing-md);
-            font-family: 'Zilla Slab', serif;
-            font-weight: 600;
-        }
-
-        .ali-description p {
-            font-size: 1.1em;
-            line-height: 1.6;
-            max-width: 600px;
-            margin: 0 auto;
-            opacity: 0.95;
-        }
-
-        /* Tarjeta del modelo */
-        .model-card {
-            background: linear-gradient(135deg, var(--azul-claro) 0%, var(--azul-claro) 100%);
-            border-radius: var(--border-radius-xl);
-            padding: var(--spacing-xxl);
-            margin-bottom: var(--spacing-xl);
-            color: var(--blanco);
-            text-align: center;
-            box-shadow: var(--shadow-lg);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .model-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%);
-            pointer-events: none;
-        }
-
-        .model-card h2 {
-            font-size: clamp(1.5rem, 4vw, 2rem);
-            margin-bottom: var(--spacing-lg);
-            font-family: 'Zilla Slab', serif;
-            font-weight: 600;
-        }
-
-        .model-card p {
-            font-size: clamp(1rem, 2.5vw, 1.1rem);
-            line-height: 1.6;
-            margin-bottom: var(--spacing-lg);
-        }
-
-        /* Footer */
-        footer {
-            background: linear-gradient(135deg, var(--amarillo-oro) 0%, var(--amarillo-oro) 100%);
-            padding: var(--spacing-xxl) var(--spacing-lg);
-            text-align: center;
-            margin-top: auto;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .footer-logo {
-            color: var(--blanco);
-            font-family: 'Zilla Slab', serif;
-            font-weight: 700;
-            font-style: italic;
-            font-size: clamp(2.5rem, 6vw, 4rem);
-        }
-
-        /* Botón volver arriba */
-        .back-to-top {
-            position: fixed;
-            bottom: var(--spacing-xl);
-            right: var(--spacing-xl);
-            background-color: var(--amarillo-oro);
-            color: var(--blanco);
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            z-index: 900;
-            font-size: 24px;
-            box-shadow: var(--shadow-lg);
-            border: none;
-        }
-
-        .back-to-top.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        /* Mobile Navigation */
-        .mobile-nav-menu {
-            position: fixed;
-            top: 100px;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: var(--blanco);
-            padding: var(--spacing-lg);
-            transform: translateY(-200%);
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 999;
-            border-radius: var(--border-radius-xl) var(--border-radius-xl) 0 0;
-            box-shadow: var(--shadow-xl);
-            overflow-y: auto;
-        }
-
-        .mobile-nav-menu.active {
-            transform: translateY(0);
-        }
-
-        .mobile-nav-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: var(--spacing-md);
-            max-width: 600px;
-            margin: 0 auto;
-            padding-bottom: var(--spacing-lg);
-        }
-
-        .mobile-nav-item {
-            background-color: var(--gris-claro);
-            padding: var(--spacing-lg);
-            border-radius: var(--border-radius-md);
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            color: var(--azul-novo);
-        }
-
-        .mobile-nav-title {
-            font-weight: 600;
-            font-size: 13px;
-            margin-top: var(--spacing-sm);
-        }
-
-        /* Responsive Design */
-        @media (min-width: 1024px) {
-            .menu-toggle {
-                display: none !important;
-            }
-            .desktop-nav {
-                display: flex !important;
-            }
-            .header-banner-btn {
-                display: flex !important;
-            }
-        }
-
-        @media (max-width: 1023px) {
-            .menu-toggle {
-                display: block !important;
-            }
-            .desktop-nav {
-                display: none !important;
-            }
-            .header-banner-btn {
-                display: none !important;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .header {
-                padding: var(--spacing-md) var(--spacing-lg);
-            }
-
-            .ali-3d-viewer {
-                height: 400px;
-            }
-
-            .ali-3d-controls {
-                top: 10px;
-                right: 10px;
-                gap: 5px;
-            }
-
-            .ali-control-btn {
-                width: 40px;
-                height: 40px;
-            }
-
-            .ali-3d-info {
-                bottom: 10px;
-                left: 10px;
-                padding: 10px 15px;
-                font-size: 12px;
-            }
-
-            .mobile-nav-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 480px) {
-            body {
-                padding-top: 80px;
-            }
-
-            .ali-3d-viewer {
-                height: 350px;
-            }
-
-            .ali-3d-container {
-                padding: var(--spacing-lg);
-            }
-
-            .banner-content {
-                padding: var(--spacing-lg);
-                height: 250px;
-            }
-        }
-
-        /* Animaciones */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .ali-3d-container {
-            animation: fadeInUp 0.8s ease-out;
-        }
-
-        .model-card {
-            animation: fadeInUp 0.8s ease-out 0.2s both;
-        }
-    </style>
 </head>
 <body>
     <!-- Header fijo con navegación -->
@@ -693,10 +118,13 @@
         </section>
 
         <!-- Visualizador 3D de Ali con Sketchfab -->
-        <section class="ali-3d-container">
-            <div class="ali-3d-viewer" id="ali3DViewer">
+        <section class="ali-3d-container" style="background: linear-gradient(135deg, var(--azul-claro) 0%, var(--azul-claro-80) 100%); border-radius: var(--border-radius-xl); padding: var(--spacing-xl); margin-bottom: var(--spacing-xl); color: var(--blanco); position: relative; overflow: hidden; box-shadow: var(--shadow-lg);">
+            <!-- Efecto de brillo sutil -->
+            <div style="content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%); pointer-events: none; z-index: 1;"></div>
+            
+            <div class="ali-3d-viewer" style="width: 100%; height: 500px; border-radius: var(--border-radius-lg); overflow: hidden; position: relative; background: linear-gradient(45deg, #1e3a8a 0%, #3b82f6 100%); border: 3px solid rgba(255,255,255,0.2); box-shadow: var(--shadow-md); z-index: 2;">
                 <!-- Embed de Sketchfab personalizado -->
-                <div class="sketchfab-embed-wrapper">
+                <div class="sketchfab-embed-wrapper" style="width: 100%; height: 100%; position: relative; border-radius: var(--border-radius-lg); overflow: hidden;">
                     <iframe 
                         title="Modelo 3D de Ali - Embajador de Innovación Alico" 
                         frameborder="0" 
@@ -708,29 +136,30 @@
                         execution-while-out-of-viewport 
                         execution-while-not-rendered 
                         web-share 
-                        src="https://sketchfab.com/models/fb2812fb1a274fe09c0cc1442098a7f1/embed?autostart=1&ui_theme=dark&ui_infos=0&ui_watermark=0&ui_help=0&ui_settings=0&ui_vr=0&ui_fullscreen=1&ui_annotations=0&ui_stop=0&ui_inspector=0&ui_ar=0&ui_ar_help=0&ui_ar_qr=0&ui_loading=0&preload=1&camera=0&ui_hint=0&ui_controls=1&ui_stop=0&transparent=0&autospin=0.2&orbit_constraint_pan=1">
+                        src="https://sketchfab.com/models/fb2812fb1a274fe09c0cc1442098a7f1/embed?autostart=1&ui_theme=dark&ui_infos=0&ui_watermark=0&ui_help=0&ui_settings=0&ui_vr=0&ui_fullscreen=1&ui_annotations=0&ui_stop=0&ui_inspector=0&ui_ar=0&ui_ar_help=0&ui_ar_qr=0&ui_loading=0&preload=1&camera=0&ui_hint=0&ui_controls=1&ui_stop=0&transparent=0&autospin=0.2&orbit_constraint_pan=1"
+                        style="width: 100%; height: 100%; border: none; border-radius: var(--border-radius-lg);">
                     </iframe>
                 </div>
                 
                 <!-- Controles personalizados superpuestos -->
-                <div class="ali-3d-controls">
-                    <button class="ali-control-btn" onclick="toggleFullscreen()" aria-label="Pantalla completa" title="Pantalla completa">
+                <div style="position: absolute; top: 15px; right: 15px; display: flex; gap: 10px; z-index: 10;">
+                    <button onclick="toggleFullscreen()" aria-label="Pantalla completa" title="Pantalla completa" style="background: rgba(255,255,255,0.95); border: none; border-radius: 50%; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease; color: var(--azul-novo); box-shadow: var(--shadow-md); backdrop-filter: blur(10px);">
                         <span class="material-symbols-rounded">fullscreen</span>
                     </button>
-                    <button class="ali-control-btn" onclick="openInSketchfab()" aria-label="Abrir en Sketchfab" title="Ver en Sketchfab">
+                    <button onclick="openInSketchfab()" aria-label="Abrir en Sketchfab" title="Ver en Sketchfab" style="background: rgba(255,255,255,0.95); border: none; border-radius: 50%; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease; color: var(--azul-novo); box-shadow: var(--shadow-md); backdrop-filter: blur(10px);">
                         <span class="material-symbols-rounded">open_in_new</span>
                     </button>
                 </div>
                 
                 <!-- Información del modelo -->
-                <div class="ali-3d-info">
+                <div style="position: absolute; bottom: 15px; left: 15px; background: rgba(0,0,0,0.8); color: white; padding: 12px 18px; border-radius: 25px; font-size: 14px; backdrop-filter: blur(10px); z-index: 10; border: 1px solid rgba(255,255,255,0.2); box-shadow: var(--shadow-sm);">
                     <div id="aliInfo">🖱️ Arrastra para rotar • 🖲️ Rueda para zoom • 🎮 Explora Ali en 3D</div>
                 </div>
             </div>
             
-            <div class="ali-description">
-                <h3>Conoce a Ali en 3D</h3>
-                <p>Explora el modelo tridimensional de Ali, tu compañero de innovación. Usa el mouse para rotarlo, el scroll para hacer zoom y descubre cada detalle de su diseño. Ali está aquí para ayudarte a descubrir nuevas ideas y soluciones creativas en el mundo de los empaques sostenibles.</p>
+            <div style="margin-top: var(--spacing-xl); text-align: center; z-index: 2; position: relative;">
+                <h3 style="font-size: 1.8em; margin-bottom: var(--spacing-md); font-family: 'Zilla Slab', serif; font-weight: 600;">Conoce a Ali en 3D</h3>
+                <p style="font-size: 1.1em; line-height: 1.6; max-width: 600px; margin: 0 auto; opacity: 0.95;">Explora el modelo tridimensional de Ali, tu compañero de innovación. Usa el mouse para rotarlo, el scroll para hacer zoom y descubre cada detalle de su diseño. Ali está aquí para ayudarte a descubrir nuevas ideas y soluciones creativas en el mundo de los empaques sostenibles.</p>
             </div>
         </section>
 
@@ -747,43 +176,11 @@
         <div class="footer-logo">alico</div>
     </footer>
 
-    <!-- JavaScript funcional -->
+    <!-- Archivo JavaScript compartido -->
+    <script src="scripts.js"></script>
+    
+    <!-- JavaScript específico para funcionalidades 3D -->
     <script>
-        // Función para alternar menú móvil
-        function toggleMenu() {
-            const mobileNavMenu = document.getElementById('mobileNavMenu');
-            const menuToggle = document.querySelector('.menu-toggle');
-            
-            if (mobileNavMenu && menuToggle) {
-                const isActive = mobileNavMenu.classList.contains('active');
-                
-                if (isActive) {
-                    mobileNavMenu.classList.remove('active');
-                    menuToggle.classList.remove('active');
-                    document.body.style.overflow = '';
-                } else {
-                    mobileNavMenu.classList.add('active');
-                    menuToggle.classList.add('active');
-                    document.body.style.overflow = 'hidden';
-                }
-            }
-        }
-
-        // Función para volver arriba
-        function scrollToTop() {
-            const scrollDuration = 800;
-            const scrollStep = -window.scrollY / (scrollDuration / 15);
-            
-            function scrollAnimation() {
-                if (window.scrollY !== 0) {
-                    window.scrollBy(0, scrollStep);
-                    requestAnimationFrame(scrollAnimation);
-                }
-            }
-            
-            requestAnimationFrame(scrollAnimation);
-        }
-
         // Función para pantalla completa del iframe
         function toggleFullscreen() {
             const iframe = document.querySelector('.sketchfab-embed-wrapper iframe');
@@ -805,59 +202,8 @@
             window.open('https://sketchfab.com/3d-models/modelo-3d-de-personaje-drakoza-fb2812fb1a274fe09c0cc1442098a7f1', '_blank');
         }
 
-        // Mostrar/ocultar botón de volver arriba
-        window.addEventListener('scroll', function() {
-            const backToTopButton = document.getElementById('backToTop');
-            if (backToTopButton) {
-                if (window.pageYOffset > 300) {
-                    backToTopButton.classList.add('visible');
-                } else {
-                    backToTopButton.classList.remove('visible');
-                }
-            }
-        });
-
-        // Cerrar menú móvil cuando se hace clic fuera
-        document.addEventListener('click', function(event) {
-            const mobileNavMenu = document.getElementById('mobileNavMenu');
-            const menuToggle = document.querySelector('.menu-toggle');
-            
-            if (mobileNavMenu && menuToggle) {
-                if (!mobileNavMenu.contains(event.target) && !menuToggle.contains(event.target)) {
-                    if (mobileNavMenu.classList.contains('active')) {
-                        toggleMenu();
-                    }
-                }
-            }
-        });
-
-        // Manejo de teclado para accesibilidad
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                const mobileNavMenu = document.getElementById('mobileNavMenu');
-                if (mobileNavMenu && mobileNavMenu.classList.contains('active')) {
-                    toggleMenu();
-                }
-            }
-        });
-
-        // Inicialización cuando el DOM está listo
+        // Inicialización específica para Ali
         document.addEventListener('DOMContentLoaded', function() {
-            // Cerrar menú móvil al hacer clic en cualquier enlace del menú
-            document.querySelectorAll('.mobile-nav-item').forEach(item => {
-                item.addEventListener('click', function() {
-                    const mobileNavMenu = document.getElementById('mobileNavMenu');
-                    if (mobileNavMenu && mobileNavMenu.classList.contains('active')) {
-                        toggleMenu();
-                    }
-                });
-            });
-
-            // Agregar clase loaded al body para activar animaciones CSS
-            setTimeout(() => {
-                document.body.classList.add('loaded');
-            }, 100);
-
             // Mensaje de bienvenida para Ali
             setTimeout(() => {
                 const info = document.getElementById('aliInfo');
@@ -868,22 +214,7 @@
                     }, 3000);
                 }
             }, 2000);
-        });
 
-        // Optimización del resize
-        let resizeTimeout;
-        window.addEventListener('resize', function() {
-            clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(function() {
-                const mobileNavMenu = document.getElementById('mobileNavMenu');
-                if (window.innerWidth > 1024 && mobileNavMenu && mobileNavMenu.classList.contains('active')) {
-                    toggleMenu();
-                }
-            }, 250);
-        });
-
-        // Efectos adicionales para mejorar la experiencia
-        document.addEventListener('DOMContentLoaded', function() {
             // Efecto de carga para el iframe de Sketchfab
             const iframe = document.querySelector('.sketchfab-embed-wrapper iframe');
             if (iframe) {
@@ -901,25 +232,17 @@
             }
 
             // Hover effects para controles
-            const controlBtns = document.querySelectorAll('.ali-control-btn');
+            const controlBtns = document.querySelectorAll('button[onclick*="toggleFullscreen"], button[onclick*="openInSketchfab"]');
             controlBtns.forEach(btn => {
                 btn.addEventListener('mouseenter', function() {
                     this.style.transform = 'scale(1.1) translateZ(0)';
+                    this.style.background = 'white';
                 });
                 
                 btn.addEventListener('mouseleave', function() {
                     this.style.transform = 'scale(1) translateZ(0)';
+                    this.style.background = 'rgba(255,255,255,0.95)';
                 });
-            });
-
-            // Parallax sutil para el contenedor 3D
-            window.addEventListener('scroll', function() {
-                const container = document.querySelector('.ali-3d-container');
-                if (container) {
-                    const scrolled = window.pageYOffset;
-                    const rate = scrolled * -0.02;
-                    container.style.transform = `translateY(${rate}px)`;
-                }
             });
         });
     </script>

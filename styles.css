@@ -629,8 +629,21 @@ footer::before {
 }
 
 /* ==================================================
-   RESPONSIVE DESIGN MEJORADO
+   RESPONSIVE DESIGN MEJORADO - CORREGIDO
    ================================================== */
+
+/* Reglas base para todos los tamaños */
+.menu-toggle {
+    display: block;
+}
+
+.desktop-nav {
+    display: none;
+}
+
+.header-banner-btn {
+    display: flex;
+}
 
 /* Escritorio - pantallas grandes */
 @media (min-width: 1024px) {
@@ -640,6 +653,8 @@ footer::before {
 
     .desktop-nav {
         display: flex !important;
+        flex: 1;
+        margin: 0 var(--spacing-xxl);
     }
 
     .mobile-nav-menu {
@@ -648,6 +663,21 @@ footer::before {
 
     .header-banner-btn {
         display: flex !important;
+    }
+
+    /* Asegurar que los nav-links sean visibles */
+    .nav-links {
+        display: flex !important;
+        gap: var(--spacing-xl);
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .nav-link {
+        display: flex !important;
+        align-items: center;
+        gap: var(--spacing-sm);
     }
 
     .sgi-grid {
@@ -661,16 +691,16 @@ footer::before {
 
 /* Tableta */
 @media (max-width: 1023px) and (min-width: 769px) {
+    .menu-toggle {
+        display: block !important;
+    }
+
     .desktop-nav {
         display: none !important;
     }
 
     .header-banner-btn {
         display: none !important;
-    }
-
-    .menu-toggle {
-        display: block !important;
     }
 
     .sgi-grid {
@@ -694,16 +724,16 @@ footer::before {
         padding: var(--spacing-md) var(--spacing-lg);
     }
 
+    .menu-toggle {
+        display: block !important;
+    }
+
     .desktop-nav {
         display: none !important;
     }
 
     .header-banner-btn {
         display: none !important;
-    }
-
-    .menu-toggle {
-        display: block !important;
     }
 
     .intro-card {

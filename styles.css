@@ -1419,4 +1419,273 @@ main {
 
 .video-card:hover {
     transform: translateY(-10px) scale(1.02);
-    box-shadow: var(--shadow-
+    box-shadow: var(--shadow--lg);
+
+/* ==================================================
+   BOTÓN DE ACCESIBILIDAD
+   ================================================== */
+.accessibility-btn {
+    position: fixed;
+    bottom: 100px; /* Arriba del botón back-to-top */
+    right: 30px;
+    background-color: var(--verde-natura);
+    color: var(--blanco);
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 900;
+    font-size: 24px;
+    box-shadow: var(--shadow-lg);
+    border: none;
+}
+
+.accessibility-btn:hover {
+    transform: scale(1.1) translateY(-3px);
+    background-color: var(--verde-natura-80);
+    box-shadow: var(--shadow-xl);
+}
+
+.accessibility-btn:focus {
+    outline: 3px solid var(--amarillo-oro);
+    outline-offset: 2px;
+}
+
+/* ==================================================
+   MENÚ DE ACCESIBILIDAD
+   ================================================== */
+.accessibility-menu {
+    position: fixed;
+    bottom: 170px;
+    right: 30px;
+    background-color: var(--blanco);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-xl);
+    width: 300px;
+    max-height: 500px;
+    overflow-y: auto;
+    z-index: 1001;
+    transform: scale(0) translateY(20px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid var(--verde-natura);
+}
+
+.accessibility-menu.active {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+.accessibility-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-lg);
+    background-color: var(--verde-natura);
+    color: var(--blanco);
+    border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
+}
+
+.accessibility-header h3 {
+    margin: 0;
+    font-size: 1.2em;
+    font-family: 'Zilla Slab', serif;
+}
+
+.accessibility-close {
+    background: none;
+    border: none;
+    color: var(--blanco);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+.accessibility-close:hover {
+    background-color: rgba(255,255,255,0.2);
+}
+
+.accessibility-options {
+    padding: var(--spacing-lg);
+}
+
+.accessibility-option {
+    margin-bottom: var(--spacing-lg);
+}
+
+.accessibility-option:last-child {
+    margin-bottom: 0;
+}
+
+.accessibility-option label {
+    display: block;
+    font-weight: 600;
+    color: var(--azul-novo);
+    margin-bottom: var(--spacing-sm);
+    font-size: 14px;
+}
+
+.accessibility-controls {
+    display: flex;
+    gap: var(--spacing-sm);
+    flex-wrap: wrap;
+}
+
+.accessibility-controls.full-width {
+    width: 100%;
+}
+
+.accessibility-controls button {
+    background-color: var(--gris-claro);
+    border: 2px solid var(--gris-medio);
+    color: var(--azul-novo);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 12px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.accessibility-controls button:hover {
+    background-color: var(--verde-natura-10);
+    border-color: var(--verde-natura);
+    transform: translateY(-1px);
+}
+
+.accessibility-controls button.active {
+    background-color: var(--verde-natura);
+    color: var(--blanco);
+    border-color: var(--verde-natura);
+}
+
+.accessibility-controls button:focus {
+    outline: 2px solid var(--amarillo-oro);
+    outline-offset: 2px;
+}
+
+.reset-btn {
+    width: 100% !important;
+    justify-content: center !important;
+    background-color: var(--amarillo-oro-10) !important;
+    border-color: var(--amarillo-oro) !important;
+    color: var(--amarillo-oro) !important;
+}
+
+.reset-btn:hover {
+    background-color: var(--amarillo-oro) !important;
+    color: var(--blanco) !important;
+}
+
+/* ==================================================
+   ESTADOS DE ACCESIBILIDAD
+   ================================================== */
+
+/* Alto contraste */
+body.high-contrast {
+    filter: contrast(150%) brightness(1.2);
+}
+
+body.high-contrast .header,
+body.high-contrast .footer,
+body.high-contrast .btn-primary,
+body.high-contrast .btn-secondary {
+    border: 2px solid var(--blanco) !important;
+}
+
+/* Texto grande */
+body.large-text {
+    font-size: 1.2em;
+}
+
+body.large-text h1,
+body.large-text h2,
+body.large-text h3 {
+    font-size: 1.3em;
+}
+
+body.extra-large-text {
+    font-size: 1.4em;
+}
+
+body.extra-large-text h1,
+body.extra-large-text h2,
+body.extra-large-text h3 {
+    font-size: 1.5em;
+}
+
+/* Sin animaciones */
+body.no-animations *,
+body.no-animations *::before,
+body.no-animations *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+}
+
+/* Cursor grande */
+body.big-cursor,
+body.big-cursor * {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="10" fill="black"/><circle cx="16" cy="16" r="8" fill="white"/></svg>') 16 16, auto !important;
+}
+
+body.big-cursor button,
+body.big-cursor a,
+body.big-cursor .nav-link {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="10" fill="blue"/><circle cx="16" cy="16" r="8" fill="white"/></svg>') 16 16, pointer !important;
+}
+
+/* Enlaces destacados */
+body.highlight-links a,
+body.highlight-links .nav-link,
+body.highlight-links button {
+    outline: 3px solid var(--amarillo-oro) !important;
+    outline-offset: 2px !important;
+    background-color: var(--amarillo-oro-10) !important;
+}
+
+/* ==================================================
+   RESPONSIVE PARA MENÚ DE ACCESIBILIDAD
+   ================================================== */
+@media (max-width: 768px) {
+    .accessibility-menu {
+        right: 10px;
+        left: 10px;
+        width: auto;
+        bottom: 150px;
+    }
+    
+    .accessibility-controls {
+        flex-direction: column;
+    }
+    
+    .accessibility-controls button {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .accessibility-btn {
+        bottom: 90px;
+        right: 20px;
+        width: 48px;
+        height: 48px;
+    }
+    
+    .accessibility-menu {
+        bottom: 140px;
+        right: 5px;
+        left: 5px;
+    }
+}

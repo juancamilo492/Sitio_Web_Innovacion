@@ -10,8 +10,134 @@
     <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <!-- Material Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+    <!-- Three.js con GLTFLoader -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
     <!-- Estilos principales -->
     <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        /* Estilos específicos para el visualizador 3D */
+        .ali-3d-container {
+            background: linear-gradient(135deg, var(--azul-claro) 0%, var(--azul-claro-80) 100%);
+            border-radius: var(--border-radius-xl);
+            padding: var(--spacing-xl);
+            margin-bottom: var(--spacing-xl);
+            color: var(--blanco);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .ali-3d-viewer {
+            width: 100%;
+            height: 500px;
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(45deg, #1e3a8a 0%, #3b82f6 100%);
+            cursor: grab;
+            border: 3px solid rgba(255,255,255,0.2);
+        }
+        
+        .ali-3d-viewer:active {
+            cursor: grabbing;
+        }
+        
+        .ali-3d-controls {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+        
+        .ali-control-btn {
+            background: rgba(255,255,255,0.9);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--azul-novo);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        
+        .ali-control-btn:hover {
+            background: white;
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        
+        .ali-3d-info {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .ali-loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 18px;
+            text-align: center;
+        }
+        
+        .ali-description {
+            margin-top: var(--spacing-lg);
+            text-align: center;
+        }
+        
+        .ali-description h3 {
+            font-size: 1.8em;
+            margin-bottom: var(--spacing-md);
+            font-family: 'Zilla Slab', serif;
+        }
+        
+        .ali-description p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        @media (max-width: 768px) {
+            .ali-3d-viewer {
+                height: 400px;
+            }
+            
+            .ali-3d-controls {
+                top: 10px;
+                right: 10px;
+                gap: 5px;
+            }
+            
+            .ali-control-btn {
+                width: 35px;
+                height: 35px;
+            }
+            
+            .ali-3d-info {
+                bottom: 10px;
+                left: 10px;
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Header fijo con navegación -->
@@ -94,11 +220,13 @@
             <a href="https://experiencia-alico.firebaseapp.com/" class="mobile-nav-item" target="_blank" rel="noopener noreferrer">
                 <div class="material-symbols-rounded mobile-nav-icon">inventory_2</div>
                 <div class="mobile-nav-title">Diseña tu empaque</div>
+                <div class="mobile-nav-external">↗</div>
             </a>
             <a href="https://docs.google.com/forms/d/e/1FAIpQLScfJWsXOj-BAAgG9tmxYFf4QEuOimOmJJPsF4bnxmquUParZA/viewform?usp=sharing&ouid=102976851646670750896" 
                class="mobile-nav-item" target="_blank" rel="noopener noreferrer">
                 <div class="material-symbols-rounded mobile-nav-icon">lightbulb</div>
                 <div class="mobile-nav-title">Banco de iniciativas</div>
+                <div class="mobile-nav-external">↗</div>
             </a>
         </div>
     </nav>
@@ -117,18 +245,45 @@
             </div>
         </section>
 
-        <!-- Tarjeta principal con información sobre Ali -->
-        <section class="model-card">
-            <h2>Embajador Ali</h2>
-            <p>Contenido próximamente...</p>
-            <p>Esta página contendrá información detallada sobre Ali, el embajador de la innovación en Alico, su personalidad, características y cómo puede ayudar a los usuarios en su proceso de innovación.</p>
+        <!-- Visualizador 3D de Ali -->
+        <section class="ali-3d-container">
+            <div class="ali-3d-viewer" id="ali3DViewer">
+                <!-- Controles del visualizador -->
+                <div class="ali-3d-controls">
+                    <button class="ali-control-btn" onclick="resetCamera()" aria-label="Restablecer vista" title="Restablecer vista">
+                        <span class="material-symbols-rounded">refresh</span>
+                    </button>
+                    <button class="ali-control-btn" onclick="toggleAutoRotate()" aria-label="Auto-rotación" title="Auto-rotación" id="autoRotateBtn">
+                        <span class="material-symbols-rounded">360</span>
+                    </button>
+                    <button class="ali-control-btn" onclick="toggleWireframe()" aria-label="Modo wireframe" title="Modo wireframe" id="wireframeBtn">
+                        <span class="material-symbols-rounded">grid_view</span>
+                    </button>
+                </div>
+                
+                <!-- Información del modelo -->
+                <div class="ali-3d-info">
+                    <div id="aliInfo">🖱️ Arrastra para rotar • 🖲️ Rueda para zoom</div>
+                </div>
+                
+                <!-- Indicador de carga -->
+                <div class="ali-loading" id="aliLoading">
+                    <div>Cargando Ali...</div>
+                    <div style="margin-top: 10px;">⏳</div>
+                </div>
+            </div>
+            
+            <div class="ali-description">
+                <h3>Conoce a Ali en 3D</h3>
+                <p>Explora el modelo tridimensional de Ali, tu compañero de innovación. Usa el mouse para rotarlo, el scroll para hacer zoom y los controles para diferentes vistas. Ali está aquí para ayudarte a descubrir nuevas ideas y soluciones creativas.</p>
+            </div>
         </section>
 
-        <!-- Placeholder para futuro contenido interactivo -->
-        <section style="text-align: center; margin: 40px 0;">
-            <div style="width: 300px; height: 400px; background-color: #ddd; border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto; font-size: 18px; color: #666;">
-                Espacio para Ali<br>Personaje Interactivo
-            </div>
+        <!-- Información adicional sobre Ali -->
+        <section class="model-card">
+            <h2>Acerca de Ali</h2>
+            <p>Ali es más que un simple asistente: es tu compañero en el viaje hacia la innovación. Diseñado para inspirar creatividad y facilitar el descubrimiento de nuevas perspectivas, Ali combina la sabiduría de la experiencia con la frescura de las ideas emergentes.</p>
+            <p>Su nombre representa <strong>A</strong>sistente <strong>L</strong>íder en <strong>I</strong>nnovación, y su misión es acompañarte en cada paso del proceso creativo, desde la ideación hasta la implementación de soluciones revolucionarias.</p>
         </section>
     </main>
 
@@ -139,5 +294,404 @@
 
     <!-- Archivo JavaScript compartido -->
     <script src="scripts.js"></script>
+    
+    <!-- Script del visualizador 3D -->
+    <script>
+        <!-- Variables globales para Three.js -->
+        let scene, camera, renderer, aliModel, controls;
+        let isAutoRotating = false;
+        let isWireframe = false;
+        let mouseDown = false;
+        let mouseX = 0, mouseY = 0;
+        let targetRotationX = 0, targetRotationY = 0;
+        let currentRotationX = 0, currentRotationY = 0;
+        let loader;
+
+        // CONFIGURACIÓN - Cambia esta ruta por tu archivo GLB/GLTF
+        const MODEL_PATH = 'models/ali.glb'; // Pon aquí la ruta a tu archivo de Blender
+        const USE_FALLBACK = true; // Si no encuentra el archivo, usar modelo geométrico
+
+        // Inicializar el visualizador 3D
+        function init3DViewer() {
+            const container = document.getElementById('ali3DViewer');
+            const loading = document.getElementById('aliLoading');
+            
+            // Crear escena
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x1e3a8a);
+            
+            // Crear cámara
+            camera = new THREE.PerspectiveCamera(75, container.offsetWidth / container.offsetHeight, 0.1, 1000);
+            camera.position.set(0, 1, 5);
+            
+            // Crear renderer
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(container.offsetWidth, container.offsetHeight);
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            renderer.outputEncoding = THREE.sRGBEncoding;
+            container.appendChild(renderer.domElement);
+            
+            // Inicializar loader GLTF
+            loader = new THREE.GLTFLoader();
+            
+            // Agregar luces
+            addLights();
+            
+            // Configurar controles
+            setupControls(container);
+            
+            // Cargar modelo de Ali
+            loadAliModel(loading);
+            
+            // Iniciar animación
+            animate();
+        }
+
+        // Cargar modelo de Blender
+        function loadAliModel(loading) {
+            updateLoadingText('Cargando modelo de Ali...');
+            
+            loader.load(
+                MODEL_PATH,
+                // onLoad
+                function(gltf) {
+                    console.log('Modelo cargado exitosamente');
+                    aliModel = gltf.scene;
+                    
+                    // Configurar el modelo
+                    setupLoadedModel(aliModel);
+                    
+                    // Agregar a la escena
+                    scene.add(aliModel);
+                    
+                    // Ocultar loading
+                    loading.style.display = 'none';
+                    
+                    updateInfoText('🎉 Modelo cargado • Arrastra para rotar');
+                },
+                // onProgress
+                function(progress) {
+                    const percentage = Math.round((progress.loaded / progress.total) * 100);
+                    updateLoadingText(`Cargando Ali... ${percentage}%`);
+                },
+                // onError
+                function(error) {
+                    console.warn('Error cargando modelo:', error);
+                    
+                    if (USE_FALLBACK) {
+                        console.log('Usando modelo geométrico de respaldo');
+                        updateLoadingText('Creando modelo geométrico...');
+                        createFallbackModel();
+                        loading.style.display = 'none';
+                        updateInfoText('🎨 Modelo geométrico • Arrastra para rotar');
+                    } else {
+                        updateLoadingText('Error: No se pudo cargar el modelo');
+                        updateInfoText('❌ Error al cargar el modelo');
+                    }
+                }
+            );
+        }
+
+        // Configurar modelo cargado
+        function setupLoadedModel(model) {
+            // Centrar el modelo
+            const box = new THREE.Box3().setFromObject(model);
+            const center = box.getCenter(new THREE.Vector3());
+            const size = box.getSize(new THREE.Vector3());
+            
+            // Mover al centro
+            model.position.x = -center.x;
+            model.position.y = -center.y;
+            model.position.z = -center.z;
+            
+            // Escalar si es necesario (ajustar según tu modelo)
+            const maxDimension = Math.max(size.x, size.y, size.z);
+            if (maxDimension > 3) {
+                const scale = 3 / maxDimension;
+                model.scale.setScalar(scale);
+            }
+            
+            // Configurar sombras
+            model.traverse(function(child) {
+                if (child.isMesh) {
+                    child.castShadow = true;
+                    child.receiveShadow = true;
+                    
+                    // Mejorar materiales si es necesario
+                    if (child.material) {
+                        child.material.envMapIntensity = 1;
+                    }
+                }
+            });
+            
+            console.log('Modelo configurado - Tamaño:', size, 'Centro:', center);
+        }
+
+        // Modelo geométrico de respaldo (igual que antes)
+        function createFallbackModel() {
+            const aliGroup = new THREE.Group();
+            
+            // Materiales con colores corporativos
+            const bodyMaterial = new THREE.MeshPhongMaterial({ color: 0x40B4E5 });
+            const accentMaterial = new THREE.MeshPhongMaterial({ color: 0xDB9500 });
+            const faceMaterial = new THREE.MeshPhongMaterial({ color: 0xffffff });
+            
+            // Cuerpo principal
+            const bodyGeometry = new THREE.CylinderGeometry(0.8, 1.0, 2.5, 8);
+            const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
+            body.position.y = 0;
+            body.castShadow = true;
+            aliGroup.add(body);
+            
+            // Cabeza
+            const headGeometry = new THREE.SphereGeometry(0.7, 16, 16);
+            const head = new THREE.Mesh(headGeometry, faceMaterial);
+            head.position.y = 2;
+            head.castShadow = true;
+            aliGroup.add(head);
+            
+            // Ojos
+            const eyeGeometry = new THREE.SphereGeometry(0.1, 8, 8);
+            const leftEye = new THREE.Mesh(eyeGeometry, accentMaterial);
+            leftEye.position.set(-0.25, 2.1, 0.5);
+            aliGroup.add(leftEye);
+            
+            const rightEye = new THREE.Mesh(eyeGeometry, accentMaterial);
+            rightEye.position.set(0.25, 2.1, 0.5);
+            aliGroup.add(rightEye);
+            
+            // Brazos
+            const armGeometry = new THREE.CylinderGeometry(0.15, 0.15, 1.5, 8);
+            const leftArm = new THREE.Mesh(armGeometry, bodyMaterial);
+            leftArm.position.set(-1.2, 0.5, 0);
+            leftArm.rotation.z = Math.PI / 6;
+            leftArm.castShadow = true;
+            aliGroup.add(leftArm);
+            
+            const rightArm = new THREE.Mesh(armGeometry, bodyMaterial);
+            rightArm.position.set(1.2, 0.5, 0);
+            rightArm.rotation.z = -Math.PI / 6;
+            rightArm.castShadow = true;
+            aliGroup.add(rightArm);
+            
+            // Elemento decorativo
+            const torusGeometry = new THREE.TorusGeometry(0.3, 0.1, 8, 16);
+            const torus = new THREE.Mesh(torusGeometry, accentMaterial);
+            torus.position.set(0, 0.5, 0.9);
+            torus.castShadow = true;
+            aliGroup.add(torus);
+            
+            aliGroup.position.y = -0.5;
+            aliModel = aliGroup;
+            scene.add(aliGroup);
+        }
+
+        // Funciones auxiliares para UI
+        function updateLoadingText(text) {
+            const loading = document.getElementById('aliLoading');
+            if (loading) {
+                loading.innerHTML = `<div>${text}</div><div style="margin-top: 10px;">⏳</div>`;
+            }
+        }
+
+        function updateInfoText(text) {
+            const info = document.getElementById('aliInfo');
+            if (info) {
+                info.textContent = text;
+            }
+        }
+
+        // Agregar luces a la escena
+        function addLights() {
+            // Luz ambiental
+            const ambientLight = new THREE.AmbientLight(0x404040, 0.6);
+            scene.add(ambientLight);
+            
+            // Luz direccional principal
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+            directionalLight.position.set(5, 5, 5);
+            directionalLight.castShadow = true;
+            directionalLight.shadow.mapSize.width = 2048;
+            directionalLight.shadow.mapSize.height = 2048;
+            scene.add(directionalLight);
+            
+            // Luz de relleno
+            const fillLight = new THREE.DirectionalLight(0x40B4E5, 0.3);
+            fillLight.position.set(-5, 2, -5);
+            scene.add(fillLight);
+            
+            // Luz de acento
+            const accentLight = new THREE.PointLight(0xDB9500, 0.5, 10);
+            accentLight.position.set(0, 3, 3);
+            scene.add(accentLight);
+        }
+
+        // Configurar controles de mouse/touch
+        function setupControls(container) {
+            // Mouse events
+            container.addEventListener('mousedown', onMouseDown);
+            container.addEventListener('mousemove', onMouseMove);
+            container.addEventListener('mouseup', onMouseUp);
+            container.addEventListener('wheel', onMouseWheel);
+            
+            // Touch events para móvil
+            container.addEventListener('touchstart', onTouchStart);
+            container.addEventListener('touchmove', onTouchMove);
+            container.addEventListener('touchend', onTouchEnd);
+            
+            // Prevent context menu
+            container.addEventListener('contextmenu', (e) => e.preventDefault());
+        }
+
+        // Event handlers para mouse
+        function onMouseDown(event) {
+            mouseDown = true;
+            mouseX = event.clientX;
+            mouseY = event.clientY;
+        }
+
+        function onMouseMove(event) {
+            if (!mouseDown) return;
+            
+            const deltaX = event.clientX - mouseX;
+            const deltaY = event.clientY - mouseY;
+            
+            targetRotationY += deltaX * 0.01;
+            targetRotationX += deltaY * 0.01;
+            
+            // Limitar rotación vertical
+            targetRotationX = Math.max(-Math.PI/2, Math.min(Math.PI/2, targetRotationX));
+            
+            mouseX = event.clientX;
+            mouseY = event.clientY;
+        }
+
+        function onMouseUp() {
+            mouseDown = false;
+        }
+
+        function onMouseWheel(event) {
+            event.preventDefault();
+            const delta = event.deltaY * 0.001;
+            camera.position.z += delta;
+            camera.position.z = Math.max(2, Math.min(10, camera.position.z));
+        }
+
+        // Event handlers para touch (móvil)
+        function onTouchStart(event) {
+            if (event.touches.length === 1) {
+                mouseDown = true;
+                mouseX = event.touches[0].clientX;
+                mouseY = event.touches[0].clientY;
+            }
+        }
+
+        function onTouchMove(event) {
+            event.preventDefault();
+            if (!mouseDown || event.touches.length !== 1) return;
+            
+            const deltaX = event.touches[0].clientX - mouseX;
+            const deltaY = event.touches[0].clientY - mouseY;
+            
+            targetRotationY += deltaX * 0.01;
+            targetRotationX += deltaY * 0.01;
+            
+            targetRotationX = Math.max(-Math.PI/2, Math.min(Math.PI/2, targetRotationX));
+            
+            mouseX = event.touches[0].clientX;
+            mouseY = event.touches[0].clientY;
+        }
+
+        function onTouchEnd() {
+            mouseDown = false;
+        }
+
+        // Funciones de control
+        function resetCamera() {
+            targetRotationX = 0;
+            targetRotationY = 0;
+            camera.position.set(0, 1, 5);
+            isAutoRotating = false;
+            updateAutoRotateButton();
+        }
+
+        function toggleAutoRotate() {
+            isAutoRotating = !isAutoRotating;
+            updateAutoRotateButton();
+        }
+
+        function updateAutoRotateButton() {
+            const btn = document.getElementById('autoRotateBtn');
+            if (isAutoRotating) {
+                btn.style.background = 'var(--amarillo-oro)';
+                btn.style.color = 'white';
+            } else {
+                btn.style.background = 'rgba(255,255,255,0.9)';
+                btn.style.color = 'var(--azul-novo)';
+            }
+        }
+
+        function toggleWireframe() {
+            isWireframe = !isWireframe;
+            const btn = document.getElementById('wireframeBtn');
+            
+            aliModel.traverse((child) => {
+                if (child.isMesh) {
+                    child.material.wireframe = isWireframe;
+                }
+            });
+            
+            if (isWireframe) {
+                btn.style.background = 'var(--amarillo-oro)';
+                btn.style.color = 'white';
+            } else {
+                btn.style.background = 'rgba(255,255,255,0.9)';
+                btn.style.color = 'var(--azul-novo)';
+            }
+        }
+
+        // Loop de animación
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            // Suavizar rotación
+            currentRotationX += (targetRotationX - currentRotationX) * 0.05;
+            currentRotationY += (targetRotationY - currentRotationY) * 0.05;
+            
+            // Auto-rotación
+            if (isAutoRotating) {
+                targetRotationY += 0.01;
+            }
+            
+            // Aplicar rotación al modelo
+            if (aliModel) {
+                aliModel.rotation.x = currentRotationX;
+                aliModel.rotation.y = currentRotationY;
+                
+                // Animación sutil de respiración
+                const time = Date.now() * 0.001;
+                aliModel.scale.y = 1 + Math.sin(time * 2) * 0.02;
+            }
+            
+            // Renderizar
+            renderer.render(scene, camera);
+        }
+
+        // Manejar resize
+        window.addEventListener('resize', () => {
+            const container = document.getElementById('ali3DViewer');
+            if (container && camera && renderer) {
+                camera.aspect = container.offsetWidth / container.offsetHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(container.offsetWidth, container.offsetHeight);
+            }
+        });
+
+        // Inicializar cuando la página cargue
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(init3DViewer, 100);
+        });
+    </script>
 </body>
 </html>

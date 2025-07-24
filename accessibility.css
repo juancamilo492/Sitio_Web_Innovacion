@@ -407,6 +407,28 @@ body.reduce-motion *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    transform: none !important;
+}
+
+body.reduce-motion .intro-card,
+body.reduce-motion .model-card,
+body.reduce-motion .methodology-card,
+body.reduce-motion .flip-card,
+body.reduce-motion .resource-card,
+body.reduce-motion .video-card,
+body.reduce-motion .ali-character {
+    animation: none !important;
+    transform: none !important;
+}
+
+body.reduce-motion .flip-card-inner {
+    transition: none !important;
+}
+
+body.reduce-motion .nav-link:hover,
+body.reduce-motion .btn-primary:hover,
+body.reduce-motion .btn-secondary:hover {
+    transform: none !important;
 }
 
 /* Animaciones pausadas */
@@ -414,6 +436,22 @@ body.pause-animations *,
 body.pause-animations *::before,
 body.pause-animations *::after {
     animation-play-state: paused !important;
+    animation: none !important;
+    transition: none !important;
+}
+
+body.pause-animations .ali-character {
+    animation: none !important;
+}
+
+body.pause-animations .flip-card-inner {
+    transition: none !important;
+}
+
+body.pause-animations .intro-card::before,
+body.pause-animations .shimmer,
+body.pause-animations .float {
+    animation: none !important;
 }
 
 /* Indicador de foco mejorado */

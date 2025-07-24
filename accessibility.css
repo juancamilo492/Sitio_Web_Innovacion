@@ -22,13 +22,13 @@
     cursor: pointer;
     font-size: 28px;
     box-shadow: var(--shadow-lg);
-    z-index: 1001;
-    transition: all 0.2s ease; /* Más rápido */
+    z-index: 1004; /* Mayor que el panel */
+    transition: all 0.2s ease;
     opacity: 0.9;
 }
 
 .accessibility-toggle:hover {
-    transform: scale(1.05) translateY(-1px); /* Efecto más sutil */
+    transform: scale(1.05) translateY(-1px);
     box-shadow: var(--shadow-xl);
     opacity: 1;
     background: linear-gradient(135deg, var(--verde-natura-80) 0%, var(--verde-natura-60) 100%);
@@ -41,7 +41,8 @@
 
 .accessibility-toggle.active {
     background: linear-gradient(135deg, var(--amarillo-oro) 0%, var(--amarillo-oro-80) 100%);
-    transform: scale(1.05); /* Sin rotación para ser más rápido */
+    transform: scale(1.05);
+    z-index: 1004; /* Asegurar que esté por encima */
 }
 
 /* ==================================================
@@ -51,19 +52,20 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.3); /* Menos opaco */
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4); /* Más visible */
     z-index: 1002;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.15s ease, visibility 0.15s ease; /* Mucho más rápido */
-    backdrop-filter: blur(1px); /* Menos blur */
+    transition: opacity 0.15s ease, visibility 0.15s ease;
+    pointer-events: none; /* Deshabilitado cuando está oculto */
 }
 
 .accessibility-overlay.active {
     opacity: 1;
     visibility: visible;
+    pointer-events: auto; /* Habilitado cuando está activo */
 }
 
 /* ==================================================

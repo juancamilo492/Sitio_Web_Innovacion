@@ -82,6 +82,8 @@
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     overflow: hidden;
     border: 2px solid var(--gris-claro);
+    display: flex;
+    flex-direction: column;
 }
 
 .accessibility-panel.active {
@@ -146,6 +148,9 @@
     padding: var(--spacing-lg);
     overflow-y: auto;
     overflow-x: hidden;
+    max-height: calc(100vh - 200px); /* Asegurar que hay espacio para scroll */
+    scrollbar-width: thin;
+    scrollbar-color: var(--azul-novo) var(--gris-claro);
 }
 
 .accessibility-group {
@@ -156,7 +161,7 @@
 
 .accessibility-group:last-child {
     border-bottom: none;
-    margin-bottom: 0;
+    margin-bottom: var(--spacing-lg); /* Agregar margen para el botón de reset */
 }
 
 .accessibility-group h4 {
@@ -168,6 +173,45 @@
     display: flex;
     align-items: center;
     gap: var(--spacing-sm);
+}
+
+/* ==================================================
+   BOTÓN DE RESET PROMINENTE
+   ================================================== */
+.accessibility-reset {
+    margin: var(--spacing-lg);
+    margin-top: 0;
+    padding-top: var(--spacing-lg);
+    border-top: 2px solid var(--gris-claro);
+}
+
+.reset-button {
+    width: 100%;
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+    color: var(--blanco);
+    border: none;
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-md);
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    font-size: 1em;
+    box-shadow: var(--shadow-sm);
+}
+
+.reset-button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
+}
+
+.reset-button:active {
+    transform: translateY(0);
 }
 
 /* ==================================================
@@ -502,10 +546,12 @@ body.enhanced-focus *:focus-visible {
         left: var(--spacing-md);
         width: auto;
         max-height: calc(100vh - 120px);
+        border-radius: var(--border-radius-lg); /* Bordes menos redondeados en móvil */
     }
     
     .accessibility-panel.active {
         right: var(--spacing-md);
+        left: var(--spacing-md); /* Asegurar que se extienda correctamente */
     }
     
     .accessibility-header {
@@ -518,10 +564,17 @@ body.enhanced-focus *:focus-visible {
     
     .accessibility-options {
         padding: var(--spacing-md);
+        max-height: calc(100vh - 180px); /* Más espacio para scroll en móvil */
+    }
+    
+    .accessibility-reset {
+        margin: var(--spacing-md);
+        margin-top: 0;
     }
     
     .font-size-controls {
         flex-direction: column;
+        gap: var(--spacing-sm);
     }
     
     .skip-links {
@@ -545,10 +598,22 @@ body.enhanced-focus *:focus-visible {
         top: 90px;
         left: var(--spacing-sm);
         right: -100%;
+        max-height: calc(100vh - 100px);
     }
     
     .accessibility-panel.active {
         right: var(--spacing-sm);
+        left: var(--spacing-sm);
+    }
+    
+    .accessibility-options {
+        padding: var(--spacing-sm);
+        max-height: calc(100vh - 160px);
+    }
+    
+    .accessibility-reset {
+        margin: var(--spacing-sm);
+        margin-top: 0;
     }
     
     .accessibility-group {
@@ -561,6 +626,10 @@ body.enhanced-focus *:focus-visible {
     
     .accessibility-buttons {
         gap: var(--spacing-xs);
+    }
+    
+    .accessibility-header {
+        padding: var(--spacing-sm) var(--spacing-md);
     }
 }
 

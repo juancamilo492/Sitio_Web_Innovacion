@@ -55,40 +55,59 @@ function toggleAccessibilityPanel() {
     const overlay = document.getElementById('accessibilityOverlay');
     const toggle = document.getElementById('accessibilityToggle');
     
-    if (!panel || !overlay || !toggle) return;
+    if (!panel || !overlay || !toggle) {
+        console.error('Elementos del panel de accesibilidad no encontrados');
+        return;
+    }
     
     accessibilityState.panelOpen = !accessibilityState.panelOpen;
     
+    console.log('Toggling panel:', accessibilityState.panelOpen); // Debug
+    
     if (accessibilityState.panelOpen) {
-        // Abrir panel - aplicar clases inmediatamente
-        panel.classList.add('active');
-        overlay.classList.add('active');
-        toggle.classList.add('active');
-        panel.setAttribute('aria-hidden', 'false');
+        // Abrir panel
+        console.log('Abriendo panel...'); // Debug
         
-        // Enfocar el primer elemento del panel - más rápido
-        setTimeout(() => {
-            const firstFocusable = panel.querySelector('button, input, [tabindex]:not([tabindex="-1"])');
-            if (firstFocusable) firstFocusable.focus();
-        }, 150); // Reducido de 300ms a 150ms
+        // Aplicar clases
+        overlay.classList.add('active');
+        panel.classList.add('active');
+        toggle.classList.add('active');
+        
+        // Configurar ARIA
+        panel.setAttribute('aria-hidden', 'false');
         
         // Prevenir scroll del body
         document.body.style.overflow = 'hidden';
+        
+        // Verificar que las clases se aplicaron
+        console.log('Overlay active:', overlay.classList.contains('active')); // Debug
+        console.log('Panel active:', panel.classList.contains('active')); // Debug
+        
+        // Enfocar el primer elemento del panel
+        setTimeout(() => {
+            const firstFocusable = panel.querySelector('button, input, [tabindex]:not([tabindex="-1"])');
+            if (firstFocusable) firstFocusable.focus();
+        }, 150);
         
         // Anunciar apertura para lectores de pantalla
         announceToScreenReader('Panel de accesibilidad abierto');
         
     } else {
-        // Cerrar panel - aplicar clases inmediatamente
-        panel.classList.remove('active');
+        // Cerrar panel
+        console.log('Cerrando panel...'); // Debug
+        
+        // Remover clases
         overlay.classList.remove('active');
+        panel.classList.remove('active');
         toggle.classList.remove('active');
+        
+        // Configurar ARIA
         panel.setAttribute('aria-hidden', 'true');
         
         // Restaurar scroll del body
         document.body.style.overflow = '';
         
-        // Devolver foco al botón de toggle - inmediato
+        // Devolver foco al botón de toggle
         toggle.focus();
         
         // Anunciar cierre para lectores de pantalla

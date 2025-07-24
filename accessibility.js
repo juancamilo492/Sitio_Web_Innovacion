@@ -580,10 +580,13 @@ Enter/Espacio: Activar elemento enfocado
  * Resetear todas las configuraciones
  */
 function resetAllSettings() {
-    if (confirm('¿Estás seguro de que quieres restaurar todas las configuraciones de accesibilidad?')) {
+    // Crear un modal de confirmación personalizado más accesible
+    const confirmReset = confirm('¿Estás seguro de que quieres restaurar todas las configuraciones de accesibilidad a sus valores predeterminados?');
+    
+    if (confirmReset) {
         // Resetear estado
         accessibilityState = {
-            panelOpen: false,
+            panelOpen: accessibilityState.panelOpen, // Mantener el panel abierto
             fontSize: 100,
             highContrast: false,
             darkMode: false,
@@ -628,7 +631,21 @@ function resetAllSettings() {
         // Limpiar localStorage
         localStorage.removeItem('alico-accessibility-settings');
         
-        announceToScreenReader('Todas las configuraciones de accesibilidad han sido restauradas');
+        // Feedback visual temporal en el botón
+        const resetButton = document.querySelector('.reset-button');
+        if (resetButton) {
+            const originalText = resetButton.innerHTML;
+            resetButton.innerHTML = '<span class="material-symbols-rounded">check</span>¡Restaurado!';
+            resetButton.style.background = 'linear-gradient(135deg, var(--verde-natura) 0%, var(--verde-natura-80) 100%)';
+            
+            setTimeout(() => {
+                resetButton.innerHTML = originalText;
+                resetButton.style.background = '';
+            }, 2000);
+        }
+        
+        announceToScreenReader('Todas las configuraciones de accesibilidad han sido restauradas a sus valores predeterminados');
+        logAccessibilityUsage('reset_all', 'executed');
     }
 }
 

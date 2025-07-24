@@ -204,7 +204,7 @@ function initHoverEffects() {
  * Optimiza las imágenes lazy loading
  */
 function initLazyLoading() {
-    const images = document.querySelectorAll('.resource-card-image[style*="background-image"]');
+    const images = document.querySelectorAll('.resource-card-image[style*="background-image"], .footer-logo-image, .logo-image');
     
     const imageObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -218,6 +218,69 @@ function initLazyLoading() {
     
     images.forEach(img => {
         imageObserver.observe(img);
+    });
+}
+
+/**
+ * Maneja el fallback de imágenes cuando no se pueden cargar
+ */
+function initImageFallbacks() {
+    // Manejar logo del header
+    const logoImage = document.querySelector('.logo-image');
+    const logoFallback = document.querySelector('.logo-text-fallback');
+    
+    if (logoImage && logoFallback) {
+        logoImage.addEventListener('error', function() {
+            console.warn('Error al cargar imagen del logo header:', this.src);
+            this.style.display = 'none';
+            logoFallback.style.display = 'flex';
+        });
+        
+        logoImage.addEventListener('load', function() {
+            console.log('Imagen del logo header cargada exitosamente');
+            logoFallback.style.display = 'none';
+        });
+    }
+    
+    // Manejar logo del footer
+    const footerLogoImage = document.querySelector('.footer-logo-image');
+    const footerLogoFallback = document.querySelector('.footer-logo-fallback');
+    
+    if (footerLogoImage && footerLogoFallback) {
+        footerLogoImage.addEventListener('error', function() {
+            console.warn('Error al cargar imagen del logo footer:', this.src);
+            this.style.display = 'none';
+            footerLogoFallback.style.display = 'block';
+        });
+        
+        footerLogoImage.addEventListener('load', function() {
+            console.log('Imagen del logo footer cargada exitosamente');
+            this.style.opacity = '1';
+            footerLogoFallback.style.display = 'none';
+        });
+        
+        // Inicializar con opacidad 0 para efecto fade-in
+        footerLogoImage.style.opacity = '0';
+        footerLogoImage.style.transition = 'opacity 0.3s ease';
+    }
+}
+
+/**
+ * Precarga las imágenes importantes
+ */
+function preloadImages() {
+    const imagesToPreload = [
+        'images/Ali_head.png',
+        'images/logo-blanco.png',
+        'images/cocrea.png',
+        'images/versatil.png'
+    ];
+    
+    imagesToPreload.forEach(src => {
+        const img = new Image();
+        img.src = src;
+        img.onload = () => console.log(`Imagen precargada: ${src}`);
+        img.onerror = () => console.warn(`Error al precargar imagen: ${src}`);
     });
 }
 
@@ -307,6 +370,8 @@ document.addEventListener('DOMContentLoaded', function() {
     initTooltips();
     initHoverEffects();
     initLazyLoading();
+    initImageFallbacks();
+    preloadImages();
     
     // Agregar clase loaded al body para activar animaciones CSS
     setTimeout(() => {
@@ -316,6 +381,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Optimización de rendimiento: usar passive listeners
     document.addEventListener('touchstart', function() {}, { passive: true });
     document.addEventListener('touchmove', function() {}, { passive: true });
+    
+    console.log('🎨 Alico - Sistema de imágenes inicializado');
+    console.log('📱 Detección de dispositivo:', window.innerWidth < 768 ? 'Móvil' : window.innerWidth < 1024 ? 'Tablet' : 'Desktop');
 });
 
 /**
@@ -329,6 +397,18 @@ window.addEventListener('resize', function() {
         const mobileNavMenu = document.getElementById('mobileNavMenu');
         if (window.innerWidth > 1024 && mobileNavMenu.classList.contains('active')) {
             toggleMenu();
+        }
+        
+        // Reajustar imágenes si es necesario
+        const logoImage = document.querySelector('.logo-image');
+        const footerLogoImage = document.querySelector('.footer-logo-image');
+        
+        if (logoImage && logoImage.complete) {
+            console.log('Reajustando imagen del logo tras resize');
+        }
+        
+        if (footerLogoImage && footerLogoImage.complete) {
+            console.log('Reajustando imagen del footer tras resize');
         }
     }, 250);
 });
@@ -347,9 +427,85 @@ if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').match
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
         navigator.serviceWorker.register('/sw.js')
-            .then(registration => console.log('SW registrado'))
-            .catch(error => console.log('SW no registrado'));
+            .then(registration => console.log('🔧 SW registrado'))
+            .catch(error => console.log('❌ SW no registrado'));
     });
+}
+
+/**
+ * Detección de soporte de WebP para optimización de imágenes
+ */
+function supportsWebP() {
+    const canvas = document.createElement('canvas');
+    canvas.width = 1;
+    canvas.height = 1;
+    return canvas.toDataURL('image/webp').indexOf('data:image/webp') === 0;
+}
+
+/**
+ * Optimización de carga de imágenes según la conexión
+ */
+function getConnectionQuality() {
+    if ('connection' in navigator) {
+        const connection = navigator.connection;
+        if (connection.effectiveType === 'slow-2g' || connection.effectiveType === '2g') {
+            return 'low';
+        } else if (connection.effectiveType === '3g') {
+            return 'medium';
+        } else {
+            return 'high';
+        }
+    }
+    return 'high'; // Default para conexiones desconocidas
+}
+
+/**
+ * Función para mostrar notificaciones del sistema
+ */
+function showNotification(message, type = 'info', duration = 3000) {
+    const notification = document.createElement('div');
+    notification.style.cssText = `
+        position: fixed;
+        top: 100px;
+        right: 20px;
+        background: ${type === 'error' ? 'linear-gradient(135deg, #e74c3c 0%, #c0392b 100%)' : 'linear-gradient(135deg, var(--verde-natura) 0%, var(--verde-natura-80) 100%)'};
+        color: white;
+        padding: 16px 24px;
+        border-radius: 12px;
+        box-shadow: var(--shadow-lg);
+        z-index: 10000;
+        font-family: 'Work Sans', sans-serif;
+        font-weight: 600;
+        font-size: 14px;
+        transform: translateX(400px);
+        transition: all 0.3s ease;
+        max-width: 300px;
+        backdrop-filter: blur(10px);
+    `;
+    
+    notification.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="material-symbols-rounded" style="font-size: 20px;">${type === 'error' ? 'error' : 'check_circle'}</span>
+            <span>${message}</span>
+        </div>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Animar entrada
+    setTimeout(() => {
+        notification.style.transform = 'translateX(0)';
+    }, 100);
+    
+    // Animar salida y remover
+    setTimeout(() => {
+        notification.style.transform = 'translateX(400px)';
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.parentNode.removeChild(notification);
+            }
+        }, 300);
+    }, duration);
 }
 
 /* ==================================================
@@ -380,6 +536,28 @@ const rippleStyles = `
     .loaded .methodology-card:nth-child(2) {
         animation: fadeInUp 0.8s ease-out 0.6s both;
     }
+    
+    /* Animaciones específicas para imágenes */
+    .logo-image,
+    .footer-logo-image {
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    
+    .logo-image:hover,
+    .footer-logo-image:hover {
+        transform: scale(1.05);
+    }
+    
+    /* Efecto de carga para imágenes */
+    .image-loading {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    
+    .image-loaded {
+        opacity: 1;
+        transform: scale(1);
+    }
 `;
 
 // Inyectar estilos si no existen
@@ -399,9 +577,31 @@ if (window.location.hostname === 'localhost' || window.location.hostname === '12
         toggleMenu,
         flipCard,
         scrollToTop,
-        version: '2.0.0'
+        showNotification,
+        supportsWebP: supportsWebP(),
+        connectionQuality: getConnectionQuality(),
+        version: '2.1.0'
     };
     
     console.log('🚀 Alico Debug Mode Activated');
     console.log('📦 Available functions:', Object.keys(window.debugAlico));
+    console.log('🖼️ WebP Support:', supportsWebP());
+    console.log('🌐 Connection Quality:', getConnectionQuality());
 }
+
+/* ==================================================
+   MANEJO DE ERRORES GLOBALES
+   ================================================== */
+window.addEventListener('error', function(event) {
+    if (event.target.tagName === 'IMG') {
+        console.warn('Error cargando imagen:', event.target.src);
+        // Aquí podrías implementar lógica adicional para manejar errores de imágenes
+    }
+});
+
+// Manejo de errores de promesas no capturadas
+window.addEventListener('unhandledrejection', function(event) {
+    console.error('Promise rechazada:', event.reason);
+    // Prevenir que aparezca en la consola del navegador
+    event.preventDefault();
+});

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inteligencias Artificiales - Alico</title>
+    <title>Recursos Audiovisuales - Alico</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -112,270 +112,75 @@
         <span class="material-symbols-rounded">keyboard_arrow_up</span>
     </button>
 
-    <!-- Contenido principal de inteligencias artificiales -->
+    <!-- Contenido principal de recursos audiovisuales -->
     <main>
         <!-- Banner principal de la página -->
         <section class="banner-section">
-            <div class="banner-content banner-ia">
-                INTELIGENCIAS ARTIFICIALES
+            <div class="banner-content banner-recursos">
+                RECURSOS AUDIOVISUALES
             </div>
         </section>
 
-        <!-- Descripción principal -->
-        <section class="model-card">
-            <h2>Nuestros Asistentes de IA Especializados</h2>
-            <p>En Alico hemos desarrollado una suite de asistentes de inteligencia artificial especializados en diferentes áreas de nuestro negocio. Cada GPT personalizado está entrenado con conocimiento específico para brindarte la mejor asistencia en tu área de trabajo.</p>
-            <p>Selecciona el asistente que mejor se adapte a tus necesidades y experimenta el poder de la IA aplicada al mundo del empaque y la innovación.</p>
+        <!-- Sección de videos destacados -->
+        <section class="video-section">
+            <!-- Video 1: Lanzamiento Termoflex +B -->
+            <a href="https://youtube.com" class="video-card" target="_blank" rel="noopener noreferrer">
+                <div class="video-placeholder">
+                    <div class="play-button">
+                        <span class="material-symbols-rounded" style="font-size: 40px;">play_arrow</span>
+                    </div>
+                </div>
+                <div class="video-title">LANZAMIENTO TERMOFLEX +B</div>
+            </a>
+
+            <!-- Video 2: Proyecto Casas -->
+            <a href="https://youtube.com" class="video-card" target="_blank" rel="noopener noreferrer">
+                <div class="video-placeholder">
+                    <div class="play-button">
+                        <span class="material-symbols-rounded" style="font-size: 40px;">play_arrow</span>
+                    </div>
+                </div>
+                <div class="video-title">PROYECTO CASAS</div>
+            </a>
         </section>
 
-        <!-- Grid de GPTs especializados -->
-        <section class="ai-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: var(--spacing-xl); margin-top: var(--spacing-xxl); margin-bottom: var(--spacing-xxl);">
-            
-            <!-- GPT 1: Diseño y Desarrollo de Productos -->
-            <article class="ai-card" onclick="openGPT('design-dev')" style="background: linear-gradient(135deg, var(--azul-claro) 0%, var(--azul-claro-80) 100%); border-radius: var(--border-radius-xl); padding: var(--spacing-xl); color: var(--blanco); box-shadow: var(--shadow-lg); cursor: pointer; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden;">
-                <div class="ai-card-glow" style="content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%); pointer-events: none; z-index: 1;"></div>
-                <div style="position: relative; z-index: 2;">
-                    <div class="ai-header" style="display: flex; align-items: center; gap: var(--spacing-md); margin-bottom: var(--spacing-lg);">
-                        <div class="ai-icon" style="width: 60px; height: 60px; background: rgba(255,255,255,0.2); border-radius: var(--border-radius-lg); display: flex; align-items: center; justify-content: center; backdrop-filter: blur(10px);">
-                            <span class="material-symbols-rounded" style="font-size: 32px; color: var(--blanco);">design_services</span>
-                        </div>
-                        <div>
-                            <h3 style="font-size: 1.4em; margin-bottom: var(--spacing-xs); font-family: 'Zilla Slab', serif; font-weight: 600;">PackageDesign Pro</h3>
-                            <div class="ai-status" style="background: rgba(113, 179, 56, 0.8); color: var(--blanco); padding: 4px 12px; border-radius: 12px; font-size: 0.8em; font-weight: 600; display: inline-block;">
-                                <span class="material-symbols-rounded" style="font-size: 14px; vertical-align: middle; margin-right: 4px;">check_circle</span>
-                                Disponible
-                            </div>
-                        </div>
-                    </div>
-                    <p style="line-height: 1.6; margin-bottom: var(--spacing-lg); font-size: 0.95em; opacity: 0.95;">Especialista en diseño de empaques, materiales sostenibles y optimización de estructuras. Te ayuda con prototipado, especificaciones técnicas y análisis de viabilidad.</p>
-                    <div class="ai-features" style="background: rgba(255,255,255,0.15); padding: var(--spacing-md); border-radius: var(--border-radius-md); margin-bottom: var(--spacing-lg); backdrop-filter: blur(5px);">
-                        <div style="font-size: 0.85em; font-weight: 600; margin-bottom: var(--spacing-xs); text-transform: uppercase; letter-spacing: 0.5px;">Especialidades:</div>
-                        <div style="font-size: 0.9em; line-height: 1.4;">• Diseño estructural • Selección de materiales • Prototipado 3D • Análisis de costos</div>
-                    </div>
-                    <div class="ai-cta" style="display: flex; align-items: center; justify-content: space-between;">
-                        <span style="font-size: 0.9em; font-weight: 600; opacity: 0.9;">
-                            <span class="material-symbols-rounded" style="font-size: 16px; vertical-align: middle; margin-right: 4px;">chat</span>
-                            Iniciar conversación
-                        </span>
-                        <span class="material-symbols-rounded" style="font-size: 24px; transition: transform 0.3s ease;">arrow_forward</span>
-                    </div>
+        <!-- Tarjetas de recursos adicionales CON IMÁGENES -->
+        <section class="resource-cards">
+            <!-- Tarjeta 1: Plantillas -->
+            <article class="resource-card">
+                <h3>Plantillas</h3>
+                <div class="resource-card-image" style="background-image: url('ruta/a/imagen-plantillas.jpg');">
+                    <!-- Placeholder para imagen de plantillas -->
+                    Imagen de Plantillas
                 </div>
             </article>
 
-            <!-- GPT 2: Marketing y Ventas -->
-            <article class="ai-card" onclick="openGPT('marketing')" style="background: linear-gradient(135deg, var(--amarillo-oro) 0%, var(--amarillo-oro-80) 100%); border-radius: var(--border-radius-xl); padding: var(--spacing-xl); color: var(--blanco); box-shadow: var(--shadow-lg); cursor: pointer; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden;">
-                <div class="ai-card-glow" style="content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%); pointer-events: none; z-index: 1;"></div>
-                <div style="position: relative; z-index: 2;">
-                    <div class="ai-header" style="display: flex; align-items: center; gap: var(--spacing-md); margin-bottom: var(--spacing-lg);">
-                        <div class="ai-icon" style="width: 60px; height: 60px; background: rgba(255,255,255,0.2); border-radius: var(--border-radius-lg); display: flex; align-items: center; justify-content: center; backdrop-filter: blur(10px);">
-                            <span class="material-symbols-rounded" style="font-size: 32px; color: var(--blanco);">campaign</span>
-                        </div>
-                        <div>
-                            <h3 style="font-size: 1.4em; margin-bottom: var(--spacing-xs); font-family: 'Zilla Slab', serif; font-weight: 600;">Market Intelligence</h3>
-                            <div class="ai-status" style="background: rgba(113, 179, 56, 0.8); color: var(--blanco); padding: 4px 12px; border-radius: 12px; font-size: 0.8em; font-weight: 600; display: inline-block;">
-                                <span class="material-symbols-rounded" style="font-size: 14px; vertical-align: middle; margin-right: 4px;">check_circle</span>
-                                Disponible
-                            </div>
-                        </div>
-                    </div>
-                    <p style="line-height: 1.6; margin-bottom: var(--spacing-lg); font-size: 0.95em; opacity: 0.95;">Experto en estrategias de marketing, análisis de mercado y desarrollo de campañas para productos de empaque. Optimiza tu propuesta de valor y comunicación.</p>
-                    <div class="ai-features" style="background: rgba(255,255,255,0.15); padding: var(--spacing-md); border-radius: var(--border-radius-md); margin-bottom: var(--spacing-lg); backdrop-filter: blur(5px);">
-                        <div style="font-size: 0.85em; font-weight: 600; margin-bottom: var(--spacing-xs); text-transform: uppercase; letter-spacing: 0.5px;">Especialidades:</div>
-                        <div style="font-size: 0.9em; line-height: 1.4;">• Análisis de mercado • Estrategias de precio • Campañas publicitarias • Branding sostenible</div>
-                    </div>
-                    <div class="ai-cta" style="display: flex; align-items: center; justify-content: space-between;">
-                        <span style="font-size: 0.9em; font-weight: 600; opacity: 0.9;">
-                            <span class="material-symbols-rounded" style="font-size: 16px; vertical-align: middle; margin-right: 4px;">chat</span>
-                            Iniciar conversación
-                        </span>
-                        <span class="material-symbols-rounded" style="font-size: 24px; transition: transform 0.3s ease;">arrow_forward</span>
-                    </div>
+            <!-- Tarjeta 2: Recursos adicionales -->
+            <article class="resource-card">
+                <h3>Recursos adicionales</h3>
+                <div class="resource-card-image" style="background-image: url('ruta/a/imagen-recursos.jpg');">
+                    <!-- Placeholder para imagen de recursos adicionales -->
+                    Imagen de Recursos
                 </div>
             </article>
 
-            <!-- GPT 3: Sostenibilidad y Medio Ambiente -->
-            <article class="ai-card" onclick="openGPT('sustainability')" style="background: linear-gradient(135deg, var(--verde-natura) 0%, var(--verde-natura-80) 100%); border-radius: var(--border-radius-xl); padding: var(--spacing-xl); color: var(--blanco); box-shadow: var(--shadow-lg); cursor: pointer; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden;">
-                <div class="ai-card-glow" style="content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%); pointer-events: none; z-index: 1;"></div>
-                <div style="position: relative; z-index: 2;">
-                    <div class="ai-header" style="display: flex; align-items: center; gap: var(--spacing-md); margin-bottom: var(--spacing-lg);">
-                        <div class="ai-icon" style="width: 60px; height: 60px; background: rgba(255,255,255,0.2); border-radius: var(--border-radius-lg); display: flex; align-items: center; justify-content: center; backdrop-filter: blur(10px);">
-                            <span class="material-symbols-rounded" style="font-size: 32px; color: var(--blanco);">eco</span>
-                        </div>
-                        <div>
-                            <h3 style="font-size: 1.4em; margin-bottom: var(--spacing-xs); font-family: 'Zilla Slab', serif; font-weight: 600;">EcoPackage Advisor</h3>
-                            <div class="ai-status" style="background: rgba(113, 179, 56, 0.8); color: var(--blanco); padding: 4px 12px; border-radius: 12px; font-size: 0.8em; font-weight: 600; display: inline-block;">
-                                <span class="material-symbols-rounded" style="font-size: 14px; vertical-align: middle; margin-right: 4px;">check_circle</span>
-                                Disponible
-                            </div>
-                        </div>
-                    </div>
-                    <p style="line-height: 1.6; margin-bottom: var(--spacing-lg); font-size: 0.95em; opacity: 0.95;">Especialista en sostenibilidad, materiales biodegradables y evaluación de impacto ambiental. Guía tu transición hacia empaques más ecológicos.</p>
-                    <div class="ai-features" style="background: rgba(255,255,255,0.15); padding: var(--spacing-md); border-radius: var(--border-radius-md); margin-bottom: var(--spacing-lg); backdrop-filter: blur(5px);">
-                        <div style="font-size: 0.85em; font-weight: 600; margin-bottom: var(--spacing-xs); text-transform: uppercase; letter-spacing: 0.5px;">Especialidades:</div>
-                        <div style="font-size: 0.9em; line-height: 1.4;">• Análisis LCA • Materiales biodegradables • Certificaciones verdes • Economía circular</div>
-                    </div>
-                    <div class="ai-cta" style="display: flex; align-items: center; justify-content: space-between;">
-                        <span style="font-size: 0.9em; font-weight: 600; opacity: 0.9;">
-                            <span class="material-symbols-rounded" style="font-size: 16px; vertical-align: middle; margin-right: 4px;">chat</span>
-                            Iniciar conversación
-                        </span>
-                        <span class="material-symbols-rounded" style="font-size: 24px; transition: transform 0.3s ease;">arrow_forward</span>
-                    </div>
+            <!-- Tarjeta 3: Experiencia del cliente -->
+            <article class="resource-card">
+                <h3>Experiencia del cliente</h3>
+                <div class="resource-card-image" style="background-image: url('ruta/a/imagen-experiencia.jpg');">
+                    <!-- Placeholder para imagen de experiencia del cliente -->
+                    Imagen de Experiencia
                 </div>
             </article>
 
-            <!-- GPT 4: Producción y Calidad -->
-            <article class="ai-card" onclick="openGPT('production')" style="background: linear-gradient(135deg, var(--azul-novo) 0%, var(--azul-novo-80) 100%); border-radius: var(--border-radius-xl); padding: var(--spacing-xl); color: var(--blanco); box-shadow: var(--shadow-lg); cursor: pointer; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden;">
-                <div class="ai-card-glow" style="content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%); pointer-events: none; z-index: 1;"></div>
-                <div style="position: relative; z-index: 2;">
-                    <div class="ai-header" style="display: flex; align-items: center; gap: var(--spacing-md); margin-bottom: var(--spacing-lg);">
-                        <div class="ai-icon" style="width: 60px; height: 60px; background: rgba(255,255,255,0.2); border-radius: var(--border-radius-lg); display: flex; align-items: center; justify-content: center; backdrop-filter: blur(10px);">
-                            <span class="material-symbols-rounded" style="font-size: 32px; color: var(--blanco);">precision_manufacturing</span>
-                        </div>
-                        <div>
-                            <h3 style="font-size: 1.4em; margin-bottom: var(--spacing-xs); font-family: 'Zilla Slab', serif; font-weight: 600;">Production Expert</h3>
-                            <div class="ai-status" style="background: rgba(113, 179, 56, 0.8); color: var(--blanco); padding: 4px 12px; border-radius: 12px; font-size: 0.8em; font-weight: 600; display: inline-block;">
-                                <span class="material-symbols-rounded" style="font-size: 14px; vertical-align: middle; margin-right: 4px;">check_circle</span>
-                                Disponible
-                            </div>
-                        </div>
-                    </div>
-                    <p style="line-height: 1.6; margin-bottom: var(--spacing-lg); font-size: 0.95em; opacity: 0.95;">Optimiza procesos de producción, control de calidad y eficiencia operacional. Resuelve problemas técnicos y mejora la productividad de tu línea.</p>
-                    <div class="ai-features" style="background: rgba(255,255,255,0.15); padding: var(--spacing-md); border-radius: var(--border-radius-md); margin-bottom: var(--spacing-lg); backdrop-filter: blur(5px);">
-                        <div style="font-size: 0.85em; font-weight: 600; margin-bottom: var(--spacing-xs); text-transform: uppercase; letter-spacing: 0.5px;">Especialidades:</div>
-                        <div style="font-size: 0.9em; line-height: 1.4;">• Control de calidad • Optimización de procesos • Lean Manufacturing • Troubleshooting</div>
-                    </div>
-                    <div class="ai-cta" style="display: flex; align-items: center; justify-content: space-between;">
-                        <span style="font-size: 0.9em; font-weight: 600; opacity: 0.9;">
-                            <span class="material-symbols-rounded" style="font-size: 16px; vertical-align: middle; margin-right: 4px;">chat</span>
-                            Iniciar conversación
-                        </span>
-                        <span class="material-symbols-rounded" style="font-size: 24px; transition: transform 0.3s ease;">arrow_forward</span>
-                    </div>
+            <!-- Tarjeta 4: Eventos -->
+            <article class="resource-card">
+                <h3>Eventos</h3>
+                <div class="resource-card-image" style="background-image: url('ruta/a/imagen-eventos.jpg');">
+                    <!-- Placeholder para imagen de eventos -->
+                    Imagen de Eventos
                 </div>
             </article>
-
-            <!-- GPT 5: Innovación y Tendencias -->
-            <article class="ai-card" onclick="openGPT('innovation')" style="background: linear-gradient(135deg, var(--marron-corporativo) 0%, #8B4F42 100%); border-radius: var(--border-radius-xl); padding: var(--spacing-xl); color: var(--blanco); box-shadow: var(--shadow-lg); cursor: pointer; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden;">
-                <div class="ai-card-glow" style="content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%); pointer-events: none; z-index: 1;"></div>
-                <div style="position: relative; z-index: 2;">
-                    <div class="ai-header" style="display: flex; align-items: center; gap: var(--spacing-md); margin-bottom: var(--spacing-lg);">
-                        <div class="ai-icon" style="width: 60px; height: 60px; background: rgba(255,255,255,0.2); border-radius: var(--border-radius-lg); display: flex; align-items: center; justify-content: center; backdrop-filter: blur(10px);">
-                            <span class="material-symbols-rounded" style="font-size: 32px; color: var(--blanco);">auto_awesome</span>
-                        </div>
-                        <div>
-                            <h3 style="font-size: 1.4em; margin-bottom: var(--spacing-xs); font-family: 'Zilla Slab', serif; font-weight: 600;">Innovation Scout</h3>
-                            <div class="ai-status" style="background: rgba(113, 179, 56, 0.8); color: var(--blanco); padding: 4px 12px; border-radius: 12px; font-size: 0.8em; font-weight: 600; display: inline-block;">
-                                <span class="material-symbols-rounded" style="font-size: 14px; vertical-align: middle; margin-right: 4px;">check_circle</span>
-                                Disponible
-                            </div>
-                        </div>
-                    </div>
-                    <p style="line-height: 1.6; margin-bottom: var(--spacing-lg); font-size: 0.95em; opacity: 0.95;">Explorador de tendencias emergentes, tecnologías disruptivas y oportunidades de innovación en la industria del empaque. Tu radar de futuro.</p>
-                    <div class="ai-features" style="background: rgba(255,255,255,0.15); padding: var(--spacing-md); border-radius: var(--border-radius-md); margin-bottom: var(--spacing-lg); backdrop-filter: blur(5px);">
-                        <div style="font-size: 0.85em; font-weight: 600; margin-bottom: var(--spacing-xs); text-transform: uppercase; letter-spacing: 0.5px;">Especialidades:</div>
-                        <div style="font-size: 0.9em; line-height: 1.4;">• Análisis de tendencias • Tecnologías emergentes • Patents scouting • Innovation roadmaps</div>
-                    </div>
-                    <div class="ai-cta" style="display: flex; align-items: center; justify-content: space-between;">
-                        <span style="font-size: 0.9em; font-weight: 600; opacity: 0.9;">
-                            <span class="material-symbols-rounded" style="font-size: 16px; vertical-align: middle; margin-right: 4px;">chat</span>
-                            Iniciar conversación
-                        </span>
-                        <span class="material-symbols-rounded" style="font-size: 24px; transition: transform 0.3s ease;">arrow_forward</span>
-                    </div>
-                </div>
-            </article>
-
-            <!-- GPT 6: Atención al Cliente -->
-            <article class="ai-card" onclick="openGPT('customer-service')" style="background: linear-gradient(135deg, #E91E63 0%, #C2185B 100%); border-radius: var(--border-radius-xl); padding: var(--spacing-xl); color: var(--blanco); box-shadow: var(--shadow-lg); cursor: pointer; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden;">
-                <div class="ai-card-glow" style="content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%); pointer-events: none; z-index: 1;"></div>
-                <div style="position: relative; z-index: 2;">
-                    <div class="ai-header" style="display: flex; align-items: center; gap: var(--spacing-md); margin-bottom: var(--spacing-lg);">
-                        <div class="ai-icon" style="width: 60px; height: 60px; background: rgba(255,255,255,0.2); border-radius: var(--border-radius-lg); display: flex; align-items: center; justify-content: center; backdrop-filter: blur(10px);">
-                            <span class="material-symbols-rounded" style="font-size: 32px; color: var(--blanco);">headset_mic</span>
-                        </div>
-                        <div>
-                            <h3 style="font-size: 1.4em; margin-bottom: var(--spacing-xs); font-family: 'Zilla Slab', serif; font-weight: 600;">Customer Care AI</h3>
-                            <div class="ai-status" style="background: rgba(113, 179, 56, 0.8); color: var(--blanco); padding: 4px 12px; border-radius: 12px; font-size: 0.8em; font-weight: 600; display: inline-block;">
-                                <span class="material-symbols-rounded" style="font-size: 14px; vertical-align: middle; margin-right: 4px;">check_circle</span>
-                                Disponible
-                            </div>
-                        </div>
-                    </div>
-                    <p style="line-height: 1.6; margin-bottom: var(--spacing-lg); font-size: 0.95em; opacity: 0.95;">Especialista en atención al cliente, resolución de problemas y gestión de relaciones comerciales. Optimiza la experiencia del cliente en cada interacción.</p>
-                    <div class="ai-features" style="background: rgba(255,255,255,0.15); padding: var(--spacing-md); border-radius: var(--border-radius-md); margin-bottom: var(--spacing-lg); backdrop-filter: blur(5px);">
-                        <div style="font-size: 0.85em; font-weight: 600; margin-bottom: var(--spacing-xs); text-transform: uppercase; letter-spacing: 0.5px;">Especialidades:</div>
-                        <div style="font-size: 0.9em; line-height: 1.4;">• Gestión de quejas • CRM optimization • Fidelización • Comunicación efectiva</div>
-                    </div>
-                    <div class="ai-cta" style="display: flex; align-items: center; justify-content: space-between;">
-                        <span style="font-size: 0.9em; font-weight: 600; opacity: 0.9;">
-                            <span class="material-symbols-rounded" style="font-size: 16px; vertical-align: middle; margin-right: 4px;">chat</span>
-                            Iniciar conversación
-                        </span>
-                        <span class="material-symbols-rounded" style="font-size: 24px; transition: transform 0.3s ease;">arrow_forward</span>
-                    </div>
-                </div>
-            </article>
-        </section>
-
-        <!-- Sección de información adicional -->
-        <section class="ai-info-section" style="background: linear-gradient(135deg, var(--azul-claro) 0%, var(--azul-claro-80) 100%); border-radius: var(--border-radius-xl); padding: var(--spacing-xxl); margin-bottom: var(--spacing-xl); color: var(--blanco); text-align: center; position: relative; overflow: hidden; box-shadow: var(--shadow-lg);">
-            <div style="content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%); pointer-events: none;"></div>
-            <div style="position: relative; z-index: 1;">
-                <div class="material-symbols-rounded" style="font-size: 60px; margin-bottom: var(--spacing-lg); color: var(--blanco); opacity: 0.9;">psychology</div>
-                <h2 style="font-size: clamp(1.5rem, 4vw, 2rem); margin-bottom: var(--spacing-lg); font-family: 'Zilla Slab', serif; font-weight: 600;">Potenciados por GPT-4</h2>
-                <p style="font-size: clamp(1rem, 2.5vw, 1.2rem); line-height: 1.6; margin-bottom: var(--spacing-xl); max-width: 800px; margin-left: auto; margin-right: auto; opacity: 0.95;">Todos nuestros asistentes de IA están construidos sobre la tecnología GPT-4 de OpenAI y entrenados específicamente con el conocimiento y experiencia de Alico. Cada conversación es una oportunidad de aprender y mejorar juntos.</p>
-                
-                <!-- Estadísticas de uso -->
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--spacing-lg); margin-top: var(--spacing-xl);">
-                    <div style="text-align: center;">
-                        <div style="font-size: 2.5em; font-weight: 700; font-family: 'Zilla Slab', serif; margin-bottom: var(--spacing-xs);">6</div>
-                        <div style="font-size: 0.9em; opacity: 0.9; text-transform: uppercase; letter-spacing: 0.5px;">Asistentes Especializados</div>
-                    </div>
-                    <div style="text-align: center;">
-                        <div style="font-size: 2.5em; font-weight: 700; font-family: 'Zilla Slab', serif; margin-bottom: var(--spacing-xs);">24/7</div>
-                        <div style="font-size: 0.9em; opacity: 0.9; text-transform: uppercase; letter-spacing: 0.5px;">Disponibilidad</div>
-                    </div>
-                    <div style="text-align: center;">
-                        <div style="font-size: 2.5em; font-weight: 700; font-family: 'Zilla Slab', serif; margin-bottom: var(--spacing-xs);">∞</div>
-                        <div style="font-size: 0.9em; opacity: 0.9; text-transform: uppercase; letter-spacing: 0.5px;">Consultas Ilimitadas</div>
-                    </div>
-                    <div style="text-align: center;">
-                        <div style="font-size: 2.5em; font-weight: 700; font-family: 'Zilla Slab', serif; margin-bottom: var(--spacing-xs);"><2s</div>
-                        <div style="font-size: 0.9em; opacity: 0.9; text-transform: uppercase; letter-spacing: 0.5px;">Tiempo de Respuesta</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Guía de uso -->
-        <section class="usage-guide" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--spacing-xl); margin-bottom: var(--spacing-xxl);">
-            <div style="background: linear-gradient(135deg, var(--amarillo-oro) 0%, var(--amarillo-oro-80) 100%); border-radius: var(--border-radius-xl); padding: var(--spacing-xl); color: var(--blanco); text-align: center; position: relative; overflow: hidden; box-shadow: var(--shadow-lg);">
-                <div style="content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%); pointer-events: none;"></div>
-                <div style="position: relative; z-index: 1;">
-                    <div class="material-symbols-rounded" style="font-size: 48px; margin-bottom: var(--spacing-md); color: var(--blanco);">mouse</div>
-                    <h3 style="font-size: 1.3em; margin-bottom: var(--spacing-md); font-family: 'Zilla Slab', serif; font-weight: 600;">Paso 1: Selecciona</h3>
-                    <p style="line-height: 1.6; font-size: 0.95em; opacity: 0.95;">Haz clic en la tarjeta del asistente que mejor se ajuste a tu área de trabajo o necesidad específica.</p>
-                </div>
-            </div>
-            
-            <div style="background: linear-gradient(135deg, var(--verde-natura) 0%, var(--verde-natura-80) 100%); border-radius: var(--border-radius-xl); padding: var(--spacing-xl); color: var(--blanco); text-align: center; position: relative; overflow: hidden; box-shadow: var(--shadow-lg);">
-                <div style="content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%); pointer-events: none;"></div>
-                <div style="position: relative; z-index: 1;">
-                    <div class="material-symbols-rounded" style="font-size: 48px; margin-bottom: var(--spacing-md); color: var(--blanco);">login</div>
-                    <h3 style="font-size: 1.3em; margin-bottom: var(--spacing-md); font-family: 'Zilla Slab', serif; font-weight: 600;">Paso 2: Conecta</h3>
-                    <p style="line-height: 1.6; font-size: 0.95em; opacity: 0.95;">Serás redirigido a ChatGPT donde podrás iniciar sesión con tu cuenta de OpenAI o crear una nueva.</p>
-                </div>
-            </div>
-            
-            <div style="background: linear-gradient(135deg, var(--azul-novo) 0%, var(--azul-novo-80) 100%); border-radius: var(--border-radius-xl); padding: var(--spacing-xl); color: var(--blanco); text-align: center; position: relative; overflow: hidden; box-shadow: var(--shadow-lg);">
-                <div style="content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%); pointer-events: none;"></div>
-                <div style="position: relative; z-index: 1;">
-                    <div class="material-symbols-rounded" style="font-size: 48px; margin-bottom: var(--spacing-md); color: var(--blanco);">chat</div>
-                    <h3 style="font-size: 1.3em; margin-bottom: var(--spacing-md); font-family: 'Zilla Slab', serif; font-weight: 600;">Paso 3: Conversa</h3>
-                    <p style="line-height: 1.6; font-size: 0.95em; opacity: 0.95;">Comienza tu conversación con preguntas específicas. Mientras más detalle proporciones, mejores serán las respuestas.</p>
-                </div>
-            </div>
         </section>
     </main>
 
@@ -392,258 +197,5 @@
 
     <!-- Archivo JavaScript compartido -->
     <script src="scripts.js"></script>
-    
-    <!-- JavaScript específico para inteligencias artificiales -->
-    <script>
-        // URLs de los GPTs (estos serían los links reales a tus GPTs personalizados)
-        const gptUrls = {
-            'design-dev': 'https://chat.openai.com/g/g-example1-packagedesign-pro',
-            'marketing': 'https://chat.openai.com/g/g-example2-market-intelligence',
-            'sustainability': 'https://chat.openai.com/g/g-example3-ecopackage-advisor',
-            'production': 'https://chat.openai.com/g/g-example4-production-expert',
-            'innovation': 'https://chat.openai.com/g/g-example5-innovation-scout',
-            'customer-service': 'https://chat.openai.com/g/g-example6-customer-care-ai'
-        };
-
-        // Función para abrir GPT específico
-        function openGPT(gptType) {
-            const url = gptUrls[gptType];
-            if (url) {
-                // Abrir en nueva pestaña
-                window.open(url, '_blank', 'noopener,noreferrer');
-                
-                // Agregar analytics o tracking aquí si es necesario
-                console.log(`Abriendo GPT: ${gptType}`);
-                
-                // Opcional: Mostrar mensaje de feedback
-                showFeedback(gptType);
-            } else {
-                console.error(`URL no encontrada para GPT: ${gptType}`);
-                showError();
-            }
-        }
-
-        // Función para mostrar feedback al usuario
-        function showFeedback(gptType) {
-            // Crear elemento de notificación temporal
-            const notification = document.createElement('div');
-            notification.style.cssText = `
-                position: fixed;
-                top: 100px;
-                right: 20px;
-                background: linear-gradient(135deg, var(--verde-natura) 0%, var(--verde-natura-80) 100%);
-                color: white;
-                padding: 16px 24px;
-                border-radius: 12px;
-                box-shadow: var(--shadow-lg);
-                z-index: 10000;
-                font-family: 'Work Sans', sans-serif;
-                font-weight: 600;
-                font-size: 14px;
-                transform: translateX(400px);
-                transition: all 0.3s ease;
-                max-width: 300px;
-                backdrop-filter: blur(10px);
-            `;
-            
-            notification.innerHTML = `
-                <div style="display: flex; align-items: center; gap: 8px;">
-                    <span class="material-symbols-rounded" style="font-size: 20px;">check_circle</span>
-                    <span>Redirigiendo a tu asistente de IA...</span>
-                </div>
-            `;
-            
-            document.body.appendChild(notification);
-            
-            // Animar entrada
-            setTimeout(() => {
-                notification.style.transform = 'translateX(0)';
-            }, 100);
-            
-            // Animar salida y remover
-            setTimeout(() => {
-                notification.style.transform = 'translateX(400px)';
-                setTimeout(() => {
-                    if (notification.parentNode) {
-                        notification.parentNode.removeChild(notification);
-                    }
-                }, 300);
-            }, 3000);
-        }
-
-        // Función para mostrar error
-        function showError() {
-            const notification = document.createElement('div');
-            notification.style.cssText = `
-                position: fixed;
-                top: 100px;
-                right: 20px;
-                background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
-                color: white;
-                padding: 16px 24px;
-                border-radius: 12px;
-                box-shadow: var(--shadow-lg);
-                z-index: 10000;
-                font-family: 'Work Sans', sans-serif;
-                font-weight: 600;
-                font-size: 14px;
-                transform: translateX(400px);
-                transition: all 0.3s ease;
-                max-width: 300px;
-            `;
-            
-            notification.innerHTML = `
-                <div style="display: flex; align-items: center; gap: 8px;">
-                    <span class="material-symbols-rounded" style="font-size: 20px;">error</span>
-                    <span>Este GPT estará disponible pronto.</span>
-                </div>
-            `;
-            
-            document.body.appendChild(notification);
-            
-            setTimeout(() => {
-                notification.style.transform = 'translateX(0)';
-            }, 100);
-            
-            setTimeout(() => {
-                notification.style.transform = 'translateX(400px)';
-                setTimeout(() => {
-                    if (notification.parentNode) {
-                        notification.parentNode.removeChild(notification);
-                    }
-                }, 300);
-            }, 3000);
-        }
-
-        // Efectos de hover y animaciones
-        document.addEventListener('DOMContentLoaded', function() {
-            const aiCards = document.querySelectorAll('.ai-card');
-            
-            aiCards.forEach((card, index) => {
-                // Animación de entrada
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(30px)';
-                card.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
-                
-                setTimeout(() => {
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                }, 100);
-
-                // Efectos de hover
-                card.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-8px) scale(1.02)';
-                    this.style.boxShadow = 'var(--shadow-xl)';
-                    
-                    // Animar flecha
-                    const arrow = this.querySelector('.ai-cta .material-symbols-rounded:last-child');
-                    if (arrow) {
-                        arrow.style.transform = 'translateX(5px)';
-                    }
-                    
-                    // Efecto de brillo
-                    const glow = this.querySelector('.ai-card-glow');
-                    if (glow) {
-                        glow.style.background = 'linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 100%)';
-                    }
-                });
-                
-                card.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0) scale(1)';
-                    this.style.boxShadow = 'var(--shadow-lg)';
-                    
-                    // Restaurar flecha
-                    const arrow = this.querySelector('.ai-cta .material-symbols-rounded:last-child');
-                    if (arrow) {
-                        arrow.style.transform = 'translateX(0)';
-                    }
-                    
-                    // Restaurar brillo
-                    const glow = this.querySelector('.ai-card-glow');
-                    if (glow) {
-                        glow.style.background = 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%)';
-                    }
-                });
-
-                // Efecto de click
-                card.addEventListener('click', function() {
-                    this.style.transform = 'translateY(-4px) scale(1.01)';
-                    setTimeout(() => {
-                        this.style.transform = 'translateY(-8px) scale(1.02)';
-                    }, 150);
-                });
-            });
-
-            // Animación de scroll para las secciones
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, observerOptions);
-            
-            // Observar secciones adicionales
-            const sections = document.querySelectorAll('.ai-info-section, .usage-guide > div');
-            sections.forEach((section, index) => {
-                section.style.opacity = '0';
-                section.style.transform = 'translateY(30px)';
-                section.style.transition = `opacity 0.6s ease ${index * 0.2}s, transform 0.6s ease ${index * 0.2}s`;
-                observer.observe(section);
-            });
-        });
-
-        // Efecto de partículas flotantes (opcional)
-        function createFloatingParticles() {
-            const particleCount = 5;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.style.cssText = `
-                    position: fixed;
-                    width: 4px;
-                    height: 4px;
-                    background: rgba(64, 180, 229, 0.6);
-                    border-radius: 50%;
-                    pointer-events: none;
-                    z-index: 1;
-                    animation: float-particle ${3 + Math.random() * 2}s ease-in-out infinite;
-                    left: ${Math.random() * 100}vw;
-                    top: ${Math.random() * 100}vh;
-                    animation-delay: ${Math.random() * 2}s;
-                `;
-                
-                document.body.appendChild(particle);
-                
-                // Remover después de la animación
-                setTimeout(() => {
-                    if (particle.parentNode) {
-                        particle.parentNode.removeChild(particle);
-                    }
-                }, 5000 + Math.random() * 2000);
-            }
-        }
-
-        // Crear partículas cada cierto tiempo
-        setInterval(createFloatingParticles, 8000);
-
-        // CSS para animación de partículas
-        const particleStyles = document.createElement('style');
-        particleStyles.textContent = `
-            @keyframes float-particle {
-                0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0; }
-                10% { opacity: 1; }
-                90% { opacity: 1; }
-                50% { transform: translateY(-100px) rotate(180deg); }
-            }
-        `;
-        document.head.appendChild(particleStyles);
-    </script>
 </body>
 </html>

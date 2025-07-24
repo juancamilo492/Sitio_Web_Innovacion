@@ -12,6 +12,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
     <!-- Estilos principales -->
     <link rel="stylesheet" href="styles.css">
+    <!-- Estilos de accesibilidad -->
+    <link rel="stylesheet" href="accessibility.css">
     
     <!-- CSS adicional para las imágenes de metodología -->
     <style>
@@ -271,13 +273,156 @@
         </div>
     </nav>
 
+    <!-- Botón de accesibilidad flotante -->
+    <button class="accessibility-toggle" id="accessibilityToggle" onclick="toggleAccessibilityPanel()" aria-label="Abrir panel de accesibilidad" title="Opciones de accesibilidad">
+        <span class="material-symbols-rounded">accessibility</span>
+    </button>
+
+    <!-- Panel de opciones de accesibilidad -->
+    <div class="accessibility-panel" id="accessibilityPanel" role="dialog" aria-labelledby="accessibility-title" aria-hidden="true">
+        <div class="accessibility-panel-content">
+            <!-- Header del panel -->
+            <div class="accessibility-header">
+                <h3 id="accessibility-title">
+                    <span class="material-symbols-rounded">accessibility</span>
+                    Opciones de Accesibilidad
+                </h3>
+                <button class="accessibility-close" onclick="toggleAccessibilityPanel()" aria-label="Cerrar panel de accesibilidad">
+                    <span class="material-symbols-rounded">close</span>
+                </button>
+            </div>
+
+            <!-- Opciones de accesibilidad -->
+            <div class="accessibility-options">
+                <!-- Tamaño de fuente -->
+                <div class="accessibility-group">
+                    <h4>
+                        <span class="material-symbols-rounded">text_fields</span>
+                        Tamaño de texto
+                    </h4>
+                    <div class="font-size-controls">
+                        <button onclick="adjustFontSize('decrease')" aria-label="Disminuir tamaño de fuente">A-</button>
+                        <button onclick="resetFontSize()" aria-label="Restaurar tamaño de fuente">100%</button>
+                        <button onclick="adjustFontSize('increase')" aria-label="Aumentar tamaño de fuente">A+</button>
+                    </div>
+                </div>
+
+                <!-- Contraste -->
+                <div class="accessibility-group">
+                    <h4>
+                        <span class="material-symbols-rounded">contrast</span>
+                        Contraste
+                    </h4>
+                    <div class="accessibility-toggles">
+                        <label class="accessibility-toggle-item">
+                            <input type="checkbox" id="highContrast" onchange="toggleHighContrast()">
+                            <span class="toggle-slider"></span>
+                            <span class="toggle-label">Alto contraste</span>
+                        </label>
+                        <label class="accessibility-toggle-item">
+                            <input type="checkbox" id="darkMode" onchange="toggleDarkMode()">
+                            <span class="toggle-slider"></span>
+                            <span class="toggle-label">Modo oscuro</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Animaciones -->
+                <div class="accessibility-group">
+                    <h4>
+                        <span class="material-symbols-rounded">motion_photos_off</span>
+                        Movimiento
+                    </h4>
+                    <div class="accessibility-toggles">
+                        <label class="accessibility-toggle-item">
+                            <input type="checkbox" id="reduceMotion" onchange="toggleReduceMotion()">
+                            <span class="toggle-slider"></span>
+                            <span class="toggle-label">Reducir animaciones</span>
+                        </label>
+                        <label class="accessibility-toggle-item">
+                            <input type="checkbox" id="pauseAnimations" onchange="togglePauseAnimations()">
+                            <span class="toggle-slider"></span>
+                            <span class="toggle-label">Pausar animaciones</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Navegación -->
+                <div class="accessibility-group">
+                    <h4>
+                        <span class="material-symbols-rounded">keyboard</span>
+                        Navegación
+                    </h4>
+                    <div class="accessibility-toggles">
+                        <label class="accessibility-toggle-item">
+                            <input type="checkbox" id="focusIndicator" onchange="toggleFocusIndicator()">
+                            <span class="toggle-slider"></span>
+                            <span class="toggle-label">Resaltar foco del teclado</span>
+                        </label>
+                        <label class="accessibility-toggle-item">
+                            <input type="checkbox" id="skipLinks" onchange="toggleSkipLinks()">
+                            <span class="toggle-slider"></span>
+                            <span class="toggle-label">Enlaces de salto</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Lectura -->
+                <div class="accessibility-group">
+                    <h4>
+                        <span class="material-symbols-rounded">record_voice_over</span>
+                        Lectura
+                    </h4>
+                    <div class="accessibility-buttons">
+                        <button onclick="toggleTextToSpeech()" id="ttsButton" aria-label="Activar/Desactivar lectura de texto">
+                            <span class="material-symbols-rounded">volume_up</span>
+                            Lectura de texto
+                        </button>
+                        <button onclick="showReadingGuide()" aria-label="Mostrar guía de lectura">
+                            <span class="material-symbols-rounded">center_focus_weak</span>
+                            Guía de lectura
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Utilidades -->
+                <div class="accessibility-group">
+                    <h4>
+                        <span class="material-symbols-rounded">build</span>
+                        Utilidades
+                    </h4>
+                    <div class="accessibility-buttons">
+                        <button onclick="showKeyboardShortcuts()" aria-label="Mostrar atajos de teclado">
+                            <span class="material-symbols-rounded">keyboard</span>
+                            Atajos de teclado
+                        </button>
+                        <button onclick="resetAllSettings()" aria-label="Restaurar todas las configuraciones de accesibilidad">
+                            <span class="material-symbols-rounded">refresh</span>
+                            Restaurar todo
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay para cerrar el panel -->
+    <div class="accessibility-overlay" id="accessibilityOverlay" onclick="toggleAccessibilityPanel()"></div>
+
+    <!-- Enlaces de salto (ocultos por defecto) -->
+    <div class="skip-links" id="skipLinks">
+        <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+        <a href="#navigation" class="skip-link">Saltar a la navegación</a>
+        <a href="#footer" class="skip-link">Saltar al footer</a>
+    </div>
+
     <!-- Botón de volver arriba -->
     <button class="back-to-top" id="backToTop" onclick="scrollToTop()" aria-label="Volver arriba">
         <span class="material-symbols-rounded">keyboard_arrow_up</span>
     </button>
 
     <!-- Contenido principal de la página home -->
-    <main>
+    <main id="main-content">
         <!-- Tarjeta de introducción con Ali - ESTRUCTURA CORREGIDA -->
         <section class="intro-card">
             <!-- Contenedor del contenido de texto -->
@@ -331,7 +476,7 @@
     </main>
 
     <!-- Footer -->
-    <footer>
+    <footer id="footer">
         <div class="footer-logo-container">
             <img src="images/logo-blanco.png" 
                  alt="Alico Logo" 
@@ -343,6 +488,8 @@
 
     <!-- Archivo JavaScript compartido -->
     <script src="scripts.js"></script>
+    <!-- JavaScript de accesibilidad -->
+    <script src="accessibility.js"></script>
     
     <!-- JavaScript adicional para las imágenes -->
     <script>

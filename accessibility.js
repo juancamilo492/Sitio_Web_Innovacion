@@ -7,7 +7,7 @@
    VARIABLES GLOBALES Y CONFIGURACIÓN
    ================================================== */
 let accessibilityState = {
-    panelOpen: false,
+    panelOpen: false, // EXPLÍCITAMENTE CERRADO
     fontSize: 100,
     highContrast: false,
     darkMode: false,
@@ -21,6 +21,23 @@ let accessibilityState = {
 
 // Cargar configuración guardada al iniciar
 document.addEventListener('DOMContentLoaded', function() {
+    // Asegurar que el panel esté cerrado al iniciar
+    const panel = document.getElementById('accessibilityPanel');
+    const overlay = document.getElementById('accessibilityOverlay');
+    const toggle = document.getElementById('accessibilityToggle');
+    
+    if (panel) {
+        panel.classList.remove('active');
+        panel.setAttribute('aria-hidden', 'true');
+    }
+    if (overlay) {
+        overlay.classList.remove('active');
+    }
+    if (toggle) {
+        toggle.classList.remove('active');
+    }
+    
+    // Cargar configuraciones guardadas DESPUÉS de asegurar que el panel esté cerrado
     loadAccessibilitySettings();
     initializeAccessibility();
     setupKeyboardShortcuts();
@@ -672,7 +689,12 @@ function loadAccessibilitySettings() {
         const saved = localStorage.getItem('alico-accessibility-settings');
         if (saved) {
             const parsedSettings = JSON.parse(saved);
-            accessibilityState = { ...accessibilityState, ...parsedSettings };
+            // NO cargar el estado del panel (panelOpen), siempre empezar cerrado
+            accessibilityState = { 
+                ...accessibilityState, 
+                ...parsedSettings, 
+                panelOpen: false // Forzar panel cerrado
+            };
             
             // Aplicar configuraciones cargadas
             applyLoadedSettings();
@@ -990,24 +1012,40 @@ function adjustPanelForScreenSize() {
     
     if (!panel || !toggle) return;
     
+    // Forzar que el panel esté cerrado en cualquier cambio de tamaño
+    if (!accessibilityState.panelOpen) {
+        panel.classList.remove('active');
+        const overlay = document.getElementById('accessibilityOverlay');
+        if (overlay) overlay.classList.remove('active');
+        toggle.classList.remove('active');
+    }
+    
     const screenWidth = window.innerWidth;
     
     if (screenWidth <= 480) {
-        // Móvil pequeño
-        toggle.style.right = 'var(--spacing-sm)';
-        toggle.style.top = '90px';
+        // Móvil pequeño - panel más adaptado
+        panel.style.width = 'calc(100vw - 16px)';
+        panel.style.maxWidth = 'none';
+        panel.style.left = 'auto';
+        panel.style.right = accessibilityState.panelOpen ? 'var(--spacing-sm)' : '-100%';
     } else if (screenWidth <= 768) {
-        // Móvil
-        toggle.style.right = 'var(--spacing-md)';
-        toggle.style.top = '100px';
+        // Móvil - panel adaptado
+        panel.style.width = 'calc(100vw - 32px)';
+        panel.style.maxWidth = '400px';
+        panel.style.left = 'auto';
+        panel.style.right = accessibilityState.panelOpen ? 'var(--spacing-md)' : '-100%';
     } else if (screenWidth <= 1023) {
-        // Tablet
-        toggle.style.right = 'var(--spacing-lg)';
-        toggle.style.top = '110px';
+        // Tablet - panel normal
+        panel.style.width = '380px';
+        panel.style.maxWidth = '380px';
+        panel.style.left = 'auto';
+        panel.style.right = accessibilityState.panelOpen ? 'var(--spacing-lg)' : '-400px';
     } else {
-        // Desktop
-        toggle.style.right = 'var(--spacing-xl)';
-        toggle.style.top = '100px';
+        // Desktop - panel original
+        panel.style.width = '420px';
+        panel.style.maxWidth = '420px';
+        panel.style.left = 'auto';
+        panel.style.right = accessibilityState.panelOpen ? 'var(--spacing-xl)' : '-450px';
     }
 }
 

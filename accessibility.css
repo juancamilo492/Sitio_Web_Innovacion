@@ -542,29 +542,36 @@ body.enhanced-focus *:focus-visible {
     
     .accessibility-panel {
         top: 100px;
-        right: -100%;
-        left: var(--spacing-md);
-        width: auto;
+        right: -100%; /* Completamente oculto inicialmente */
+        left: auto; /* Remover left fijo */
+        width: calc(100vw - 32px); /* Ancho específico */
+        max-width: 400px; /* Límite máximo */
+        margin: 0 var(--spacing-md);
         max-height: calc(100vh - 120px);
-        border-radius: var(--border-radius-lg); /* Bordes menos redondeados en móvil */
+        border-radius: var(--border-radius-lg);
     }
     
     .accessibility-panel.active {
-        right: var(--spacing-md);
-        left: var(--spacing-md); /* Asegurar que se extienda correctamente */
+        right: var(--spacing-md); /* Posición cuando está abierto */
+        left: auto; /* Mantener left auto */
     }
     
     .accessibility-header {
         padding: var(--spacing-md);
+        position: relative;
     }
     
     .accessibility-header h3 {
         font-size: 1.1em;
     }
     
+    .accessibility-close {
+        display: flex !important; /* Asegurar que sea visible en móvil */
+    }
+    
     .accessibility-options {
         padding: var(--spacing-md);
-        max-height: calc(100vh - 180px); /* Más espacio para scroll en móvil */
+        max-height: calc(100vh - 180px);
     }
     
     .accessibility-reset {
@@ -596,14 +603,17 @@ body.enhanced-focus *:focus-visible {
     
     .accessibility-panel {
         top: 90px;
-        left: var(--spacing-sm);
         right: -100%;
+        left: auto;
+        width: calc(100vw - 16px);
+        max-width: none;
+        margin: 0 var(--spacing-sm);
         max-height: calc(100vh - 100px);
     }
     
     .accessibility-panel.active {
         right: var(--spacing-sm);
-        left: var(--spacing-sm);
+        left: auto;
     }
     
     .accessibility-options {

@@ -60,17 +60,17 @@ function toggleAccessibilityPanel() {
     accessibilityState.panelOpen = !accessibilityState.panelOpen;
     
     if (accessibilityState.panelOpen) {
-        // Abrir panel
+        // Abrir panel - aplicar clases inmediatamente
         panel.classList.add('active');
         overlay.classList.add('active');
         toggle.classList.add('active');
         panel.setAttribute('aria-hidden', 'false');
         
-        // Enfocar el primer elemento del panel
+        // Enfocar el primer elemento del panel - más rápido
         setTimeout(() => {
             const firstFocusable = panel.querySelector('button, input, [tabindex]:not([tabindex="-1"])');
             if (firstFocusable) firstFocusable.focus();
-        }, 300);
+        }, 150); // Reducido de 300ms a 150ms
         
         // Prevenir scroll del body
         document.body.style.overflow = 'hidden';
@@ -79,7 +79,7 @@ function toggleAccessibilityPanel() {
         announceToScreenReader('Panel de accesibilidad abierto');
         
     } else {
-        // Cerrar panel
+        // Cerrar panel - aplicar clases inmediatamente
         panel.classList.remove('active');
         overlay.classList.remove('active');
         toggle.classList.remove('active');
@@ -88,7 +88,7 @@ function toggleAccessibilityPanel() {
         // Restaurar scroll del body
         document.body.style.overflow = '';
         
-        // Devolver foco al botón de toggle
+        // Devolver foco al botón de toggle - inmediato
         toggle.focus();
         
         // Anunciar cierre para lectores de pantalla

@@ -12,6 +12,37 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
     <!-- Estilos principales -->
     <link rel="stylesheet" href="styles.css">
+    
+    <!-- CSS adicional para solución de centrado -->
+    <style>
+        /* SOLUCIÓN PARA CENTRAR PROYECTOS */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-xl);
+            margin-top: var(--spacing-xxl);
+            margin-bottom: var(--spacing-xxl);
+            /* NUEVAS PROPIEDADES PARA CENTRADO PERFECTO */
+            max-width: 960px; /* Limita el ancho total para mejor distribución */
+            margin-left: auto;
+            margin-right: auto;
+            justify-content: center; /* Centra los elementos cuando sobra espacio */
+        }
+        
+        /* Ajustes responsive para el centrado */
+        @media (max-width: 1200px) {
+            .projects-grid {
+                max-width: 660px; /* Para 2 columnas centradas */
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .projects-grid {
+                max-width: 100%; /* Ancho completo en móvil */
+                grid-template-columns: 1fr; /* Una sola columna */
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Header fijo con navegación -->
@@ -124,8 +155,8 @@
             <p>Aquí podrás conocer los proyectos que estamos desarrollando, los resultados obtenidos y el impacto que generamos en la industria y el medio ambiente.</p>
         </section>
 
-        <!-- Grid de proyectos destacados -->
-        <section class="projects-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-xl); margin-top: var(--spacing-xxl); margin-bottom: var(--spacing-xxl);">
+        <!-- Grid de proyectos destacados - CON SOLUCIÓN DE CENTRADO -->
+        <section class="projects-grid">
             <!-- Proyecto 1: Empaques Sostenibles -->
             <article class="project-card" style="background: linear-gradient(135deg, var(--verde-natura) 0%, var(--verde-natura-80) 100%); border-radius: var(--border-radius-xl); padding: var(--spacing-xl); color: var(--blanco); box-shadow: var(--shadow-lg); transition: all 0.3s ease; position: relative; overflow: hidden; cursor: pointer;">
                 <div style="content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%); pointer-events: none;"></div>
@@ -279,7 +310,7 @@
             projectCards.forEach((card, index) => {
                 card.style.opacity = '0';
                 card.style.transform = 'translateY(30px)';
-                card.style.transition = `opacity 0.6s ease ${index * 0.2}s, transform 0.6s ease ${index * 0.2}s`;
+                card.style.transition = `opacity 0.6s ease ${index * 0.2}s, transform 0.6s ease ${index * 0.2}s, box-shadow 0.3s ease, scale 0.3s ease`;
                 observer.observe(card);
             });
 

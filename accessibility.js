@@ -193,13 +193,17 @@ function toggleReduceMotion() {
     
     if (accessibilityState.reduceMotion) {
         body.classList.add('reduce-motion');
+        // También pausar animaciones CSS específicas
+        disableSpecificAnimations();
         announceToScreenReader('Animaciones reducidas');
     } else {
         body.classList.remove('reduce-motion');
+        enableSpecificAnimations();
         announceToScreenReader('Animaciones restauradas');
     }
     
     saveAccessibilitySettings();
+    logAccessibilityUsage('reduce_motion', checkbox.checked ? 'enabled' : 'disabled');
 }
 
 /**
@@ -213,13 +217,120 @@ function togglePauseAnimations() {
     
     if (accessibilityState.pauseAnimations) {
         body.classList.add('pause-animations');
-        announceToScreenReader('Animaciones pausadas');
+        // Forzar eliminación de todas las animaciones
+        forceDisableAllAnimations();
+        announceToScreenReader('Todas las animaciones pausadas');
     } else {
         body.classList.remove('pause-animations');
+        enableSpecificAnimations();
         announceToScreenReader('Animaciones reanudadas');
     }
     
     saveAccessibilitySettings();
+    logAccessibilityUsage('pause_animations', checkbox.checked ? 'enabled' : 'disabled');
+}
+
+/**
+ * Deshabilitar animaciones específicas
+ */
+function disableSpecificAnimations() {
+    // Crear un estilo dinámico para deshabilitar animaciones
+    let disableAnimationsStyle = document.getElementById('disable-animations-style');
+    
+    if (!disableAnimationsStyle) {
+        disableAnimationsStyle = document.createElement('style');
+        disableAnimationsStyle.id = 'disable-animations-style';
+        document.head.appendChild(disableAnimationsStyle);
+    }
+    
+    disableAnimationsStyle.textContent = `
+        .reduce-motion *,
+        .reduce-motion *::before,
+        .reduce-motion *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+            transform: none !important;
+        }
+        
+        .reduce-motion .ali-character {
+            animation: none !important;
+        }
+        
+        .reduce-motion .flip-card:hover .flip-card-inner {
+            transform: rotateY(0deg) !important;
+        }
+        
+        .reduce-motion .nav-link:hover,
+        .reduce-motion .btn-primary:hover,
+        .reduce-motion .btn-secondary:hover,
+        .reduce-motion .resource-card:hover,
+        .reduce-motion .methodology-card:hover {
+            transform: none !important;
+        }
+        
+        .reduce-motion .intro-card::before {
+            animation: none !important;
+        }
+    `;
+}
+
+/**
+ * Forzar eliminación de todas las animaciones
+ */
+function forceDisableAllAnimations() {
+    let pauseAnimationsStyle = document.getElementById('pause-animations-style');
+    
+    if (!pauseAnimationsStyle) {
+        pauseAnimationsStyle = document.createElement('style');
+        pauseAnimationsStyle.id = 'pause-animations-style';
+        document.head.appendChild(pauseAnimationsStyle);
+    }
+    
+    pauseAnimationsStyle.textContent = `
+        .pause-animations *,
+        .pause-animations *::before,
+        .pause-animations *::after {
+            animation: none !important;
+            transition: none !important;
+            transform: none !important;
+        }
+        
+        .pause-animations .flip-card-inner {
+            transition: none !important;
+        }
+        
+        .pause-animations .ali-character {
+            animation: none !important;
+        }
+        
+        .pause-animations .intro-card::before,
+        .pause-animations [class*="shimmer"],
+        .pause-animations [class*="float"] {
+            animation: none !important;
+        }
+        
+        .pause-animations .flip-card:hover .flip-card-inner {
+            transform: rotateY(0deg) !important;
+        }
+    `;
+}
+
+/**
+ * Habilitar animaciones específicas
+ */
+function enableSpecificAnimations() {
+    // Remover estilos dinámicos de deshabilitación
+    const disableStyle = document.getElementById('disable-animations-style');
+    const pauseStyle = document.getElementById('pause-animations-style');
+    
+    if (disableStyle) {
+        disableStyle.remove();
+    }
+    
+    if (pauseStyle) {
+        pauseStyle.remove();
+    }
 }
 
 /* ==================================================
@@ -501,6 +612,7 @@ function resetAllSettings() {
         // Desactivar funcionalidades especiales
         disableTextToSpeech();
         removeReadingGuide();
+        enableSpecificAnimations(); // Restaurar animaciones
         
         // Ocultar skip links
         const skipLinksEl = document.getElementById('skipLinks');
@@ -586,6 +698,7 @@ function applyLoadedSettings() {
     // Aplicar reducción de movimiento
     if (accessibilityState.reduceMotion) {
         body.classList.add('reduce-motion');
+        disableSpecificAnimations();
         const checkbox = document.getElementById('reduceMotion');
         if (checkbox) checkbox.checked = true;
     }
@@ -593,6 +706,7 @@ function applyLoadedSettings() {
     // Aplicar pausa de animaciones
     if (accessibilityState.pauseAnimations) {
         body.classList.add('pause-animations');
+        forceDisableAllAnimations();
         const checkbox = document.getElementById('pauseAnimations');
         if (checkbox) checkbox.checked = true;
     }

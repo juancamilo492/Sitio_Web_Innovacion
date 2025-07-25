@@ -1565,3 +1565,581 @@ footer::before {
 .mb-md { margin-bottom: var(--spacing-md); }
 .mb-lg { margin-bottom: var(--spacing-lg); }
 .mb-xl { margin-bottom: var(--spacing-xl); }
+
+/* ==================================================
+   ALICO - OPTIMIZACIONES CSS PARA CARGA RÁPIDA
+   Agregar al final de styles.css existente
+   ================================================== */
+
+/* ==================================================
+   OPTIMIZACIÓN DE FUENTES Y ICONOS
+   ================================================== */
+
+/* Fallback inmediato para Material Icons */
+.material-symbols-rounded {
+    font-display: swap;
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    text-rendering: optimizeSpeed;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Estilos para iconos fallback */
+.icon-fallback {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Segoe UI Emoji', 'Apple Color Emoji', sans-serif !important;
+    font-weight: normal !important;
+    font-style: normal !important;
+    line-height: 1 !important;
+    text-align: center;
+    display: inline-block;
+}
+
+/* Transición suave cuando se cargan los iconos reales */
+.material-icons-loaded {
+    transition: all 0.2s ease;
+}
+
+/* ==================================================
+   SKELETON LOADING MEJORADO
+   ================================================== */
+
+.image-skeleton {
+    background: linear-gradient(90deg, 
+        rgba(219, 149, 0, 0.1) 25%, 
+        rgba(219, 149, 0, 0.2) 50%, 
+        rgba(219, 149, 0, 0.1) 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s ease-in-out infinite;
+    border-radius: var(--border-radius-md);
+    position: relative;
+    overflow: hidden;
+}
+
+.image-skeleton::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+        rgba(64, 180, 229, 0.1) 0%, 
+        rgba(64, 180, 229, 0.2) 100%);
+    border-radius: inherit;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Skeleton específico para logos */
+.logo .image-skeleton {
+    border-radius: 50%;
+    background: linear-gradient(135deg, 
+        var(--azul-claro) 0%, 
+        var(--azul-novo) 100%);
+    animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes skeleton-pulse {
+    0%, 100% {
+        opacity: 0.6;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(1.02);
+    }
+}
+
+/* ==================================================
+   OPTIMIZACIÓN DE CARGA DE IMÁGENES
+   ================================================== */
+
+/* Estado inicial de imágenes */
+img {
+    transition: opacity 0.3s ease, filter 0.3s ease;
+}
+
+/* Imágenes mientras cargan */
+img:not(.loaded) {
+    opacity: 0;
+}
+
+/* Imágenes cargadas */
+img.loaded {
+    opacity: 1;
+}
+
+/* Optimización para conexiones lentas */
+.slow-connection img {
+    filter: blur(0.5px);
+    transform: scale(1.01);
+}
+
+.slow-connection img.loaded {
+    filter: none;
+    transform: scale(1);
+}
+
+/* Prevenir layout shift */
+.logo-image,
+.footer-logo-image,
+.methodology-title-image {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    vertical-align: top;
+}
+
+/* ==================================================
+   LOADING STATES ESPECÍFICOS
+   ================================================== */
+
+/* Loading state para el header */
+.header {
+    opacity: 0;
+    animation: header-fade-in 0.3s ease-out 0.1s forwards;
+}
+
+@keyframes header-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Loading state para contenido principal */
+main {
+    opacity: 0;
+    animation: main-fade-in 0.5s ease-out 0.2s forwards;
+}
+
+@keyframes main-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Loading state para footer */
+footer {
+    opacity: 0;
+    animation: footer-fade-in 0.3s ease-out 0.4s forwards;
+}
+
+@keyframes footer-fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* ==================================================
+   OPTIMIZACIÓN DE RENDIMIENTO
+   ================================================== */
+
+/* Usar will-change para animaciones */
+.flip-card-inner,
+.logo,
+.back-to-top,
+.btn-primary,
+.btn-secondary {
+    will-change: transform;
+}
+
+/* Optimizar compositing */
+.header,
+.mobile-nav-menu,
+.back-to-top {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+/* Optimizar scroll */
+* {
+    scroll-behavior: smooth;
+}
+
+/* ==================================================
+   PREFERS-REDUCED-MOTION SUPPORT
+   ================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    .image-skeleton {
+        animation: none;
+        background: rgba(219, 149, 0, 0.1);
+    }
+    
+    .header,
+    main,
+    footer {
+        animation: none;
+        opacity: 1;
+    }
+    
+    img {
+        transition: opacity 0.1s ease;
+    }
+    
+    .material-icons-loaded {
+        transition: none;
+    }
+}
+
+/* ==================================================
+   OPTIMIZACIÓN PARA CONEXIONES LENTAS
+   ================================================== */
+
+@media (max-width: 768px) and (max-resolution: 1.5dppx) {
+    /* Reducir complejidad visual en móviles con conexión lenta */
+    .intro-card::before,
+    .methodology-card::before,
+    .flip-card-front::before,
+    .flip-card-back::before {
+        display: none;
+    }
+    
+    /* Simplificar sombras */
+    .flip-card,
+    .resource-card,
+    .methodology-card {
+        box-shadow: var(--shadow-sm);
+    }
+}
+
+/* ==================================================
+   FONT LOADING OPTIMIZATION
+   ================================================== */
+
+/* Fallback mientras cargan las fuentes personalizadas */
+.font-loading {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Transición suave cuando se cargan las fuentes */
+body.fonts-loaded {
+    font-family: 'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    transition: font-family 0.2s ease;
+}
+
+body.fonts-loaded h1,
+body.fonts-loaded h2,
+body.fonts-loaded h3,
+body.fonts-loaded h4,
+body.fonts-loaded h5,
+body.fonts-loaded h6 {
+    font-family: 'Zilla Slab', serif;
+    transition: font-family 0.2s ease;
+}
+
+/* ==================================================
+   CRITICAL CSS PARA ABOVE THE FOLD
+   ================================================== */
+
+/* Estilos críticos que deben cargarse inmediatamente */
+.critical-content {
+    /* Header */
+    .header {
+        background-color: var(--amarillo-oro);
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        min-height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 var(--spacing-lg);
+    }
+    
+    /* Logo básico */
+    .logo {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, var(--azul-claro) 0%, var(--azul-novo) 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    /* Navegación básica */
+    .nav-links {
+        display: flex;
+        gap: var(--spacing-lg);
+        align-items: center;
+    }
+    
+    .nav-link {
+        color: var(--blanco);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        padding: var(--spacing-sm) var(--spacing-md);
+        border-radius: var(--border-radius-md);
+    }
+}
+
+/* ==================================================
+   UTILIDADES DE OPTIMIZACIÓN
+   ================================================== */
+
+/* Ocultar elementos hasta que estén listos */
+.hide-until-loaded {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.show-when-loaded {
+    opacity: 1;
+    pointer-events: auto;
+    transition: opacity 0.3s ease;
+}
+
+/* Estados de carga para diferentes elementos */
+.loading-state {
+    position: relative;
+    overflow: hidden;
+}
+
+.loading-state::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.3), 
+        transparent);
+    animation: loading-shimmer 1.5s infinite;
+}
+
+@keyframes loading-shimmer {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+/* ==================================================
+   MEJORAS DE ACCESIBILIDAD
+   ================================================== */
+
+/* Focus mejorado para elementos interactivos */
+.nav-link:focus-visible,
+.btn-primary:focus-visible,
+.btn-secondary:focus-visible,
+.flip-card:focus-visible {
+    outline: 3px solid var(--amarillo-oro);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 6px rgba(219, 149, 0, 0.2);
+}
+
+/* Indicador de carga para lectores de pantalla */
+.sr-loading {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ==================================================
+   RESPONSIVE OPTIMIZATIONS
+   ================================================== */
+
+/* Optimizaciones específicas para móvil */
+@media (max-width: 768px) {
+    /* Reducir animaciones en móvil para mejor rendimiento */
+    .methodology-card,
+    .flip-card,
+    .resource-card {
+        transition-duration: 0.2s;
+    }
+    
+    /* Skeleton más simple en móvil */
+    .image-skeleton {
+        animation-duration: 2s;
+    }
+    
+    /* Menú móvil optimizado */
+    .mobile-nav-menu {
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+}
+
+/* Optimizaciones para tablets */
+@media (min-width: 769px) and (max-width: 1023px) {
+    .image-skeleton {
+        animation-duration: 1.2s;
+    }
+}
+
+/* Optimizaciones para desktop */
+@media (min-width: 1024px) {
+    /* Preload hover states */
+    .nav-link::before,
+    .btn-primary::before,
+    .methodology-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+        transition: left 0.5s;
+        z-index: -1;
+    }
+    
+    .nav-link:hover::before,
+    .btn-primary:hover::before,
+    .methodology-card:hover::before {
+        left: 100%;
+    }
+}
+
+/* ==================================================
+   PRINT OPTIMIZATIONS
+   ================================================== */
+
+@media print {
+    .image-skeleton,
+    .loading-state::after {
+        display: none;
+    }
+    
+    img {
+        opacity: 1 !important;
+    }
+    
+    .material-symbols-rounded {
+        font-size: 0;
+    }
+    
+    .material-symbols-rounded::after {
+        content: attr(data-icon);
+        font-size: 16px;
+        font-family: serif;
+    }
+}
+
+/* ==================================================
+   DEBUG Y DESARROLLO
+   ================================================== */
+
+/* Solo mostrar en desarrollo */
+@media screen and (min-width: 1px) {
+    .debug-loading {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        background: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 8px 12px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-family: monospace;
+        z-index: 10000;
+        display: none;
+    }
+    
+    /* Mostrar solo en localhost */
+    .debug-loading[data-env="localhost"] {
+        display: block;
+    }
+}
+
+/* Indicadores visuales de rendimiento */
+.performance-indicator {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    z-index: 9999;
+    transition: all 0.3s ease;
+}
+
+.performance-indicator.excellent {
+    background: #71B338;
+    box-shadow: 0 0 10px rgba(113, 179, 56, 0.5);
+}
+
+.performance-indicator.good {
+    background: #DB9500;
+    box-shadow: 0 0 10px rgba(219, 149, 0, 0.5);
+}
+
+.performance-indicator.poor {
+    background: #e74c3c;
+    box-shadow: 0 0 10px rgba(231, 76, 60, 0.5);
+}
+
+/* ==================================================
+   FINAL OPTIMIZATIONS
+   ================================================== */
+
+/* Asegurar que todo esté optimizado para GPU */
+.gpu-optimized {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+/* Optimizar repaint */
+.logo,
+.nav-link,
+.btn-primary,
+.btn-secondary,
+.flip-card-inner,
+.back-to-top {
+    @extend .gpu-optimized;
+}
+
+/* Contenedor principal optimizado */
+body.loaded {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+body:not(.loaded) {
+    opacity: 0;
+}
+
+/* Prevenir FOUC (Flash of Unstyled Content) */
+html {
+    visibility: hidden;
+}
+
+html.loaded {
+    visibility: visible;
+}

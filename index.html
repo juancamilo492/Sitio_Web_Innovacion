@@ -4,283 +4,181 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alico - Innovación</title>
-    <!-- Google Fonts -->
+    
+    <!-- OPTIMIZACIÓN: Preconnect mejorado -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <!-- Material Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
-    <!-- Estilos principales -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
-    <!-- CSS adicional para las imágenes de metodología -->
+    <!-- OPTIMIZACIÓN: Precarga de recursos críticos -->
+    <link rel="preload" href="images/Ali_head.png" as="image" type="image/png">
+    <link rel="preload" href="images/logo-blanco.png" as="image" type="image/png">
+    <link rel="preload" href="images/cocrea.png" as="image" type="image/png">
+    <link rel="preload" href="images/versatil.png" as="image" type="image/png">
+    
+    <!-- OPTIMIZACIÓN: DNS prefetch para recursos externos -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    
+    <!-- OPTIMIZACIÓN: Fuentes con display=swap para mejor rendimiento -->
+    <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    
+    <!-- OPTIMIZACIÓN: Material Icons con cache -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
+    
+    <!-- OPTIMIZACIÓN: Estilos críticos inline -->
     <style>
-        /* CORRECCIÓN ESPECÍFICA PARA TARJETA DE ALI */
-        .intro-card {
-            /* Cambiar de absolute positioning a flexbox */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            min-height: auto;
+        /* Estilos críticos para evitar FOUC */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #003DA6;
+            padding-top: 80px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
         
-        .intro-content {
-            order: 1;
-            width: 100%;
-            z-index: 2;
+        body.loaded {
+            opacity: 1;
         }
         
-        .ali-character {
-            order: 2;
-            position: relative !important; /* Override absolute positioning */
-            right: auto !important;
-            bottom: auto !important;
-            margin: var(--spacing-lg) auto 0 auto;
-            animation: float 3s ease-in-out infinite;
+        /* Skeleton loading para imágenes */
+        .image-skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+            border-radius: 8px;
         }
         
-        /* DESKTOP: Layout lado a lado */
-        @media (min-width: 1024px) {
-            .intro-card {
-                flex-direction: row;
-                text-align: left;
-                align-items: center;
-                min-height: 350px;
-            }
-            
-            .intro-content {
-                flex: 1;
-                padding-right: var(--spacing-xl);
-                order: 1;
-            }
-            
-            .ali-character {
-                order: 2;
-                margin: 0;
-                flex-shrink: 0;
-            }
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
         }
         
-        /* TABLET: Stack vertical con más espacio */
-        @media (max-width: 1023px) and (min-width: 769px) {
-            .intro-card {
-                padding: var(--spacing-xl);
-            }
-            
-            .ali-character {
-                width: 180px;
-                height: 220px;
-                margin-top: var(--spacing-xl);
-            }
+        /* Optimización para logos */
+        .logo-image, .footer-logo-image {
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
         
-        /* MÓVIL: Stack vertical compacto */
-        @media (max-width: 768px) {
-            .intro-card {
-                padding: var(--spacing-lg);
-                text-align: center;
-            }
-            
-            .intro-content h1 {
-                font-size: clamp(1.5rem, 6vw, 2rem);
-                margin-bottom: var(--spacing-sm);
-            }
-            
-            .intro-content h2 {
-                font-size: clamp(1.2rem, 5vw, 1.5rem);
-                margin-bottom: var(--spacing-sm);
-            }
-            
-            .intro-content p {
-                font-size: clamp(0.9rem, 3vw, 1.1rem);
-                margin-bottom: var(--spacing-md);
-            }
-            
-            .ali-character {
-                width: 150px;
-                height: 180px;
-                margin-top: var(--spacing-md);
-                font-size: 12px;
-            }
-            
-            .btn-primary {
-                margin-top: var(--spacing-md);
-                padding: var(--spacing-md) var(--spacing-lg);
-                font-size: 1rem;
-            }
+        .logo-image.loaded, .footer-logo-image.loaded {
+            opacity: 1;
         }
         
-        /* MÓVIL PEQUEÑO: Aún más compacto */
-        @media (max-width: 480px) {
-            .intro-card {
-                padding: var(--spacing-md);
-            }
-            
-            .ali-character {
-                width: 120px;
-                height: 150px;
-                font-size: 11px;
-            }
-        }
-
-        /* ESTILOS PARA LAS IMÁGENES DE TÍTULOS DE METODOLOGÍA */
-        .methodology-card {
-            /* Mantener todos los estilos existentes */
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            text-align: left;
-            padding: var(--spacing-xl);
-        }
-
-        .methodology-title-image {
-            max-width: 200px;
-            height: auto;
-            margin-bottom: var(--spacing-lg);
-            transition: transform 0.3s ease;
-            filter: brightness(1.1);
-        }
-
-        .methodology-card:hover .methodology-title-image {
-            transform: scale(1.05);
-        }
-
-        /* Asegurar que el texto siga las reglas de tipografía existentes */
-        .methodology-card p {
-            font-family: 'Work Sans', sans-serif;
-            font-weight: 400;
-            line-height: 1.6;
-            font-size: clamp(1rem, 2.5vw, 1.1rem);
-            color: var(--blanco);
-        }
-
-        /* Responsive para las imágenes de título */
-        @media (max-width: 768px) {
-            .methodology-title-image {
-                max-width: 150px;
-                margin-bottom: var(--spacing-md);
-            }
-            
-            .methodology-card {
-                text-align: center;
-                align-items: center;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .methodology-title-image {
-                max-width: 120px;
-            }
+        /* Fallback inmediato para iconos */
+        .material-symbols-rounded {
+            font-display: swap;
         }
     </style>
+    
+    <!-- Estilos principales con defer si no son críticos -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Header fijo con navegación -->
+    <!-- Header optimizado -->
     <header class="header">
-        <!-- Botón de menú móvil -->
         <button class="menu-toggle" onclick="toggleMenu()" aria-label="Abrir menú de navegación">
-            <span></span>
-            <span></span>
-            <span></span>
+            <span></span><span></span><span></span>
         </button>
         
-        <!-- Logo de Alico -->
+        <!-- Logo con optimización de carga -->
         <a href="index.html" class="logo" aria-label="Ir a página principal de Alico">
+            <!-- Skeleton placeholder mientras carga -->
+            <div class="logo-skeleton image-skeleton" style="width: 50px; height: 50px; border-radius: 50%;"></div>
             <img src="images/Ali_head.png" 
                  alt="Ali Head Logo" 
                  class="logo-image"
-                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <span class="logo-text-fallback">a</span>
+                 loading="eager"
+                 decoding="async"
+                 onload="this.classList.add('loaded'); this.previousElementSibling.style.display='none';"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'; this.previousElementSibling.style.display='none';">
+            <span class="logo-text-fallback" style="display: none;">a</span>
         </a>
 
-        <!-- Navegación de escritorio -->
+        <!-- Navegación optimizada -->
         <nav class="desktop-nav" aria-label="Navegación principal">
             <div class="nav-links">
                 <a href="generalidades-sgi.html" class="nav-link">
-                    <span class="material-symbols-rounded nav-link-icon">analytics</span>
+                    <span class="material-symbols-rounded nav-link-icon" data-icon="analytics">📊</span>
                     <span>Generalidades SGI</span>
                 </a>
                 <a href="embajador-ali.html" class="nav-link">
-                    <span class="material-symbols-rounded nav-link-icon">support_agent</span>
+                    <span class="material-symbols-rounded nav-link-icon" data-icon="support_agent">🤖</span>
                     <span>Embajador Ali</span>
                 </a>
                 <a href="inteligencias-artificiales.html" class="nav-link">
-                    <span class="material-symbols-rounded nav-link-icon">psychology</span>
+                    <span class="material-symbols-rounded nav-link-icon" data-icon="psychology">🧠</span>
                     <span>Inteligencias artificiales</span>
                 </a>
                 <a href="recursos-audiovisuales.html" class="nav-link">
-                    <span class="material-symbols-rounded nav-link-icon">video_library</span>
+                    <span class="material-symbols-rounded nav-link-icon" data-icon="video_library">🎥</span>
                     <span>Recursos audiovisuales</span>
                 </a>
                 <a href="proyectos.html" class="nav-link">
-                    <span class="material-symbols-rounded nav-link-icon">engineering</span>
+                    <span class="material-symbols-rounded nav-link-icon" data-icon="engineering">⚙️</span>
                     <span>Proyectos</span>
                 </a>
                 <a href="https://experiencia-alico.firebaseapp.com/" class="nav-link" target="_blank" rel="noopener noreferrer">
-                    <span class="material-symbols-rounded nav-link-icon">inventory_2</span>
+                    <span class="material-symbols-rounded nav-link-icon" data-icon="inventory_2">📦</span>
                     <span>Diseña tu empaque</span>
-                    <span class="material-symbols-rounded" style="font-size: 16px;">open_in_new</span>
+                    <span class="material-symbols-rounded" style="font-size: 16px;" data-icon="open_in_new">↗</span>
                 </a>
             </div>
         </nav>
 
-        <!-- Botón de banco de iniciativas en el header -->
         <a href="https://docs.google.com/forms/d/e/1FAIpQLScfJWsXOj-BAAgG9tmxYFf4QEuOimOmJJPsF4bnxmquUParZA/viewform?usp=sharing&ouid=102976851646670750896" 
            class="header-banner-btn" target="_blank" rel="noopener noreferrer">
-            <span class="material-symbols-rounded">lightbulb</span>
+            <span class="material-symbols-rounded" data-icon="lightbulb">💡</span>
             <span>Banco de iniciativas</span>
-            <span class="material-symbols-rounded" style="font-size: 16px;">open_in_new</span>
+            <span class="material-symbols-rounded" style="font-size: 16px;" data-icon="open_in_new">↗</span>
         </a>
     </header>
 
-    <!-- Menú de navegación móvil -->
+    <!-- Menú móvil optimizado -->
     <nav class="mobile-nav-menu" id="mobileNavMenu" aria-label="Menú de navegación móvil">
         <div class="mobile-nav-grid">
             <a href="generalidades-sgi.html" class="mobile-nav-item">
-                <div class="material-symbols-rounded mobile-nav-icon">analytics</div>
+                <div class="material-symbols-rounded mobile-nav-icon" data-icon="analytics">📊</div>
                 <div class="mobile-nav-title">Generalidades SGI</div>
             </a>
             <a href="embajador-ali.html" class="mobile-nav-item">
-                <div class="material-symbols-rounded mobile-nav-icon">support_agent</div>
+                <div class="material-symbols-rounded mobile-nav-icon" data-icon="support_agent">🤖</div>
                 <div class="mobile-nav-title">Embajador Ali</div>
             </a>
             <a href="inteligencias-artificiales.html" class="mobile-nav-item">
-                <div class="material-symbols-rounded mobile-nav-icon">psychology</div>
+                <div class="material-symbols-rounded mobile-nav-icon" data-icon="psychology">🧠</div>
                 <div class="mobile-nav-title">Inteligencias artificiales</div>
             </a>
             <a href="recursos-audiovisuales.html" class="mobile-nav-item">
-                <div class="material-symbols-rounded mobile-nav-icon">video_library</div>
+                <div class="material-symbols-rounded mobile-nav-icon" data-icon="video_library">🎥</div>
                 <div class="mobile-nav-title">Recursos audiovisuales</div>
             </a>
             <a href="proyectos.html" class="mobile-nav-item">
-                <div class="material-symbols-rounded mobile-nav-icon">engineering</div>
+                <div class="material-symbols-rounded mobile-nav-icon" data-icon="engineering">⚙️</div>
                 <div class="mobile-nav-title">Proyectos</div>
             </a>
             <a href="https://experiencia-alico.firebaseapp.com/" class="mobile-nav-item" target="_blank" rel="noopener noreferrer">
-                <div class="material-symbols-rounded mobile-nav-icon">inventory_2</div>
+                <div class="material-symbols-rounded mobile-nav-icon" data-icon="inventory_2">📦</div>
                 <div class="mobile-nav-title">Diseña tu empaque</div>
-                <div class="mobile-nav-external">↗</div>
             </a>
             <a href="https://docs.google.com/forms/d/e/1FAIpQLScfJWsXOj-BAAgG9tmxYFf4QEuOimOmJJPsF4bnxmquUParZA/viewform?usp=sharing&ouid=102976851646670750896" 
                class="mobile-nav-item" target="_blank" rel="noopener noreferrer">
-                <div class="material-symbols-rounded mobile-nav-icon">lightbulb</div>
+                <div class="material-symbols-rounded mobile-nav-icon" data-icon="lightbulb">💡</div>
                 <div class="mobile-nav-title">Banco de iniciativas</div>
-                <div class="mobile-nav-external">↗</div>
             </a>
         </div>
     </nav>
 
     <!-- Botón de volver arriba -->
     <button class="back-to-top" id="backToTop" onclick="scrollToTop()" aria-label="Volver arriba">
-        <span class="material-symbols-rounded">keyboard_arrow_up</span>
+        <span class="material-symbols-rounded" data-icon="keyboard_arrow_up">⬆️</span>
     </button>
 
-    <!-- Contenido principal de la página home -->
+    <!-- Contenido principal -->
     <main id="main-content">
-        <!-- Tarjeta de introducción con Ali - ESTRUCTURA CORREGIDA -->
+        <!-- Introducción con Ali optimizada -->
         <section class="intro-card">
-            <!-- Contenedor del contenido de texto -->
             <div class="intro-content">
                 <h1>¡Hola! Soy Ali, el explorador de</h1>
                 <h2>NUEVAS IDEAS</h2>
@@ -288,109 +186,157 @@
                 <p>Estoy diseñado para cuestionar lo establecido, buscar respuestas más allá de lo evidente y atreverme a innovar.</p>
                 <a href="embajador-ali.html" class="btn-primary">¡Conóceme!</a>
             </div>
-            
-            <!-- Personaje Ali - ahora en el orden correcto -->
             <div class="ali-character" aria-hidden="true">Espacio para Ali</div>
         </section>
 
-        <!-- Tarjeta del modelo de innovación -->
+        <!-- Modelo de innovación -->
         <section class="model-card">
             <h2>NUESTRO MODELO DE INNOVACIÓN</h2>
             <p>Para Alico, la innovación es la capacidad de crear, entregar y capturar valor de nuevas formas, de manera consciente y sostenible que genere impactos y beneficios positivos en términos ambientales, sociales y económicos.</p>
             <a href="generalidades-sgi.html" class="btn-secondary">Conoce más</a>
         </section>
 
-        <!-- Grid de metodología CON TÍTULOS COMO IMÁGENES -->
+        <!-- Metodología con imágenes optimizadas -->
         <section class="methodology-grid">
-            <!-- Tarjeta Co-crea - TÍTULO COMO IMAGEN + TEXTO -->
+            <!-- Co-crea con lazy loading optimizado -->
             <article class="methodology-card">
+                <div class="image-skeleton" style="width: 200px; height: 60px; margin-bottom: 24px;"></div>
                 <img 
                     src="images/cocrea.png" 
                     alt="co-crea"
                     class="methodology-title-image"
                     loading="lazy"
-                    onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
-                >
+                    decoding="async"
+                    onload="this.style.opacity='1'; this.previousElementSibling.style.display='none';"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='block'; this.previousElementSibling.style.display='none';"
+                    style="opacity: 0;">
                 <h3 style="display: none;">co-crea</h3>
                 <p>Implementar una metodología de co-creación que involucra clientes, tanto internos como externos, para así fortalecer las redes de valor de la compañía.</p>
             </article>
             
-            <!-- Tarjeta Versátil - TÍTULO COMO IMAGEN + TEXTO -->
+            <!-- Versátil con lazy loading optimizado -->
             <article class="methodology-card">
+                <div class="image-skeleton" style="width: 200px; height: 60px; margin-bottom: 24px;"></div>
                 <img 
                     src="images/versatil.png" 
                     alt="VERSÁTIL"
                     class="methodology-title-image"
                     loading="lazy"
-                    onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
-                >
+                    decoding="async"
+                    onload="this.style.opacity='1'; this.previousElementSibling.style.display='none';"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='block'; this.previousElementSibling.style.display='none';"
+                    style="opacity: 0;">
                 <h3 style="display: none;">VERSÁTIL</h3>
                 <p>Desarrollar soluciones innovadoras y versátiles que se adapten a las necesidades cambiantes del mercado y generen valor sostenible para todos los stakeholders.</p>
             </article>
         </section>
     </main>
 
-    <!-- Footer -->
+    <!-- Footer optimizado -->
     <footer id="footer">
         <div class="footer-logo-container">
+            <div class="image-skeleton" style="width: 200px; height: 60px;"></div>
             <img src="images/logo-blanco.png" 
                  alt="Alico Logo" 
                  class="footer-logo-image"
-                 onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-            <div class="footer-logo-fallback">alico</div>
+                 loading="lazy"
+                 decoding="async"
+                 onload="this.classList.add('loaded'); this.previousElementSibling.style.display='none';"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='block'; this.previousElementSibling.style.display='none';">
+            <div class="footer-logo-fallback" style="display: none;">alico</div>
         </div>
     </footer>
 
-    <!-- Archivo JavaScript compartido -->
-    <script src="scripts.js"></script>
-    
-    <!-- JavaScript adicional para las imágenes -->
+    <!-- Scripts optimizados -->
     <script>
+        // OPTIMIZACIÓN: Reemplazar iconos con fallbacks inmediatos
+        function replaceIconsWithMaterial() {
+            const iconMap = {
+                analytics: 'analytics',
+                support_agent: 'support_agent',
+                psychology: 'psychology',
+                video_library: 'video_library',
+                engineering: 'engineering',
+                inventory_2: 'inventory_2',
+                open_in_new: 'open_in_new',
+                lightbulb: 'lightbulb',
+                keyboard_arrow_up: 'keyboard_arrow_up'
+            };
+            
+            document.querySelectorAll('[data-icon]').forEach(element => {
+                const iconName = element.getAttribute('data-icon');
+                if (iconMap[iconName]) {
+                    element.textContent = iconMap[iconName];
+                    element.classList.add('material-symbols-rounded');
+                }
+            });
+        }
+        
+        // OPTIMIZACIÓN: Carga progresiva
+        function initializeApp() {
+            // Mostrar el body
+            document.body.classList.add('loaded');
+            
+            // Reemplazar iconos
+            replaceIconsWithMaterial();
+            
+            // Inicializar funcionalidades
+            if (typeof initScrollReveal === 'function') {
+                initScrollReveal();
+            }
+            
+            console.log('🚀 Alico cargado y optimizado');
+        }
+        
+        // OPTIMIZACIÓN: Carga cuando el DOM esté listo
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeApp);
+        } else {
+            initializeApp();
+        }
+        
+        // OPTIMIZACIÓN: Service Worker para cache
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(reg => console.log('🔧 SW registrado'))
+                    .catch(err => console.log('❌ SW error:', err));
+            });
+        }
+    </script>
+    
+    <!-- Scripts principales con defer -->
+    <script src="scripts.js" defer></script>
+    
+    <!-- Script adicional optimizado -->
+    <script defer>
         document.addEventListener('DOMContentLoaded', function() {
-            // JavaScript para las imágenes de títulos de metodología
+            // Optimización de imágenes de metodología
             const methodologyCards = document.querySelectorAll('.methodology-card');
             
             methodologyCards.forEach(card => {
                 const img = card.querySelector('.methodology-title-image');
-                const fallbackTitle = card.querySelector('h3');
+                const skeleton = card.querySelector('.image-skeleton');
                 
-                if (img && fallbackTitle) {
-                    // Manejar carga exitosa de imagen
-                    img.addEventListener('load', function() {
-                        console.log('Imagen de título cargada exitosamente:', this.src);
-                        this.style.opacity = '1';
-                        fallbackTitle.style.display = 'none';
-                    });
+                if (img && skeleton) {
+                    // Observer para lazy loading
+                    const observer = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                const image = entry.target;
+                                if (image.src && !image.complete) {
+                                    image.addEventListener('load', () => {
+                                        skeleton.style.display = 'none';
+                                        image.style.opacity = '1';
+                                    });
+                                }
+                                observer.unobserve(image);
+                            }
+                        });
+                    }, { rootMargin: '50px' });
                     
-                    // Manejar error de carga
-                    img.addEventListener('error', function() {
-                        console.warn('Error al cargar imagen de título:', this.src);
-                        this.style.display = 'none';
-                        fallbackTitle.style.display = 'block';
-                    });
-                    
-                    // Efecto hover en toda la tarjeta
-                    card.addEventListener('mouseenter', function() {
-                        this.style.transform = 'translateY(-5px) scale(1.02)';
-                        this.style.boxShadow = 'var(--shadow-xl)';
-                    });
-                    
-                    card.addEventListener('mouseleave', function() {
-                        this.style.transform = 'translateY(0) scale(1)';
-                        this.style.boxShadow = 'var(--shadow-lg)';
-                    });
-                    
-                    // Inicializar con opacidad 0 para efecto fade-in
-                    img.style.opacity = '0';
-                    img.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                    observer.observe(img);
                 }
-            });
-            
-            // Precargar las imágenes de títulos
-            const titleImages = ['images/cocrea.png', 'images/versatil.png'];
-            titleImages.forEach(url => {
-                const img = new Image();
-                img.src = url;
             });
         });
     </script>

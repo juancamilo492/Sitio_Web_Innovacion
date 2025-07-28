@@ -157,36 +157,6 @@
             margin: 0 auto;
         }
 
-        /* Títulos de sección mejorados */
-        .section-title {
-            text-align: center;
-            margin: var(--spacing-xxl) 0 var(--spacing-xl) 0;
-            position: relative;
-        }
-
-        .section-title h2 {
-            font-family: 'Zilla Slab', serif;
-            font-weight: 600;
-            font-size: clamp(1.8rem, 4vw, 2.5rem);
-            color: var(--blanco);
-            margin-bottom: var(--spacing-md);
-        }
-
-        .section-title .section-icon {
-            font-size: 48px;
-            color: var(--amarillo-oro);
-            margin-bottom: var(--spacing-sm);
-        }
-
-        .section-title p {
-            font-size: clamp(1rem, 2.5vw, 1.2rem);
-            color: var(--blanco);
-            opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
-
         /* Efecto de carga para embebidos */
         .embed-loading {
             position: absolute;
@@ -326,13 +296,6 @@
             </div>
         </section>
 
-        <!-- Título de sección para videos -->
-        <section class="section-title">
-            <div class="material-symbols-rounded section-icon">play_circle</div>
-            <h2>Videos Destacados</h2>
-            <p>Descubre nuestros proyectos más importantes a través de contenido audiovisual de alta calidad.</p>
-        </section>
-
         <!-- Sección de videos embebidos de YouTube -->
         <section class="video-section">
             <!-- Video 1: Lanzamiento Termoflex +B -->
@@ -351,9 +314,7 @@
                         loading="lazy">
                     </iframe>
                 </div>
-                <div style="background: linear-gradient(135deg, var(--amarillo-oro) 0%, var(--amarillo-oro-80) 100%); color: var(--blanco); padding: var(--spacing-lg); border-radius: 0 0 var(--border-radius-lg) var(--border-radius-lg); font-size: 1.2em; font-weight: 600; text-align: center; font-family: 'Zilla Slab', serif; margin-top: -5px;">
-                    LANZAMIENTO TERMOFLEX +B
-                </div>
+                <div class="video-title">LANZAMIENTO TERMOFLEX +B</div>
             </article>
 
             <!-- Video 2: Proyecto Casas -->
@@ -372,9 +333,7 @@
                         loading="lazy">
                     </iframe>
                 </div>
-                <div style="background: linear-gradient(135deg, var(--azul-claro) 0%, var(--azul-claro-80) 100%); color: var(--blanco); padding: var(--spacing-lg); border-radius: 0 0 var(--border-radius-lg) var(--border-radius-lg); font-size: 1.2em; font-weight: 600; text-align: center; font-family: 'Zilla Slab', serif; margin-top: -5px;">
-                    PROYECTO CASAS
-                </div>
+                <div class="video-title">PROYECTO CASAS</div>
             </article>
         </section>
 
@@ -410,13 +369,6 @@
                     <span>Contenido exclusivo</span>
                 </div>
             </div>
-        </section>
-
-        <!-- Título de sección para recursos adicionales -->
-        <section class="section-title">
-            <div class="material-symbols-rounded section-icon">folder_open</div>
-            <h2>Recursos Adicionales</h2>
-            <p>Explora nuestra biblioteca de recursos complementarios para potenciar tu experiencia con Alico.</p>
         </section>
 
         <!-- Tarjetas de recursos adicionales CON IMÁGENES ORIGINALES -->
@@ -513,15 +465,6 @@
                 observer.observe(container);
             });
 
-            // Animaciones para títulos de sección
-            const sectionTitles = document.querySelectorAll('.section-title');
-            sectionTitles.forEach((title, index) => {
-                title.style.opacity = '0';
-                title.style.transform = 'translateY(20px)';
-                title.style.transition = `opacity 0.8s ease ${index * 0.3}s, transform 0.8s ease ${index * 0.3}s`;
-                observer.observe(title);
-            });
-
             // Efectos hover mejorados para las tarjetas de recursos
             const resourceCards = document.querySelectorAll('.resource-card');
             
@@ -532,7 +475,7 @@
                     
                     const image = this.querySelector('.resource-card-image');
                     if (image) {
-                        image.style.transform = 'scale(1.05)';
+                        image.style.transform = 'scale(1.1)';
                     }
                 });
                 
@@ -585,34 +528,6 @@
 
             console.log('✅ Recursos audiovisuales con embebidos cargados correctamente');
         });
-
-        // Función para reintentar carga de embebidos
-        function retryEmbed(containerId) {
-            const container = document.getElementById(containerId);
-            if (container) {
-                const iframe = container.querySelector('iframe');
-                if (iframe) {
-                    const src = iframe.src;
-                    iframe.src = '';
-                    setTimeout(() => {
-                        iframe.src = src;
-                    }, 100);
-                }
-            }
-        }
-
-        // Optimización de rendimiento para dispositivos móviles
-        if (window.innerWidth <= 768) {
-            // Cargar embebidos con delay en móvil para mejor rendimiento
-            setTimeout(() => {
-                const iframes = document.querySelectorAll('iframe[loading="lazy"]');
-                iframes.forEach((iframe, index) => {
-                    setTimeout(() => {
-                        iframe.removeAttribute('loading');
-                    }, index * 500);
-                });
-            }, 2000);
-        }
     </script>
 </body>
 </html>

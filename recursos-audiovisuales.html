@@ -12,6 +12,211 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
     <!-- Estilos principales -->
     <link rel="stylesheet" href="styles.css">
+    
+    <!-- Estilos adicionales para embebidos responsive -->
+    <style>
+        /* ==================================================
+           CONTENEDORES RESPONSIVE PARA EMBEBIDOS
+           ================================================== */
+        .embed-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* Ratio 16:9 para videos */
+            height: 0;
+            overflow: hidden;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-lg);
+            background: linear-gradient(135deg, var(--gris-medio) 0%, var(--gris-claro) 100%);
+            transition: all 0.3s ease;
+        }
+
+        .embed-container:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .embed-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: var(--border-radius-lg);
+        }
+
+        /* Contenedor específico para Spotify (más bajo) */
+        .spotify-embed-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 45%; /* Ratio más bajo para podcast */
+            height: 0;
+            overflow: hidden;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-lg);
+            background: linear-gradient(135deg, #1DB954 0%, #1ed760 100%);
+            transition: all 0.3s ease;
+        }
+
+        .spotify-embed-container:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .spotify-embed-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: var(--border-radius-lg);
+        }
+
+        /* Ajustes para móvil */
+        @media (max-width: 768px) {
+            .embed-container {
+                padding-bottom: 56.25%; /* Mantener ratio 16:9 en móvil */
+            }
+            
+            .spotify-embed-container {
+                padding-bottom: 60%; /* Más alto en móvil para mejor usabilidad */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .spotify-embed-container {
+                padding-bottom: 70%; /* Aún más alto en móviles pequeños */
+            }
+        }
+
+        /* Grid de videos actualizado */
+        .video-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: var(--spacing-xl);
+            margin-bottom: var(--spacing-xxl);
+        }
+
+        @media (max-width: 768px) {
+            .video-section {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-lg);
+            }
+        }
+
+        /* Sección de podcast */
+        .podcast-section {
+            background: linear-gradient(135deg, var(--verde-natura) 0%, var(--verde-natura-80) 100%);
+            border-radius: var(--border-radius-xl);
+            padding: var(--spacing-xxl);
+            margin-bottom: var(--spacing-xxl);
+            color: var(--blanco);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .podcast-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+            pointer-events: none;
+        }
+
+        .podcast-section h2 {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            margin-bottom: var(--spacing-lg);
+            font-family: 'Zilla Slab', serif;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+
+        .podcast-section p {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            line-height: 1.6;
+            margin-bottom: var(--spacing-xl);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+
+        .podcast-embed-wrapper {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Títulos de sección mejorados */
+        .section-title {
+            text-align: center;
+            margin: var(--spacing-xxl) 0 var(--spacing-xl) 0;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-family: 'Zilla Slab', serif;
+            font-weight: 600;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            color: var(--blanco);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .section-title .section-icon {
+            font-size: 48px;
+            color: var(--amarillo-oro);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .section-title p {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            color: var(--blanco);
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Efecto de carga para embebidos */
+        .embed-loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--spacing-md);
+            color: var(--blanco);
+            font-family: 'Work Sans', sans-serif;
+            font-weight: 500;
+            z-index: 1;
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top: 3px solid var(--blanco);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
 </head>
 <body>
     <!-- Header fijo con navegación -->
@@ -121,37 +326,110 @@
             </div>
         </section>
 
-        <!-- Sección de videos destacados -->
-        <section class="video-section">
-            <!-- Video 1: Lanzamiento Termoflex +B -->
-            <a href="https://youtube.com" class="video-card" target="_blank" rel="noopener noreferrer">
-                <div class="video-placeholder">
-                    <div class="play-button">
-                        <span class="material-symbols-rounded" style="font-size: 40px;">play_arrow</span>
-                    </div>
-                </div>
-                <div class="video-title">LANZAMIENTO TERMOFLEX +B</div>
-            </a>
-
-            <!-- Video 2: Proyecto Casas -->
-            <a href="https://youtube.com" class="video-card" target="_blank" rel="noopener noreferrer">
-                <div class="video-placeholder">
-                    <div class="play-button">
-                        <span class="material-symbols-rounded" style="font-size: 40px;">play_arrow</span>
-                    </div>
-                </div>
-                <div class="video-title">PROYECTO CASAS</div>
-            </a>
+        <!-- Título de sección para videos -->
+        <section class="section-title">
+            <div class="material-symbols-rounded section-icon">play_circle</div>
+            <h2>Videos Destacados</h2>
+            <p>Descubre nuestros proyectos más importantes a través de contenido audiovisual de alta calidad.</p>
         </section>
 
-        <!-- Tarjetas de recursos adicionales CON IMÁGENES -->
+        <!-- Sección de videos embebidos de YouTube -->
+        <section class="video-section">
+            <!-- Video 1: Lanzamiento Termoflex +B -->
+            <article class="video-embed-card">
+                <div class="embed-container">
+                    <div class="embed-loading" id="loading-termoflex">
+                        <div class="loading-spinner"></div>
+                        <span>Cargando video...</span>
+                    </div>
+                    <iframe 
+                        src="https://www.youtube.com/embed/z3t8BdLXPSg?rel=0&modestbranding=1&showinfo=0"
+                        title="Lanzamiento Termoflex +B - Alico"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen
+                        onload="hideLoading('loading-termoflex')"
+                        loading="lazy">
+                    </iframe>
+                </div>
+                <div style="background: linear-gradient(135deg, var(--amarillo-oro) 0%, var(--amarillo-oro-80) 100%); color: var(--blanco); padding: var(--spacing-lg); border-radius: 0 0 var(--border-radius-lg) var(--border-radius-lg); font-size: 1.2em; font-weight: 600; text-align: center; font-family: 'Zilla Slab', serif; margin-top: -5px;">
+                    LANZAMIENTO TERMOFLEX +B
+                </div>
+            </article>
+
+            <!-- Video 2: Proyecto Casas -->
+            <article class="video-embed-card">
+                <div class="embed-container">
+                    <div class="embed-loading" id="loading-casas">
+                        <div class="loading-spinner"></div>
+                        <span>Cargando video...</span>
+                    </div>
+                    <iframe 
+                        src="https://www.youtube.com/embed/tCiqvXYunD0?rel=0&modestbranding=1&showinfo=0"
+                        title="Proyecto Casas - Alico"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen
+                        onload="hideLoading('loading-casas')"
+                        loading="lazy">
+                    </iframe>
+                </div>
+                <div style="background: linear-gradient(135deg, var(--azul-claro) 0%, var(--azul-claro-80) 100%); color: var(--blanco); padding: var(--spacing-lg); border-radius: 0 0 var(--border-radius-lg) var(--border-radius-lg); font-size: 1.2em; font-weight: 600; text-align: center; font-family: 'Zilla Slab', serif; margin-top: -5px;">
+                    PROYECTO CASAS
+                </div>
+            </article>
+        </section>
+
+        <!-- Nueva sección: Podcast de Spotify -->
+        <section class="podcast-section">
+            <div class="material-symbols-rounded" style="font-size: 60px; margin-bottom: var(--spacing-lg); color: var(--blanco); opacity: 0.9;">podcasts</div>
+            <h2>Nuestro Podcast</h2>
+            <p>Sumérgete en conversaciones profundas sobre innovación, sostenibilidad y el futuro del empaque. Escucha las historias detrás de nuestros proyectos más ambiciosos y conoce las mentes brillantes que están transformando la industria.</p>
+            
+            <div class="podcast-embed-wrapper">
+                <div class="spotify-embed-container">
+                    <div class="embed-loading" id="loading-spotify">
+                        <div class="loading-spinner"></div>
+                        <span>Cargando podcast...</span>
+                    </div>
+                    <iframe 
+                        src="https://open.spotify.com/embed/show/2NoZaH1m43Lhj2FEpz85WO?utm_source=generator&theme=0"
+                        title="Podcast Alico - Innovación en Empaque"
+                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                        onload="hideLoading('loading-spotify')"
+                        loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+            
+            <div style="margin-top: var(--spacing-lg); font-size: 0.95em; opacity: 0.9;">
+                <div style="display: flex; align-items: center; justify-content: center; gap: var(--spacing-sm); flex-wrap: wrap;">
+                    <span class="material-symbols-rounded" style="font-size: 18px;">headphones</span>
+                    <span>Disponible en Spotify</span>
+                    <span>•</span>
+                    <span>Episodios semanales</span>
+                    <span>•</span>
+                    <span>Contenido exclusivo</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Título de sección para recursos adicionales -->
+        <section class="section-title">
+            <div class="material-symbols-rounded section-icon">folder_open</div>
+            <h2>Recursos Adicionales</h2>
+            <p>Explora nuestra biblioteca de recursos complementarios para potenciar tu experiencia con Alico.</p>
+        </section>
+
+        <!-- Tarjetas de recursos adicionales -->
         <section class="resource-cards">
             <!-- Tarjeta 1: Plantillas -->
             <article class="resource-card">
                 <h3>Plantillas</h3>
                 <div class="resource-card-image" style="background-image: url('ruta/a/imagen-plantillas.jpg');">
                     <!-- Placeholder para imagen de plantillas -->
-                    Imagen de Plantillas
+                    <div style="display: flex; flex-direction: column; align-items: center; gap: var(--spacing-sm);">
+                        <span class="material-symbols-rounded" style="font-size: 48px; color: var(--blanco);">description</span>
+                        <span style="font-size: 0.9em; text-align: center; color: var(--blanco);">Plantillas y formatos listos para usar</span>
+                    </div>
                 </div>
             </article>
 
@@ -160,7 +438,10 @@
                 <h3>Recursos adicionales</h3>
                 <div class="resource-card-image" style="background-image: url('ruta/a/imagen-recursos.jpg');">
                     <!-- Placeholder para imagen de recursos adicionales -->
-                    Imagen de Recursos
+                    <div style="display: flex; flex-direction: column; align-items: center; gap: var(--spacing-sm);">
+                        <span class="material-symbols-rounded" style="font-size: 48px; color: var(--blanco);">library_books</span>
+                        <span style="font-size: 0.9em; text-align: center; color: var(--blanco);">Documentos y guías complementarias</span>
+                    </div>
                 </div>
             </article>
 
@@ -169,7 +450,10 @@
                 <h3>Experiencia del cliente</h3>
                 <div class="resource-card-image" style="background-image: url('ruta/a/imagen-experiencia.jpg');">
                     <!-- Placeholder para imagen de experiencia del cliente -->
-                    Imagen de Experiencia
+                    <div style="display: flex; flex-direction: column; align-items: center; gap: var(--spacing-sm);">
+                        <span class="material-symbols-rounded" style="font-size: 48px; color: var(--blanco);">sentiment_very_satisfied</span>
+                        <span style="font-size: 0.9em; text-align: center; color: var(--blanco);">Testimonios y casos de éxito</span>
+                    </div>
                 </div>
             </article>
 
@@ -178,7 +462,10 @@
                 <h3>Eventos</h3>
                 <div class="resource-card-image" style="background-image: url('ruta/a/imagen-eventos.jpg');">
                     <!-- Placeholder para imagen de eventos -->
-                    Imagen de Eventos
+                    <div style="display: flex; flex-direction: column; align-items: center; gap: var(--spacing-sm);">
+                        <span class="material-symbols-rounded" style="font-size: 48px; color: var(--blanco);">event</span>
+                        <span style="font-size: 0.9em; text-align: center; color: var(--blanco);">Conferencias y presentaciones</span>
+                    </div>
                 </div>
             </article>
         </section>
@@ -197,5 +484,147 @@
 
     <!-- Archivo JavaScript compartido -->
     <script src="scripts.js"></script>
+    
+    <!-- JavaScript específico para recursos audiovisuales -->
+    <script>
+        // Función para ocultar indicador de carga
+        function hideLoading(loadingId) {
+            const loadingElement = document.getElementById(loadingId);
+            if (loadingElement) {
+                setTimeout(() => {
+                    loadingElement.style.opacity = '0';
+                    setTimeout(() => {
+                        loadingElement.style.display = 'none';
+                    }, 300);
+                }, 1000);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animaciones de aparición para embebidos
+            const embedContainers = document.querySelectorAll('.embed-container, .spotify-embed-container');
+            
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            embedContainers.forEach((container, index) => {
+                container.style.opacity = '0';
+                container.style.transform = 'translateY(30px)';
+                container.style.transition = `opacity 0.6s ease ${index * 0.2}s, transform 0.6s ease ${index * 0.2}s`;
+                observer.observe(container);
+            });
+
+            // Animaciones para títulos de sección
+            const sectionTitles = document.querySelectorAll('.section-title');
+            sectionTitles.forEach((title, index) => {
+                title.style.opacity = '0';
+                title.style.transform = 'translateY(20px)';
+                title.style.transition = `opacity 0.8s ease ${index * 0.3}s, transform 0.8s ease ${index * 0.3}s`;
+                observer.observe(title);
+            });
+
+            // Efectos hover mejorados para las tarjetas de recursos
+            const resourceCards = document.querySelectorAll('.resource-card');
+            
+            resourceCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-12px) scale(1.03)';
+                    this.style.boxShadow = 'var(--shadow-xl)';
+                    
+                    const image = this.querySelector('.resource-card-image');
+                    if (image) {
+                        image.style.transform = 'scale(1.05)';
+                    }
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                    this.style.boxShadow = 'var(--shadow-lg)';
+                    
+                    const image = this.querySelector('.resource-card-image');
+                    if (image) {
+                        image.style.transform = 'scale(1)';
+                    }
+                });
+            });
+
+            // Mostrar indicadores de carga inicialmente
+            setTimeout(() => {
+                const loadingElements = document.querySelectorAll('.embed-loading');
+                loadingElements.forEach(loading => {
+                    loading.style.opacity = '1';
+                });
+            }, 500);
+
+            // Manejo de errores para iframes
+            const iframes = document.querySelectorAll('iframe');
+            iframes.forEach(iframe => {
+                iframe.addEventListener('error', function() {
+                    console.warn('Error cargando embed:', this.src);
+                    const container = this.closest('.embed-container, .spotify-embed-container');
+                    if (container) {
+                        const errorMsg = document.createElement('div');
+                        errorMsg.style.cssText = `
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                            color: white;
+                            text-align: center;
+                            font-family: 'Work Sans', sans-serif;
+                            z-index: 2;
+                        `;
+                        errorMsg.innerHTML = `
+                            <div class="material-symbols-rounded" style="font-size: 48px; margin-bottom: 8px; opacity: 0.7;">error</div>
+                            <div>Error al cargar contenido</div>
+                            <div style="font-size: 0.8em; opacity: 0.8; margin-top: 4px;">Intenta recargar la página</div>
+                        `;
+                        container.appendChild(errorMsg);
+                    }
+                });
+            });
+
+            console.log('✅ Recursos audiovisuales con embebidos cargados correctamente');
+        });
+
+        // Función para reintentar carga de embebidos
+        function retryEmbed(containerId) {
+            const container = document.getElementById(containerId);
+            if (container) {
+                const iframe = container.querySelector('iframe');
+                if (iframe) {
+                    const src = iframe.src;
+                    iframe.src = '';
+                    setTimeout(() => {
+                        iframe.src = src;
+                    }, 100);
+                }
+            }
+        }
+
+        // Optimización de rendimiento para dispositivos móviles
+        if (window.innerWidth <= 768) {
+            // Cargar embebidos con delay en móvil para mejor rendimiento
+            setTimeout(() => {
+                const iframes = document.querySelectorAll('iframe[loading="lazy"]');
+                iframes.forEach((iframe, index) => {
+                    setTimeout(() => {
+                        iframe.removeAttribute('loading');
+                    }, index * 500);
+                });
+            }, 2000);
+        }
+    </script>
 </body>
 </html>

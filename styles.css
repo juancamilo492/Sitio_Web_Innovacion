@@ -1149,14 +1149,14 @@ footer::before {
 .banner-sgi {
     background-image: 
         linear-gradient(rgba(0,61,166,0.6), rgba(0,61,166,0.6)),
-        url('ruta/a/tu/imagen-sgi.jpg');
+        url('banners/sgi.jpeg');
 }
 
 /* Banner Recursos Audiovisuales */
 .banner-recursos {
     background-image: 
         linear-gradient(rgba(0,61,166,0.6), rgba(0,61,166,0.6)),
-        url('ruta/a/tu/imagen-recursos.jpg');
+        url('banners/audiovisual.jpeg');
 }
 
 /* Banner Embajador Ali */
@@ -1170,14 +1170,14 @@ footer::before {
 .banner-ia {
     background-image: 
         linear-gradient(rgba(0,61,166,0.6), rgba(0,61,166,0.6)),
-        url('ruta/a/tu/imagen-ia.jpg');
+        url('banners/ia.jpg');
 }
 
 /* Banner Proyectos */
 .banner-proyectos {
     background-image: 
         linear-gradient(rgba(0,61,166,0.6), rgba(0,61,166,0.6)),
-        url('ruta/a/tu/imagen-proyectos.jpg');
+        url('banners/projects.png');
 }
 
 /* ==================================================
